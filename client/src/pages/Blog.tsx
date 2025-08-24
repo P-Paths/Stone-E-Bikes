@@ -1,14 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'wouter';
 import { useQuery } from '@tanstack/react-query';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { BlogPost } from '@shared/schema';
+import { BlogPost as DBBlogPost } from '@shared/schema';
+import { loadMarkdownPosts, BlogPost as MarkdownBlogPost } from '../lib/blog.loader';
 
 export default function Blog() {
-  const { data: blogPosts, isLoading } = useQuery<BlogPost[]>({
+  const [markdownPosts, setMarkdownPosts] = useState<MarkdownBlogPost[]>([]);
+  const [usingMarkdown, setUsingMarkdown] = useState(false);
+  
+  // Try to load markdown posts first
+  useEffect(() => {
+    loadMarkdownPosts().then(posts => {
+      if (posts.length > 0) {
+        setMarkdownPosts(posts);
+        setUsingMarkdown(true);
+      }
+    }).catch(err => {
+      console.warn('Failed to load markdown posts:', err);
+    });
+  }, []);
+
+  // Fallback to database posts if no markdown posts
+  const { data: dbBlogPosts, isLoading } = useQuery<DBBlogPost[]>({
     queryKey: ['/api/blog'],
+    enabled: !usingMarkdown || markdownPosts.length === 0
   });
+
+  // Determine which posts to show
+  const postsToShow = usingMarkdown && markdownPosts.length > 0 ? markdownPosts : (dbBlogPosts || []);
+  const hasNoPosts = (!usingMarkdown && (!dbBlogPosts || dbBlogPosts.length === 0)) || 
+                     (usingMarkdown && markdownPosts.length === 0);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -21,10 +44,15 @@ export default function Blog() {
           <p className="text-xl text-muted max-w-2xl mx-auto" data-testid="text-blog-description">
             Tips, guides, and stories from the cycling community
           </p>
+          {usingMarkdown && (
+            <p className="text-sm text-secondary mt-2">
+              ✓ Loading from markdown files
+            </p>
+          )}
         </div>
 
         {/* Blog Posts */}
-        {isLoading ? (
+        {isLoading && !usingMarkdown ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[...Array(6)].map((_, i) => (
               <div key={i} className="animate-pulse">
@@ -35,7 +63,7 @@ export default function Blog() {
               </div>
             ))}
           </div>
-        ) : blogPosts?.length === 0 ? (
+        ) : hasNoPosts ? (
           <div className="text-center py-12">
             <p className="text-muted text-lg" data-testid="text-no-posts">
               No blog posts available at the moment.
@@ -43,97 +71,71 @@ export default function Blog() {
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" data-testid="blog-posts-grid">
-            {blogPosts?.map((post) => (
-              <Card 
-                key={post.id} 
-                className="overflow-hidden hover:shadow-lg transition-shadow"
-                data-testid={`card-blog-${post.id}`}
-              >
-                <img
-                  src={post.imageUrl || 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250'}
-                  alt={post.title}
-                  className="w-full h-48 object-cover"
-                  data-testid={`img-blog-${post.id}`}
-                />
-                <CardContent className="p-6">
-                  {post.category && (
-                    <div 
-                      className="text-sm text-accent font-semibold mb-2"
-                      data-testid={`text-blog-category-${post.id}`}
-                    >
-                      {post.category}
-                    </div>
-                  )}
-                  <h3 
-                    className="text-xl font-semibold text-primary mb-3"
-                    data-testid={`text-blog-title-${post.id}`}
-                  >
-                    {post.title}
-                  </h3>
-                  <p 
-                    className="text-muted mb-4"
-                    data-testid={`text-blog-excerpt-${post.id}`}
-                  >
-                    {post.excerpt}
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <span 
-                      className="text-sm text-muted"
-                      data-testid={`text-blog-date-${post.id}`}
-                    >
-                      {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString() : ''}
-                    </span>
-                    <Link href={`/blog/${post.slug}`}>
-                      <Button 
-                        variant="link" 
-                        className="text-secondary hover:text-blue-600 p-0"
-                        data-testid={`button-read-more-${post.id}`}
-                      >
-                        Read More
-                      </Button>
-                    </Link>
+            {postsToShow.map((post) => {
+              const isMarkdown = usingMarkdown && markdownPosts.length > 0;
+              const postId = isMarkdown ? post.slug : (post as DBBlogPost).id;
+              
+              return (
+                <Card 
+                  key={postId}
+                  className="overflow-hidden hover:shadow-lg transition-shadow bg-white"
+                  data-testid={`card-blog-${postId}`}
+                >
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={
+                        isMarkdown 
+                          ? 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250'
+                          : (post as DBBlogPost).imageUrl || 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250'
+                      }
+                      alt={post.title}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      data-testid={`img-blog-${postId}`}
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-20"></div>
                   </div>
-                </CardContent>
-              </Card>
-            ))}
+                  <CardContent className="p-6">
+                    {/* Tags/Category */}
+                    {isMarkdown && (post as MarkdownBlogPost).tags && (post as MarkdownBlogPost).tags.length > 0 && (
+                      <div className="text-sm font-semibold text-secondary mb-2" data-testid={`text-blog-tags-${postId}`}>
+                        {(post as MarkdownBlogPost).tags.join(', ')}
+                      </div>
+                    )}
+                    {!isMarkdown && (post as DBBlogPost).category && (
+                      <div className="text-sm font-semibold text-secondary mb-2" data-testid={`text-blog-category-${postId}`}>
+                        {(post as DBBlogPost).category}
+                      </div>
+                    )}
+                    
+                    <h2 className="text-xl font-bold text-primary mb-3 line-clamp-2" data-testid={`text-blog-title-${postId}`}>
+                      {post.title}
+                    </h2>
+                    <p className="text-muted mb-4 line-clamp-3" data-testid={`text-blog-excerpt-${postId}`}>
+                      {post.excerpt}
+                    </p>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-muted" data-testid={`text-blog-date-${postId}`}>
+                        {isMarkdown 
+                          ? new Date(post.date).toLocaleDateString()
+                          : ((post as DBBlogPost).publishedAt ? new Date((post as DBBlogPost).publishedAt).toLocaleDateString() : '')
+                        }
+                      </span>
+                      <Link href={`/blog/${post.slug}`}>
+                        <Button 
+                          variant="link" 
+                          className="text-secondary hover:text-blue-600 p-0 h-auto"
+                          data-testid={`button-read-more-${postId}`}
+                        >
+                          Read More →
+                        </Button>
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         )}
-
-        {/* Featured Categories */}
-        <div className="mt-16">
-          <h2 className="text-2xl font-bold text-primary text-center mb-8">Browse by Category</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            <Card className="hover:shadow-lg transition-shadow cursor-pointer">
-              <CardContent className="p-6 text-center">
-                <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white font-bold">M</span>
-                </div>
-                <h3 className="text-lg font-semibold text-primary mb-2">Maintenance</h3>
-                <p className="text-muted text-sm">Tips and guides for bike care</p>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition-shadow cursor-pointer">
-              <CardContent className="p-6 text-center">
-                <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white font-bold">A</span>
-                </div>
-                <h3 className="text-lg font-semibold text-primary mb-2">Adventure</h3>
-                <p className="text-muted text-sm">Routes and travel stories</p>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition-shadow cursor-pointer">
-              <CardContent className="p-6 text-center">
-                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white font-bold">T</span>
-                </div>
-                <h3 className="text-lg font-semibold text-primary mb-2">Technology</h3>
-                <p className="text-muted text-sm">Latest bike tech and innovations</p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
       </div>
     </div>
   );

@@ -72,12 +72,12 @@ export const Footer: React.FC = () => {
               {quickLinks.map((item) => (
                 <li key={item.name}>
                   <Link href={item.href}>
-                    <a
-                      className="text-gray-400 hover:text-white transition-colors"
+                    <span
+                      className="cursor-pointer text-gray-400 hover:text-white transition-colors"
                       data-testid={`link-${item.name.toLowerCase()}`}
                     >
                       {item.name}
-                    </a>
+                    </span>
                   </Link>
                 </li>
               ))}

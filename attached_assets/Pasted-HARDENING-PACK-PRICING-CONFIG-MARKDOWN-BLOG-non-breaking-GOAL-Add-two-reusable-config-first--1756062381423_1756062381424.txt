@@ -1,0 +1,95 @@
+HARDENING PACK — PRICING CONFIG + MARKDOWN BLOG (non-breaking)
+
+GOAL
+Add two reusable, config-first features:
+1) Centralized pricing config with a Pricing section on Home (pure config, no DB).
+2) Markdown blog fallback that works even without a database.
+Also fix header DOM nesting warnings, then print a self-audit so we can export to Cursor.
+
+CONSTRAINTS
+- Do NOT break existing flows (products/cart/checkout/leads).
+- Keep everything working if markdown files are missing or pricing config is empty.
+- Keep Postgres + Stripe logic as-is; this task is additive.
+- Vite + React app; keep current env usage.
+
+TASKS
+
+A) PRICING CONFIG (pure config, reusable across brands)
+1) Create file: client/src/commerce/pricing.config.ts
+   - Export interface:
+     export interface PricingTier { id: string; label: string; priceMonthly: number; features: string[] }
+   - Export object:
+     export const PRICING = {
+       currency: "USD",
+       tiers: [
+         { id:"starter", label:"Starter",      priceMonthly:20,  features:["Basic site", "Email support", "1 brand"] },
+         { id:"solo",    label:"Solo Hustler", priceMonthly:50,  features:["Pro site", "Priority support", "3 brands"] },
+         { id:"dealer",  label:"Dealer Pro",   priceMonthly:200, features:["Advanced e-com", "VIP support", "Unlimited brands"] }
+       ],
+       note: "7-day free trial available"
+     };
+2) Create component: client/src/components/PricingSection.tsx
+   - Renders from PRICING only (no DB). Shows currency, tiers, features, and note.
+   - If PRICING.tiers is empty, render nothing (safe fallback).
+3) Add to Home page:
+   - Import and render <PricingSection /> near the bottom of client/src/pages/Home.tsx.
+4) README updates:
+   - Add “Pricing Update Guide” (edit one file: client/src/commerce/pricing.config.ts; no code changes needed).
+   - Add a table showing example tiers and how to change currency.
+
+B) MARKDOWN BLOG FALLBACK (DB optional)
+1) Content folder:
+   - Create directory: client/src/content/posts
+   - Add 3 demo markdown files with frontmatter:
+     ---
+     title: "Choosing Your First Commuter Bike"
+     slug: "first-commuter-bike"
+     date: "2025-08-01"
+     excerpt: "How to pick the perfect daily ride."
+     tags: ["commuter","beginner"]
+     ---
+     (then some markdown content)
+   - Add two more similar demo posts.
+2) Loader:
+   - Create file: client/src/lib/blog.loader.ts
+     - Export async function loadMarkdownPosts() that imports all *.md under client/src/content/posts, parses frontmatter (title, slug, date, excerpt, tags), returns sorted list by date desc.
+     - If no files found, return empty array (safe).
+   - Use a tiny, dependency-light frontmatter parse (no heavy CMS).
+3) Blog page behavior (client/src/pages/Blog.tsx):
+   - Prefer markdown: try loadMarkdownPosts().
+   - If markdown array has posts → render them (title, date, excerpt, “Read more”).
+   - If empty → fall back to existing DB posts (current behavior).
+   - If both empty → show friendly “No posts yet.”
+4) README updates:
+   - “Blog via Markdown” section: where to add files, frontmatter format, how to add images (client/public/images/blog/*), and how fallback works.
+
+C) UI/QA FIXES
+1) Fix DOM nesting/header warnings:
+   - Resolve Link/a nesting issues in Header/Nav to eliminate console warnings.
+2) Keep typecheck and lint clean; do not introduce new warnings.
+
+D) SELF-AUDIT (PRINT RESULTS ONLY, DO NOT JUST SAY DONE)
+Output the following:
+1) File tree for new/modified files:
+   - client/src/commerce/pricing.config.ts
+   - client/src/components/PricingSection.tsx
+   - client/src/content/posts/* (list the 3 demo files)
+   - client/src/lib/blog.loader.ts
+   - client/src/pages/Blog.tsx (modified)
+   - client/src/pages/Home.tsx (modified)
+   - README.md (modified)
+2) Pricing Check:
+   - Detected currency, number of tiers, and first tier label from PRICING.
+   - Confirm Home renders <PricingSection /> when tiers exist.
+3) Blog Check:
+   - Count of markdown posts loaded.
+   - Confirm Blog prefers markdown; falls back to DB if none.
+4) Warnings:
+   - Confirm header DOM nesting warnings are resolved.
+5) Non-breaking guarantee:
+   - Confirm products/cart/checkout/leads still work.
+6) Next steps (PRINT):
+   - Exact commands or path to zip/export this project.
+   - Short note: “Safe to migrate to Cursor and convert to Next.js”.
+
+Do not remove any existing capabilities. This is a quick additive pack to finalize v0.1.0 before export.

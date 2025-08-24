@@ -2,6 +2,65 @@
 
 A high-performance, mobile-first e-commerce application built with React, designed as a reusable skeleton for quick rebranding. Perfect for bike shops, accessory stores, and similar retail businesses.
 
+## Quick Update Guides
+
+### Pricing Update Guide
+To update pricing plans, edit **one file**: `client/src/commerce/pricing.config.ts`
+
+```typescript
+export const PRICING = {
+  currency: "USD", // Change currency
+  tiers: [
+    {
+      id: "starter",
+      label: "Starter",
+      priceMonthly: 20, // Change price
+      features: ["Basic site", "Email support", "1 brand"] // Modify features
+    }
+    // Add/remove/modify tiers as needed
+  ],
+  note: "7-day free trial available" // Optional note
+};
+```
+
+**Example Pricing Plans:**
+| Plan | Monthly Price | Features |
+|------|---------------|----------|
+| Starter | $20 | Basic site, Email support, 1 brand |
+| Solo Hustler | $50 | Pro site, Priority support, 3 brands |
+| Dealer Pro | $200 | Advanced e-com, VIP support, Unlimited brands |
+
+To change currency from USD to EUR:
+1. Update `currency: "EUR"`  
+2. Adjust prices accordingly
+3. No code changes needed - automatically renders
+
+### Blog via Markdown
+Add blog posts as markdown files in `client/src/content/posts/`:
+
+```markdown
+---
+title: "Your Post Title"
+slug: "your-post-slug"
+date: "2025-08-01"
+excerpt: "Brief description of your post"
+tags: ["tag1", "tag2"]
+---
+
+# Your Post Content
+
+Write your blog post content here using markdown.
+```
+
+**Blog System Behavior:**
+- **Prefers markdown**: If `.md` files exist in `client/src/content/posts/`, shows them
+- **Database fallback**: If no markdown files, shows database posts
+- **Graceful empty**: If both empty, shows "No posts yet" message
+
+**Adding Images:**
+- Place images in `client/public/images/blog/`
+- Reference in markdown: `![Alt text](/images/blog/your-image.jpg)`
+
 ## 🚀 Features
 
 - **Mobile-First Design** - Optimized for all devices with responsive layouts
