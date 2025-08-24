@@ -1,0 +1,515 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BikeShop Pro - Premium Bikes & Accessories</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1F2937',
+                        secondary: '#3B82F6',
+                        accent: '#10B981',
+                        muted: '#6B7280'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- @COMPONENT: Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="text-2xl font-bold text-primary">BikeShop Pro</div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-secondary transition-colors">Home</a>
+                    <a href="#shop" class="text-gray-700 hover:text-secondary transition-colors">Shop</a>
+                    <a href="#accessories" class="text-gray-700 hover:text-secondary transition-colors">Accessories</a>
+                    <a href="#blog" class="text-gray-700 hover:text-secondary transition-colors">Blog</a>
+                    <a href="#about" class="text-gray-700 hover:text-secondary transition-colors">About</a>
+                    <a href="#contact" class="text-gray-700 hover:text-secondary transition-colors">Contact</a>
+                </nav>
+
+                <!-- Cart and Mobile Menu -->
+                <div class="flex items-center space-x-4">
+                    <button data-event="click:toggleCart" class="relative p-2 text-gray-700 hover:text-secondary transition-colors">
+                        <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                        <span data-bind="cart.itemCount" class="absolute -top-1 -right-1 bg-accent text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                    </button>
+                    <button class="md:hidden p-2 text-gray-700" data-event="click:toggleMobileMenu">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div class="md:hidden border-t border-gray-200 py-4 space-y-2" data-state="mobileMenuOpen:boolean = false">
+                <a href="#home" class="block px-3 py-2 text-gray-700 hover:text-secondary">Home</a>
+                <a href="#shop" class="block px-3 py-2 text-gray-700 hover:text-secondary">Shop</a>
+                <a href="#accessories" class="block px-3 py-2 text-gray-700 hover:text-secondary">Accessories</a>
+                <a href="#blog" class="block px-3 py-2 text-gray-700 hover:text-secondary">Blog</a>
+                <a href="#about" class="block px-3 py-2 text-gray-700 hover:text-secondary">About</a>
+                <a href="#contact" class="block px-3 py-2 text-gray-700 hover:text-secondary">Contact</a>
+            </div>
+        </div>
+    </header>
+    <!-- @END_COMPONENT: Header -->
+
+    <!-- @COMPONENT: HeroSection -->
+    <section id="home" class="relative bg-primary text-white">
+        <!-- Hero background showcasing modern bikes in action -->
+        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h1 class="text-4xl lg:text-6xl font-bold mb-6">
+                        Ride the Future
+                        <span class="text-accent block">Premium Bikes</span>
+                    </h1>
+                    <p class="text-xl mb-8 text-gray-300">
+                        Discover our collection of cutting-edge bicycles designed for every adventure. From city commuting to mountain trails.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="bg-accent hover:bg-green-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+                            Shop Now
+                        </button>
+                        <button class="border border-white text-white hover:bg-white hover:text-primary px-8 py-3 rounded-lg font-semibold transition-colors">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+                <div class="hidden lg:block">
+                    <!-- Professional cyclist on a modern road bike against urban backdrop -->
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
+                         alt="Professional cyclist on modern road bike" 
+                         class="rounded-xl shadow-2xl" data-mock-image="true" />
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: HeroSection -->
+
+    <!-- @COMPONENT: FeaturedProducts -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl lg:text-4xl font-bold text-primary mb-4">Featured Bikes</h2>
+                <p class="text-xl text-muted max-w-2xl mx-auto">
+                    Handpicked selection of our most popular and innovative bicycles
+                </p>
+            </div>
+
+            <!-- @MAP: featuredProducts.map(product => ( -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product Card 1 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group">
+                    <!-- Modern mountain bike on trail -->
+                    <img src="https://pixabay.com/get/gaf4882c6c00407b2a5e5ed0810927441d3c52ebd860a9e981f67fdeec5161e778f5e231076a27621a82839f51290a774c7c0c1b7e77d9eec8be8f6e1d50d1b70_1280.jpg" 
+                         alt="Mountain bike on trail" 
+                         class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" data-mock-image="true" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-primary mb-2" data-bind="product.name">TrailMaster Pro</h3>
+                        <p class="text-muted mb-4" data-bind="product.description">High-performance mountain bike for serious trail riders</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-primary" data-bind="product.price">$2,299</span>
+                            <button class="bg-secondary hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition-colors" data-event="click:addToCart">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group">
+                    <!-- Sleek road bike in urban setting -->
+                    <img src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" 
+                         alt="Road bike in urban setting" 
+                         class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" data-mock-image="true" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-primary mb-2" data-bind="product.name">City Cruiser Elite</h3>
+                        <p class="text-muted mb-4" data-bind="product.description">Perfect for urban commuting and weekend rides</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-primary" data-bind="product.price">$1,599</span>
+                            <button class="bg-secondary hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition-colors" data-event="click:addToCart">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group">
+                    <!-- Electric bike with modern design -->
+                    <img src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" 
+                         alt="Electric bike with modern design" 
+                         class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" data-mock-image="true" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-primary mb-2" data-bind="product.name">E-Power Max</h3>
+                        <p class="text-muted mb-4" data-bind="product.description">Electric bike with extended range and smart features</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-primary" data-bind="product.price">$3,499</span>
+                            <button class="bg-secondary hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition-colors" data-event="click:addToCart">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- @END_MAP )) -->
+
+            <div class="text-center mt-12">
+                <button class="bg-primary hover:bg-gray-800 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+                    View All Bikes
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: FeaturedProducts -->
+
+    <!-- @COMPONENT: AccessoriesSection -->
+    <section id="accessories" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl lg:text-4xl font-bold text-primary mb-4">Essential Accessories</h2>
+                <p class="text-xl text-muted max-w-2xl mx-auto">
+                    Complete your ride with our premium bike accessories and gear
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Accessory 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                    <!-- Professional bike helmet -->
+                    <img src="https://pixabay.com/get/g6439dca5ef6d61a3991a9fff3c1fb3ad1ff41af7a2b5a232e5ce0fde814621b53997cdcb8b63c0c98920c770e5d634104255e8c620bf4c3b764c4bb42c55cac3_1280.jpg" 
+                         alt="Professional bike helmet" 
+                         class="w-full h-48 object-cover" data-mock-image="true" />
+                    <div class="p-4">
+                        <h4 class="font-semibold text-primary mb-1">Safety Helmet Pro</h4>
+                        <p class="text-sm text-muted mb-2">Ultra-light with advanced ventilation</p>
+                        <span class="text-lg font-bold text-primary">$89</span>
+                    </div>
+                </div>
+
+                <!-- Accessory 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                    <!-- Bike lights set -->
+                    <img src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200" 
+                         alt="Bike lights set" 
+                         class="w-full h-48 object-cover" data-mock-image="true" />
+                    <div class="p-4">
+                        <h4 class="font-semibold text-primary mb-1">LED Light Set</h4>
+                        <p class="text-sm text-muted mb-2">Rechargeable front and rear lights</p>
+                        <span class="text-lg font-bold text-primary">$45</span>
+                    </div>
+                </div>
+
+                <!-- Accessory 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                    <!-- Bike lock security -->
+                    <img src="https://pixabay.com/get/gc6ddd93cce975d10c82657fdadd07f88f90c2cff3a085550b10b6fa152acf78d79b7ebbccf495bb6673e72efbce0a3e4366ac0b429264f86e8ce17c54979b3ec_1280.jpg" 
+                         alt="Bike security lock" 
+                         class="w-full h-48 object-cover" data-mock-image="true" />
+                    <div class="p-4">
+                        <h4 class="font-semibold text-primary mb-1">Security Lock</h4>
+                        <p class="text-sm text-muted mb-2">Heavy-duty chain lock with keys</p>
+                        <span class="text-lg font-bold text-primary">$32</span>
+                    </div>
+                </div>
+
+                <!-- Accessory 4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                    <!-- Bike water bottle and holder -->
+                    <img src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200" 
+                         alt="Bike water bottle and holder" 
+                         class="w-full h-48 object-cover" data-mock-image="true" />
+                    <div class="p-4">
+                        <h4 class="font-semibold text-primary mb-1">Hydration Kit</h4>
+                        <p class="text-sm text-muted mb-2">Bottle with quick-release holder</p>
+                        <span class="text-lg font-bold text-primary">$25</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: AccessoriesSection -->
+
+    <!-- @COMPONENT: BlogSection -->
+    <section id="blog" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl lg:text-4xl font-bold text-primary mb-4">Latest from Our Blog</h2>
+                <p class="text-xl text-muted max-w-2xl mx-auto">
+                    Tips, guides, and stories from the cycling community
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Blog Post 1 -->
+                <article class="bg-gray-50 rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
+                    <!-- Bike maintenance workshop scene -->
+                    <img src="https://pixabay.com/get/g4c919bc2ff9193deb614a5aa8566bf87539dd5115242457be2069b32b78d859901e988dc5b86fbb98c095abdfa472efe1c86e27737fa9b5f7e729b29a49447b9_1280.jpg" 
+                         alt="Bike maintenance workshop" 
+                         class="w-full h-48 object-cover" data-mock-image="true" />
+                    <div class="p-6">
+                        <div class="text-sm text-accent font-semibold mb-2">MAINTENANCE</div>
+                        <h3 class="text-xl font-semibold text-primary mb-3">Essential Bike Maintenance Tips</h3>
+                        <p class="text-muted mb-4">Keep your bike in top condition with these expert maintenance tips...</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-muted">March 15, 2024</span>
+                            <button class="text-secondary hover:text-blue-600 font-semibold">Read More</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Post 2 -->
+                <article class="bg-gray-50 rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
+                    <!-- Group of cyclists on scenic trail -->
+                    <img src="https://pixabay.com/get/g3807b320c3cb72b3f349d243aeacf3d693ebeb161275a8e69b8ab049a3e52adf106bc7c211572c8719a980e564e16006f42120cb7aa1502868697201c7238ca2_1280.jpg" 
+                         alt="Group of cyclists on scenic trail" 
+                         class="w-full h-48 object-cover" data-mock-image="true" />
+                    <div class="p-6">
+                        <div class="text-sm text-accent font-semibold mb-2">ADVENTURE</div>
+                        <h3 class="text-xl font-semibold text-primary mb-3">Best Cycling Routes This Spring</h3>
+                        <p class="text-muted mb-4">Discover amazing cycling routes perfect for spring adventures...</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-muted">March 12, 2024</span>
+                            <button class="text-secondary hover:text-blue-600 font-semibold">Read More</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Post 3 -->
+                <article class="bg-gray-50 rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
+                    <!-- Electric bike charging station -->
+                    <img src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250" 
+                         alt="Electric bike charging station" 
+                         class="w-full h-48 object-cover" data-mock-image="true" />
+                    <div class="p-6">
+                        <div class="text-sm text-accent font-semibold mb-2">TECHNOLOGY</div>
+                        <h3 class="text-xl font-semibold text-primary mb-3">The Future of E-Bikes</h3>
+                        <p class="text-muted mb-4">Explore the latest innovations in electric bicycle technology...</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-muted">March 10, 2024</span>
+                            <button class="text-secondary hover:text-blue-600 font-semibold">Read More</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: BlogSection -->
+
+    <!-- @COMPONENT: ContactSection -->
+    <section id="contact" class="py-16 bg-primary text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-6">Get in Touch</h2>
+                    <p class="text-xl mb-8 text-gray-300">
+                        Have questions about our bikes or need expert advice? We're here to help you find the perfect ride.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4">
+                            <i data-lucide="map-pin" class="w-6 h-6 text-accent"></i>
+                            <div>
+                                <h4 class="font-semibold">Visit Our Store</h4>
+                                <p class="text-gray-300">123 Bike Street, Cycling City, CC 12345</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <i data-lucide="phone" class="w-6 h-6 text-accent"></i>
+                            <div>
+                                <h4 class="font-semibold">Call Us</h4>
+                                <p class="text-gray-300">(555) 123-BIKE</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <i data-lucide="mail" class="w-6 h-6 text-accent"></i>
+                            <div>
+                                <h4 class="font-semibold">Email Us</h4>
+                                <p class="text-gray-300">info@bikeshoppro.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 text-gray-900">
+                    <form data-implementation="Should validate form and capture leads to database">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                                <input type="text" data-bind="form.firstName" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                                <input type="text" data-bind="form.lastName" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent">
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" data-bind="form.email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent">
+                        </div>
+                        
+                        <div class="mt-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                            <textarea rows="4" data-bind="form.message" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full mt-6 bg-accent hover:bg-green-600 text-white py-3 px-6 rounded-lg font-semibold transition-colors" data-event="click:handleSubmit">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: ContactSection -->
+
+    <!-- @COMPONENT: Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">BikeShop Pro</h3>
+                    <p class="text-gray-400 mb-4">Your premier destination for quality bicycles and accessories.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-accent transition-colors">
+                            <i data-lucide="facebook" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-accent transition-colors">
+                            <i data-lucide="twitter" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-accent transition-colors">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#shop" class="text-gray-400 hover:text-white transition-colors">Shop</a></li>
+                        <li><a href="#accessories" class="text-gray-400 hover:text-white transition-colors">Accessories</a></li>
+                        <li><a href="#blog" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">About</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Customer Care</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Shipping Info</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Returns</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Size Guide</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Support</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Get updates on new products and special offers.</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Your email" class="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-l-lg focus:ring-2 focus:ring-accent focus:border-transparent text-white">
+                        <button class="bg-accent hover:bg-green-600 px-4 py-2 rounded-r-lg transition-colors">
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 BikeShop Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <!-- @COMPONENT: CartDrawer -->
+    <div data-state="cartOpen:boolean = false" class="fixed inset-0 z-50 hidden" data-implementation="Toggle visibility based on cartOpen state">
+        <div class="absolute inset-0 bg-black bg-opacity-50" data-event="click:closeCart"></div>
+        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-xl">
+            <div class="flex flex-col h-full">
+                <div class="flex items-center justify-between p-4 border-b">
+                    <h2 class="text-lg font-semibold">Shopping Cart</h2>
+                    <button data-event="click:closeCart" class="p-2 hover:bg-gray-100 rounded-lg">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+
+                <div class="flex-1 overflow-y-auto p-4">
+                    <!-- @MAP: cartItems.map(item => ( -->
+                    <div class="flex items-center space-x-4 p-4 border-b">
+                        <img src="https://images.unsplash.com/photo-1544191696-15693072fb5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80" 
+                             alt="Cart item" 
+                             class="w-16 h-16 object-cover rounded-lg" data-mock-image="true" />
+                        <div class="flex-1">
+                            <h4 class="font-semibold" data-bind="item.name">TrailMaster Pro</h4>
+                            <p class="text-sm text-muted" data-bind="item.price">$2,299</p>
+                            <div class="flex items-center space-x-2 mt-2">
+                                <button class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100">-</button>
+                                <span data-bind="item.quantity">1</span>
+                                <button class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100">+</button>
+                            </div>
+                        </div>
+                        <button class="text-red-500 hover:text-red-700">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                    <!-- @END_MAP )) -->
+                </div>
+
+                <div class="border-t p-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-lg font-semibold">Total:</span>
+                        <span class="text-2xl font-bold text-primary" data-bind="cart.total">$2,299</span>
+                    </div>
+                    <button class="w-full bg-accent hover:bg-green-600 text-white py-3 rounded-lg font-semibold transition-colors mb-2" data-event="click:checkout">
+                        Checkout
+                    </button>
+                    <button class="w-full border border-gray-300 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors" data-event="click:viewCart">
+                        View Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: CartDrawer -->
+
+    <script>
+        // Initialize Lucide icons
+        (function() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        })();
+
+        // TODO: Implement cart state management with Context API
+        // TODO: Implement Stripe payment integration
+        // TODO: Implement PayPal payment hooks
+        // TODO: Implement form validation and lead capture
+        // TODO: Implement mobile menu toggle functionality
+        // TODO: Implement smooth scroll navigation
+        // TODO: Implement product filtering and search
+        // TODO: Implement user authentication system
+        // TODO: Implement order management system
+    </script>
+</body>
+</html>
