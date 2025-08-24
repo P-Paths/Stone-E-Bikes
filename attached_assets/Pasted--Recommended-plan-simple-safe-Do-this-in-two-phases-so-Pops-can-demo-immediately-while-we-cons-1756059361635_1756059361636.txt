@@ -1,0 +1,114 @@
+✅ Recommended plan (simple + safe)
+
+Do this in two phases so Pops can demo immediately while we consolidate the backend:
+
+Phase 1 — Supabase for Leads now (fastest win)
+
+Use Supabase right away to capture all leads across brands in one place.
+
+Keep products/blog in seed JSON or current DB for now (so the store runs with no friction).
+
+App never crashes if Supabase keys are missing (returns mock “saved” for demos).
+
+Phase 2 — Migrate Products/Orders/Blog to Supabase
+
+Once leads are flowing and you like it, move the catalog/orders/blog into Supabase tables.
+
+We can still keep Drizzle models if you want (Drizzle can point to Supabase Postgres using the Supabase DATABASE_URL). Or skip Drizzle and use the Supabase JS client only. Either path is fine.
+
+🧱 What to tell Replit AI (copy–paste prompts)
+1) Add Supabase adapters (server + client)
+Add Supabase support without removing existing DB:
+
+1) Install @supabase/supabase-js.
+2) Create server/lib/supabase.server.ts:
+   - exports getSupabaseAdmin() using SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY (server-only).
+   - NEVER expose service role to the client.
+3) Create client/src/lib/supabase.client.ts:
+   - exports getSupabaseAnon() using NEXT_PUBLIC_SUPABASE_URL + NEXT_PUBLIC_SUPABASE_ANON_KEY (safe for client).
+4) Add env to .env.example:
+   NEXT_PUBLIC_SUPABASE_URL=
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=
+   SUPABASE_URL=
+   SUPABASE_SERVICE_ROLE_KEY=
+
+2) Leads → Supabase first (fallback if missing)
+Create server/lib/leads.ts with createLead(data):
+- If SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY present:
+    insert {name,email,phone,message,website_id} into Supabase table `leads`.
+- Else if existing Postgres is available:
+    insert into local Postgres leads table.
+- Else:
+    return {mock:true} and log a warning (demo mode).
+
+Update POST /api/contact to call createLead().
+Read WEBSITE_ID from env (default 2). Document in README.
+
+3) Create Supabase schema (SQL you run in Supabase SQL editor)
+-- minimal tables for phase 1
+create table if not exists public.websites (
+  id bigint generated always as identity primary key,
+  name text not null,
+  domain text,
+  created_at timestamptz default now()
+);
+
+create table if not exists public.leads (
+  id bigint generated always as identity primary key,
+  website_id bigint not null references public.websites(id),
+  name text,
+  email text,
+  phone text,
+  message text,
+  created_at timestamptz default now()
+);
+
+-- Simple RLS (optional for now; we can tighten later)
+alter table public.leads enable row level security;
+create policy "service role full access" on public.leads
+  for all using (true) with check (true);
+
+
+For demos, we’re fine using the service role on the server. For production, we’ll swap to strict RLS + anon key where needed.
+
+4) Add a payments flag (to avoid crashes)
+Add PAYMENTS_ENABLED (default "false"):
+- If false: skip Stripe startup, /api/create-payment-intent returns 501, UI shows “Demo mode”.
+- If true: require VITE_STRIPE_PUBLIC_KEY + STRIPE_SECRET_KEY and run Stripe Test Mode (4242 card).
+Document both modes in README.
+
+5) (Optional now, or later) Products/Orders → Supabase
+Add a products adapter with two paths:
+- If NEXT_PUBLIC_SUPABASE_URL present: fetch from Supabase `products`.
+- Else: use seed JSON.
+Add README: “Switch products to Supabase by setting these envs and running this seed SQL.”
+
+🧪 What changes for you (operationally)
+
+Replit Secrets now include Supabase keys:
+
+# client (safe)
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+
+# server (DO NOT expose to client)
+SUPABASE_URL=
+SUPABASE_SERVICE_ROLE_KEY=
+
+WEBSITE_ID=2
+PAYMENTS_ENABLED=false
+
+
+When these are present, leads go to Supabase.
+
+If not present, leads are mocked or stored locally so the demo still works.
+
+Later, flip products/orders/blog to Supabase the same way.
+
+❓Why keep Drizzle at all?
+
+You don’t have to.
+
+But Drizzle can still be useful for local dev or if a client wants plain Postgres without Supabase.
+
+If you prefer all-in on Supabase, we can phase Drizzle out when we migrate products/orders/blog.
