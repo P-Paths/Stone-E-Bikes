@@ -176,10 +176,16 @@ export default function Checkout() {
       apiRequest("POST", "/api/create-payment-intent", { amount: total })
         .then((res) => res.json())
         .then((data) => {
-          setClientSecret(data.clientSecret);
+          if (data.demo) {
+            // Demo mode - payments disabled
+            setClientSecret("demo");
+          } else {
+            setClientSecret(data.clientSecret);
+          }
         })
         .catch((error) => {
           console.error('Error creating payment intent:', error);
+          setClientSecret("error");
         });
     }
   }, [total]);
@@ -199,6 +205,45 @@ export default function Checkout() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full" aria-label="Loading" />
+      </div>
+    );
+  }
+
+  if (clientSecret === "demo") {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <h1 className="text-3xl font-bold text-primary mb-8" data-testid="text-checkout-title">
+            Checkout - Demo Mode
+          </h1>
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-8">
+            <div className="flex">
+              <div className="ml-3">
+                <h3 className="text-sm font-medium text-yellow-800">
+                  Demo Mode: Payments Disabled
+                </h3>
+                <div className="mt-2 text-sm text-yellow-700">
+                  <p>This store is running in demo mode. To enable payments:</p>
+                  <ul className="list-disc list-inside mt-2">
+                    <li>Set PAYMENTS_ENABLED=true in environment variables</li>
+                    <li>Configure Stripe keys (VITE_STRIPE_PUBLIC_KEY, STRIPE_SECRET_KEY)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (clientSecret === "error") {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-red-600 mb-4">Payment Setup Error</h1>
+          <p className="text-muted">Unable to initialize payment. Please try again later.</p>
+        </div>
       </div>
     );
   }

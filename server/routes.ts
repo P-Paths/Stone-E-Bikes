@@ -3,15 +3,20 @@ import { createServer, type Server } from "http";
 import Stripe from "stripe";
 import { storage } from "./storage";
 import { insertContactSubmissionSchema, insertProductSchema, insertCategorySchema, insertBlogPostSchema } from "@shared/schema";
+import { createLead } from "./lib/leads";
 import { z } from "zod";
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error('Missing required Stripe secret: STRIPE_SECRET_KEY');
-}
+const paymentsEnabled = process.env.PAYMENTS_ENABLED?.toLowerCase() === 'true';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: "2025-07-30.basil",
-});
+let stripe: Stripe | null = null;
+if (paymentsEnabled) {
+  if (!process.env.STRIPE_SECRET_KEY) {
+    throw new Error('PAYMENTS_ENABLED=true but missing STRIPE_SECRET_KEY');
+  }
+  stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: "2025-07-30.basil",
+  });
+}
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Products
@@ -90,22 +95,42 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Contact form
+  // Contact form - now uses multi-provider leads adapter
   app.post("/api/contact", async (req, res) => {
     try {
-      const validatedData = insertContactSubmissionSchema.parse(req.body);
-      const submission = await storage.createContactSubmission(validatedData);
-      res.json({ message: "Message sent successfully", id: submission.id });
+      const { firstName, lastName, email, message } = req.body;
+      const website_id = Number(process.env.WEBSITE_ID || 2);
+      
+      // Use new leads adapter with fallback logic
+      const result = await createLead({
+        name: `${firstName || ''} ${lastName || ''}`.trim(),
+        email,
+        message,
+        website_id
+      });
+
+      res.json({ 
+        message: "Message sent successfully",
+        ...result
+      });
     } catch (error: any) {
-      if (error instanceof z.ZodError) {
-        return res.status(400).json({ message: "Invalid form data", errors: error.errors });
-      }
       res.status(500).json({ message: "Error submitting contact form: " + error.message });
     }
   });
 
   // Stripe payment
   app.post("/api/create-payment-intent", async (req, res) => {
+    if (!paymentsEnabled) {
+      return res.status(501).json({ 
+        message: "Payments disabled in demo mode",
+        demo: true 
+      });
+    }
+
+    if (!stripe) {
+      return res.status(500).json({ message: "Stripe not configured" });
+    }
+
     try {
       const { amount } = req.body;
       

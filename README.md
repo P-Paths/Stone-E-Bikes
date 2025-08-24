@@ -119,8 +119,9 @@ Edit `client/src/index.css` for:
 
 ### Prerequisites
 - Node.js 18+ 
-- PostgreSQL database
-- Stripe account (free)
+- PostgreSQL database (optional - has fallbacks)
+- Stripe account (optional - demo mode available)
+- Supabase account (optional - has fallbacks)
 
 ### Setup Instructions
 
@@ -135,15 +136,27 @@ npm install
 Create your environment variables in Replit Secrets or `.env.local`:
 
 ```bash
-# Database
+# Database (PostgreSQL)
 DATABASE_URL=your_postgresql_connection_string
 
 # Stripe Keys (get from https://dashboard.stripe.com/apikeys)
-STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key
 VITE_STRIPE_PUBLIC_KEY=pk_test_your_stripe_publishable_key
+STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key
+
+# Supabase - CLIENT (safe for browser)
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your_anon_public_key
+
+# Supabase - SERVER (never expose to client)
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_secret_key
+
+# App Configuration
+WEBSITE_ID=2
+PAYMENTS_ENABLED=false
 ```
 
-**3. Database Setup**
+**3. Database Setup (PostgreSQL)**
 ```bash
 # Push schema to database
 npm run db:push
@@ -160,6 +173,126 @@ npm run dev
 ```
 
 Visit `http://localhost:5000` to see your store!
+
+## 📧 Leads Setup (Supabase)
+
+### Multi-Provider Lead System
+The app uses intelligent fallbacks for lead capture:
+
+1. **Supabase** (preferred) - Centralized across all brands
+2. **PostgreSQL** (fallback) - Local database storage  
+3. **Mock** (fallback) - Demo mode for development
+
+### 60-Second Supabase Setup
+
+**1. Create Supabase Project**
+- Go to [supabase.com](https://supabase.com)
+- Create new project
+- Note your project URL and keys
+
+**2. Run SQL Schema**
+In Supabase SQL Editor, execute:
+
+```sql
+-- Multi-brand lead management
+create table if not exists public.websites (
+  id bigint generated always as identity primary key,
+  name text not null,
+  domain text,
+  created_at timestamptz default now()
+);
+
+create table if not exists public.leads (
+  id bigint generated always as identity primary key,
+  website_id bigint not null references public.websites(id),
+  name text,
+  email text,
+  phone text,
+  message text,
+  created_at timestamptz default now()
+);
+
+-- Simple RLS for now
+alter table public.leads enable row level security;
+create policy "service role full access" on public.leads
+  for all using (true) with check (true);
+
+-- Seed websites
+insert into public.websites (id, name, domain) values 
+(1, 'Her Cookie Shop', 'hercookieshop.com'),
+(2, 'Stonee Bikes', 'stoneebikes.com'),
+(3, 'Prestigious Paths', 'prestigiouspaths.com')
+on conflict (id) do nothing;
+```
+
+**3. Configure Environment Variables**
+```bash
+# Get these from Supabase Project Settings > API
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your_anon_public_key
+SUPABASE_URL=https://your-project.supabase.co  
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_secret_key
+
+# Set your brand ID (2 = Stonee Bikes)
+WEBSITE_ID=2
+```
+
+**SECURITY**: Service role key is server-only. Never expose to client code.
+
+## 🛡️ Fallbacks (Postgres or Mock)
+
+### What Happens When Services Are Missing
+
+| Scenario | Leads Storage | Behavior |
+|----------|---------------|----------|
+| **All configured** | Supabase | ✅ Production ready |
+| **No Supabase** | PostgreSQL | ✅ Works locally |
+| **No databases** | Mock mode | ⚠️ Logs warning, returns success |
+
+### Demo Never Crashes
+The app gracefully handles missing services:
+- Missing Supabase → Falls back to PostgreSQL
+- Missing PostgreSQL → Uses mock responses
+- Missing Stripe → Shows demo mode UI
+
+## 💳 Payments: Demo vs Test Mode
+
+### Demo Mode (Default: PAYMENTS_ENABLED=false)
+- ✅ Store functions fully
+- ❌ Checkout shows "Demo Mode" message
+- 📊 Perfect for client demos and development
+
+### Test Mode (PAYMENTS_ENABLED=true)
+- ✅ Full Stripe integration
+- 💳 Use test card: `4242 4242 4242 4242`
+- 🔒 Requires STRIPE_SECRET_KEY + VITE_STRIPE_PUBLIC_KEY
+
+```bash
+# Enable payments
+PAYMENTS_ENABLED=true
+VITE_STRIPE_PUBLIC_KEY=pk_test_...
+STRIPE_SECRET_KEY=sk_test_...
+```
+
+## 🏢 Multi-Brand: WEBSITE_ID Usage
+
+Each brand gets a unique WEBSITE_ID:
+- `1` = Her Cookie Shop
+- `2` = Stonee Bikes (default)
+- `3` = Prestigious Paths
+
+All leads are captured in one Supabase database with website_id for filtering. Perfect for managing multiple brands from one dashboard.
+
+### Brand-Specific Deployment
+```bash
+# Deploy Her Cookie Shop
+WEBSITE_ID=1
+# ... configure theme.config.ts for cookie theme
+
+# Deploy Stonee Bikes  
+WEBSITE_ID=2
+# ... configure theme.config.ts for bike theme
+```
 
 ## 🛍️ E-commerce Features
 

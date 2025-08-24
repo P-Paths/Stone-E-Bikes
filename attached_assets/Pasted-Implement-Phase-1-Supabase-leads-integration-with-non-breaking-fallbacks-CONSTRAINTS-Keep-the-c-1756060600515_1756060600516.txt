@@ -1,0 +1,77 @@
+Implement Phase 1: Supabase leads integration with non-breaking fallbacks.
+
+CONSTRAINTS
+- Keep the current app fully working even if Supabase envs are missing.
+- This is a Vite + React app. Client envs must use VITE_ prefix.
+- Do not remove existing Postgres/Drizzle; just add Supabase adapters.
+- Document everything in README. No silent changes.
+
+TASKS
+
+1) Dependencies & Clients
+- Add @supabase/supabase-js to the project.
+- Create server/lib/supabase.server.ts:
+  - export function getSupabaseAdmin() that returns a Supabase client using:
+    process.env.SUPABASE_URL and process.env.SUPABASE_SERVICE_ROLE_KEY
+  - This file must NEVER be imported by client code.
+- Create client/src/lib/supabase.client.ts:
+  - export function getSupabaseAnon() that returns a Supabase client using:
+    import.meta.env.VITE_SUPABASE_URL and import.meta.env.VITE_SUPABASE_ANON_KEY
+
+2) Env & Defaults
+- Update .env.example with ALL of these keys:
+  # CLIENT (safe for browser)
+  VITE_SUPABASE_URL=
+  VITE_SUPABASE_ANON_KEY=
+  # SERVER (never expose to client)
+  SUPABASE_URL=
+  SUPABASE_SERVICE_ROLE_KEY=
+  # App behavior
+  WEBSITE_ID=2
+  PAYMENTS_ENABLED=false
+  # Stripe (already present, reiterate)
+  VITE_STRIPE_PUBLIC_KEY=
+  STRIPE_SECRET_KEY=
+- In code, default WEBSITE_ID to 2 if not set. Document that 2 = Stonee Bikes for now.
+
+3) Leads Adapter (Supabase → Postgres → Mock)
+- Create server/lib/leads.ts with:
+  export async function createLead({name, email, phone, message, website_id}) that:
+    a) If SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY exist:
+        Insert into Supabase table public.leads with columns:
+        (name, email, phone, message, website_id, created_at=now()).
+        Return {provider:"supabase", id: <inserted id>}
+    b) Else if Postgres is available (current implementation):
+        Insert into local leads table and return {provider:"postgres", id: <id>}
+    c) Else:
+        Log a WARN "Leads mocked: missing Supabase and Postgres" and return {provider:"mock", id:null, mock:true}
+- Update POST /api/contact to call createLead() and always include website_id:
+    website_id = Number(process.env.WEBSITE_ID || 2)
+- Ensure the endpoint never throws if providers are missing; it should respond 200 with the result payload.
+
+4) README Updates
+- Add sections:
+  “Leads Setup (Supabase)”
+  “Fallbacks (Postgres or Mock)”
+  “Environment Variables (Vite + Server)”
+  “Multi-Brand: WEBSITE_ID usage”
+  Provide a 60-second checklist to enable Supabase and a note that service role key must only be used server-side.
+
+5) Payments Flag (Demo vs Test Mode)
+- Implement PAYMENTS_ENABLED (default "false"):
+  - If false:
+      - Do NOT require STRIPE_SECRET_KEY at startup.
+      - /api/create-payment-intent returns 501 JSON {message:"Payments disabled in demo mode"}
+      - Checkout button in the UI shows a tooltip “Demo mode: payments disabled”
+  - If true:
+      - Require VITE_STRIPE_PUBLIC_KEY and STRIPE_SECRET_KEY, keep current Stripe test flow.
+- Document both modes in README with the 4242 test card.
+
+6) Quick Self-Test Output (report only)
+- After implementing, run a self-audit and PRINT (do not just say done):
+  - Which provider will be used for leads given current envs (supabase/postgres/mock)
+  - Confirm WEBSITE_ID value being sent
+  - List new files created and modified
+  - Any remaining TODOs
+
+Do not remove existing features. Keep products/blog as-is for now. This change is additive and non-breaking.
