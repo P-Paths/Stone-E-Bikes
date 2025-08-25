@@ -7,11 +7,14 @@ import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
 import { PRICING } from '@/commerce/pricing.config';
 import { usePathname } from 'next/navigation';
+import { BikeDetailsModal } from '@/components/BikeDetailsModal';
 
 export default function Shop() {
   const { addItem } = useCart();
   const { toast } = useToast();
   const pathname = usePathname();
+  const [selectedBike, setSelectedBike] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Scroll to top when page loads
   useEffect(() => {
@@ -119,49 +122,8 @@ export default function Shop() {
                   {bike.label}
                 </h3>
                 
-                {/* Key Specifications */}
-                <div className="mb-4">
-                  <div className="grid grid-cols-2 gap-3 text-sm">
-                    <div className="bg-gray-50 p-2 rounded">
-                      <span className="font-semibold text-accent">Motor:</span>
-                      <div className="text-muted">{bike.specifications.motor}</div>
-                    </div>
-                    <div className="bg-gray-50 p-2 rounded">
-                      <span className="font-semibold text-accent">Battery:</span>
-                      <div className="text-muted">{bike.specifications.battery}</div>
-                    </div>
-                    <div className="bg-gray-50 p-2 rounded">
-                      <span className="font-semibold text-accent">Range:</span>
-                      <div className="text-muted">{bike.specifications.range}</div>
-                    </div>
-                    <div className="bg-gray-50 p-2 rounded">
-                      <span className="font-semibold text-accent">Max Speed:</span>
-                      <div className="text-muted">{bike.specifications.maxSpeed}</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Frame & Geometry */}
-                <div className="mb-4">
-                  <div className="text-sm space-y-2">
-                    <div>
-                      <span className="font-semibold text-accent">Frame:</span>
-                      <div className="text-muted">{bike.specifications.frame}</div>
-                    </div>
-                    <div>
-                      <span className="font-semibold text-accent">Wheels:</span>
-                      <div className="text-muted">{bike.specifications.wheelSize}</div>
-                    </div>
-                    <div>
-                      <span className="font-semibold text-accent">Brakes:</span>
-                      <div className="text-muted">{bike.specifications.brakes}</div>
-                    </div>
-                  </div>
-                </div>
-
                 {/* Features */}
                 <div className="mb-4">
-                  <h4 className="font-semibold text-primary mb-2">Key Features:</h4>
                   <ul className="text-sm text-muted space-y-1">
                     {bike.features.map((feature, index) => (
                       <li key={index} className="flex items-center">
@@ -170,27 +132,6 @@ export default function Shop() {
                       </li>
                     ))}
                   </ul>
-                </div>
-                {/* Pricing */}
-                <div className="mb-4 p-3 bg-accent/10 rounded-lg">
-                  <div className="text-sm space-y-1">
-                    <div className="flex justify-between">
-                      <span className="font-semibold">Retail Price:</span>
-                      <span className="text-primary font-bold">${bike.specifications.retailPrice.toLocaleString()}</span>
-                    </div>
-                    {bike.specifications.bulkPrice && (
-                      <div className="flex justify-between text-green-600">
-                        <span className="font-semibold">Bulk Discount:</span>
-                        <span className="font-bold">${bike.specifications.bulkPrice.toLocaleString()}</span>
-                      </div>
-                    )}
-                    {bike.specifications.premiumPrice && (
-                      <div className="flex justify-between text-blue-600">
-                        <span className="font-semibold">Premium Package:</span>
-                        <span className="font-bold">${bike.specifications.premiumPrice.toLocaleString()}</span>
-                      </div>
-                    )}
-                  </div>
                 </div>
 
                 <div className="flex justify-between items-center">
@@ -205,16 +146,8 @@ export default function Shop() {
                       variant="outline"
                       className="border-accent text-accent hover:bg-accent hover:text-black font-semibold"
                       onClick={() => {
-                        // Scroll to top and show this bike
-                        window.scrollTo(0, 0);
-                        const element = document.getElementById(`card-product-${bike.id}`);
-                        if (element) {
-                          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                          element.classList.add('ring-4', 'ring-accent', 'ring-opacity-50');
-                          setTimeout(() => {
-                            element.classList.remove('ring-4', 'ring-accent', 'ring-opacity-50');
-                          }, 3000);
-                        }
+                        setSelectedBike(bike);
+                        setIsModalOpen(true);
                       }}
                     >
                       View Details
@@ -234,6 +167,16 @@ export default function Shop() {
         })}
         </div>
       </div>
+
+      {/* Bike Details Modal */}
+      <BikeDetailsModal
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          setSelectedBike(null);
+        }}
+        bike={selectedBike}
+      />
     </div>
   );
 }

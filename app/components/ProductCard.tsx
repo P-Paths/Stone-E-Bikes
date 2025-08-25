@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Product } from '@shared/schema';
 import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
+import Link from 'next/link';
 
 interface ProductCardProps {
   product: Product;
@@ -65,14 +66,25 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, variant = 'de
           >
             ${product.price}
           </span>
-          <Button
-            className="bg-accent hover:bg-yellow-600 text-black font-semibold transition-all duration-300 transform hover:scale-105"
-            onClick={handleAddToCart}
-            disabled={!product.inStock}
-            data-testid={`button-add-to-cart-${product.id}`}
-          >
-            {product.inStock ? 'Add to Cart' : 'Out of Stock'}
-          </Button>
+          {variant === 'featured' ? (
+            <Link href="/shop">
+              <Button
+                className="bg-accent hover:bg-yellow-600 text-black font-semibold transition-all duration-300 transform hover:scale-105"
+                data-testid={`button-view-details-${product.id}`}
+              >
+                View Details
+              </Button>
+            </Link>
+          ) : (
+            <Button
+              className="bg-accent hover:bg-yellow-600 text-black font-semibold transition-all duration-300 transform hover:scale-105"
+              onClick={handleAddToCart}
+              disabled={!product.inStock}
+              data-testid={`button-add-to-cart-${product.id}`}
+            >
+              {product.inStock ? 'Add to Cart' : 'Out of Stock'}
+            </Button>
+          )}
         </div>
       </CardContent>
     </Card>

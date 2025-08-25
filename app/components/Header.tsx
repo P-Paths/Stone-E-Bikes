@@ -31,12 +31,12 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className="gradient-bg text-white shadow-lg sticky top-0 z-50 border-b border-accent/20">
+    <header className="bg-white text-black shadow-lg sticky top-0 z-50 border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
-                      <Link href="/" className="text-2xl font-bold text-white cursor-pointer hover:text-accent transition-colors" data-testid="logo">
+                      <Link href="/" className="text-2xl font-bold text-black cursor-pointer hover:text-accent transition-colors" data-testid="logo">
             {theme.logo.text}
           </Link>
           </div>
@@ -50,7 +50,7 @@ export const Header: React.FC = () => {
                 className={`cursor-pointer transition-colors ${
                   isActive(item.href)
                     ? 'text-accent font-medium'
-                    : 'text-white hover:text-accent'
+                    : 'text-black hover:text-accent'
                 }`}
                 data-testid={`nav-${item.name.toLowerCase()}`}
                 onClick={() => window.scrollTo(0, 0)}
@@ -66,13 +66,13 @@ export const Header: React.FC = () => {
               variant="ghost"
               size="sm"
               onClick={openCart}
-              className="relative p-2 text-white hover:text-accent"
+              className="relative p-2 text-black hover:text-accent"
               data-testid="button-cart"
             >
               <ShoppingCart className="w-6 h-6" />
               {itemCount > 0 && (
                 <span
-                  className="absolute -top-1 -right-1 bg-red-500 text-white font-bold text-xs rounded-full min-w-[20px] h-5 flex items-center justify-center px-1 shadow-lg border-2 border-white"
+                  className="absolute -top-1 -right-1 bg-accent text-black font-bold text-xs rounded-full min-w-[20px] h-5 flex items-center justify-center px-1 shadow-lg border-2 border-white"
                   data-testid="text-cart-count"
                 >
                   {itemCount}
@@ -83,7 +83,7 @@ export const Header: React.FC = () => {
             <Button
               variant="ghost"
               size="sm"
-              className="md:hidden p-2 text-white"
+              className="md:hidden p-2 text-black"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               data-testid="button-mobile-menu"
             >
@@ -98,7 +98,7 @@ export const Header: React.FC = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-accent/20 py-4 space-y-2 bg-black/95" data-testid="mobile-menu">
+          <div className="md:hidden border-t border-gray-200 py-4 space-y-2 bg-white" data-testid="mobile-menu">
             {navigation.map((item) => (
               <Link 
                 key={item.name} 
@@ -106,7 +106,7 @@ export const Header: React.FC = () => {
                 className={`cursor-pointer block px-3 py-2 transition-colors ${
                   isActive(item.href)
                     ? 'text-accent font-medium'
-                    : 'text-white hover:text-accent'
+                    : 'text-black hover:text-accent'
                 }`}
                 onClick={() => {
                   setIsMobileMenuOpen(false);
