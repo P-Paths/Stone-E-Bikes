@@ -46,19 +46,9 @@ export const BikeDetailsModal: React.FC<BikeDetailsModalProps> = ({ isOpen, onCl
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-white border-2 border-accent shadow-2xl">
         <DialogHeader>
-          <div className="flex justify-between items-start">
-            <DialogTitle className="text-2xl font-bold text-primary">
-              {bike.label}
-            </DialogTitle>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={onClose}
-              className="h-8 w-8 p-0"
-            >
-              <X className="h-4 w-4" />
-            </Button>
-          </div>
+          <DialogTitle className="text-2xl font-bold text-primary">
+            {bike.label}
+          </DialogTitle>
         </DialogHeader>
 
         <div className="grid md:grid-cols-2 gap-6">
@@ -69,7 +59,7 @@ export const BikeDetailsModal: React.FC<BikeDetailsModalProps> = ({ isOpen, onCl
               alt={bike.label}
               className="w-full h-80 object-contain bg-gray-100 rounded-lg"
             />
-            <div className="absolute top-2 left-2 bg-accent text-black font-bold px-3 py-1 rounded-full text-xs shadow-lg border border-white">
+            <div className="absolute top-2 left-2 bg-yellow-500 text-black font-bold px-4 py-2 rounded-full text-sm shadow-xl border-2 border-white transform rotate-1">
               ⚡ Electric
             </div>
           </div>
