@@ -1,0 +1,18 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/api/blog/route": "/api/blog",
+  "/api/products/featured/route": "/api/products/featured",
+  "/api/products/route": "/api/products",
+  "/about/page": "/about",
+  "/accessories/page": "/accessories",
+  "/blog/page": "/blog",
+  "/cart/page": "/cart",
+  "/checkout/page": "/checkout",
+  "/contact/page": "/contact",
+  "/page": "/",
+  "/returns/page": "/returns",
+  "/shipping-info/page": "/shipping-info",
+  "/shop/page": "/shop",
+  "/size-guide/page": "/size-guide",
+  "/support/page": "/support"
+}
