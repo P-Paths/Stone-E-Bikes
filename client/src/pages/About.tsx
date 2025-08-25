@@ -29,32 +29,14 @@ export default function About() {
     },
   ];
 
-  const team = [
-    {
-      name: 'Sarah Johnson',
-      role: 'Founder & CEO',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b47c?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300',
-      bio: 'Avid cyclist with 15+ years in the bike industry.',
-    },
-    {
-      name: 'Mike Chen',
-      role: 'Head Mechanic',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300',
-      bio: 'Expert bike technician specializing in high-performance builds.',
-    },
-    {
-      name: 'Emma Davis',
-      role: 'Customer Experience',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300',
-      bio: 'Dedicated to ensuring every customer finds their perfect ride.',
-    },
-  ];
+
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="bg-primary text-white py-16" data-testid="about-hero-section">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative bg-primary text-white py-16" data-testid="about-hero-section">
+        <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl lg:text-5xl font-bold mb-6" data-testid="text-about-title">
               About {theme.brandName}
@@ -66,6 +48,12 @@ export default function About() {
             </p>
           </div>
         </div>
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+          style={{
+            backgroundImage: 'url("https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080")'
+          }}
+        ></div>
       </section>
 
       {/* Our Story */}
@@ -78,11 +66,12 @@ export default function About() {
               </h2>
               <div className="space-y-4 text-muted">
                 <p data-testid="text-story-paragraph-1">
-                  Founded in 2020 by a group of electric mobility enthusiasts, {theme.brandName} started with a 
+                  Founded in 2023 by a black minority-owned business, {theme.brandName} started with a 
                   vision: to make premium electric bicycles accessible to everyone, especially seniors and 
                   those seeking alternative transportation.
                 </p>
                 <p data-testid="text-story-paragraph-2">
+                  Born and raised in Detroit, we understand the importance of reliable, affordable transportation. 
                   We recognized that many people, particularly seniors, were looking for comfortable, 
                   safe, and reliable transportation options. Our e-bikes provide the perfect solution—combining 
                   the freedom of cycling with the assistance of electric power for a truly enjoyable experience.
@@ -242,67 +231,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Our Team */}
-      <section className="py-16 bg-white" data-testid="our-team-section">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-primary mb-4" data-testid="text-team-title">
-              Meet Our Team
-            </h2>
-            <p className="text-xl text-muted" data-testid="text-team-description">
-              The passionate people behind {theme.brandName}
-            </p>
-          </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {team.map((member, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow" data-testid={`card-team-${index}`}>
-                <CardContent className="p-6">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
-                    data-testid={`img-team-${index}`}
-                  />
-                  <h3 className="text-lg font-semibold text-primary mb-1" data-testid={`text-team-name-${index}`}>
-                    {member.name}
-                  </h3>
-                  <p className="text-secondary font-medium mb-3" data-testid={`text-team-role-${index}`}>
-                    {member.role}
-                  </p>
-                  <p className="text-muted text-sm" data-testid={`text-team-bio-${index}`}>
-                    {member.bio}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Statistics */}
-      <section className="py-16 bg-primary text-white" data-testid="statistics-section">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8 text-center">
-            <div data-testid="stat-customers">
-              <div className="text-4xl font-bold text-accent mb-2">10,000+</div>
-              <div className="text-gray-300">Happy Customers</div>
-            </div>
-            <div data-testid="stat-bikes">
-              <div className="text-4xl font-bold text-accent mb-2">500+</div>
-              <div className="text-gray-300">Bikes Sold</div>
-            </div>
-            <div data-testid="stat-experience">
-              <div className="text-4xl font-bold text-accent mb-2">8+</div>
-              <div className="text-gray-300">Years Experience</div>
-            </div>
-            <div data-testid="stat-rating">
-              <div className="text-4xl font-bold text-accent mb-2">4.9★</div>
-              <div className="text-gray-300">Customer Rating</div>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

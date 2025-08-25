@@ -4,20 +4,20 @@ import React from 'react';
 import { X, Trash2, Plus, Minus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '../contexts/CartContext';
-import { useRouter } from 'next/navigation';
+import { useLocation } from 'wouter';
 
 export const CartDrawer: React.FC = () => {
   const { items, itemCount, total, removeItem, updateQuantity, isOpen, closeCart } = useCart();
-  const router = useRouter();
+  const [, setLocation] = useLocation();
 
   const handleCheckout = () => {
     closeCart();
-    router.push('/checkout');
+    setLocation('/checkout');
   };
 
   const handleViewCart = () => {
     closeCart();
-    router.push('/cart');
+    setLocation('/cart');
   };
 
   if (!isOpen) return null;

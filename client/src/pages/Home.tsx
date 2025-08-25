@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import Link from 'next/link';
+import { Link } from 'wouter';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from '../components/ui/button';
 import { ProductCard } from '../components/ProductCard';
@@ -47,7 +47,7 @@ export default function Home() {
                 <span className="text-accent block">Premium Electric Bikes</span>
               </h1>
               <p className="text-xl mb-4 text-gray-300" data-testid="text-hero-slogan">
-                Love it, live it, ride it too.
+                Ride it, live it, love it!
               </p>
               <p className="text-lg mb-8 text-gray-300" data-testid="text-hero-description">
                 Discover our collection of cutting-edge electric bicycles designed for every adventure. From city commuting to mountain trails.

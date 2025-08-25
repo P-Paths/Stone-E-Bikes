@@ -11,6 +11,11 @@ export default function Shop() {
   const { toast } = useToast();
   const [location] = useLocation();
 
+  // Scroll to top when page loads
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Handle anchor links to scroll to specific bikes
   useEffect(() => {
     const hash = location.split('#')[1];

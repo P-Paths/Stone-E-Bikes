@@ -5,10 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check } from "lucide-react";
 import { PRICING } from "../commerce/pricing.config";
-import { useRouter } from "next/navigation";
+import { useLocation } from "wouter";
 
 export function PricingSection() {
-  const router = useRouter();
+  const [, setLocation] = useLocation();
   
   // Safe fallback: if no tiers configured, render nothing
   if (!PRICING.tiers || PRICING.tiers.length === 0) {
@@ -32,13 +32,13 @@ export function PricingSection() {
 
   const handleGetStarted = (bikeId: string) => {
     // Navigate to shop page and scroll to specific bike
-    router.push(`/shop#${bikeId}`);
+    setLocation(`/shop#${bikeId}`);
   };
 
   const handleQuickView = (bikeId: string) => {
     // For now, just navigate to shop page
     // In the future, this could open a modal with bike details
-    router.push(`/shop#${bikeId}`);
+    setLocation(`/shop#${bikeId}`);
   };
 
   return (

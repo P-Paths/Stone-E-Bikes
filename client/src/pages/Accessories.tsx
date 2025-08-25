@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useCart } from '../contexts/CartContext';
@@ -7,6 +7,11 @@ import { useToast } from '@/hooks/use-toast';
 export default function Accessories() {
   const { addItem } = useCart();
   const { toast } = useToast();
+
+  // Scroll to top when page loads
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const accessories = [
     {

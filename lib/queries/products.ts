@@ -5,56 +5,92 @@ import { Product } from '@shared/schema';
 // Demo data for when Supabase is not configured
 const DEMO_PRODUCTS: Product[] = [
   {
-    id: 'demo-1',
-    name: 'TrailMaster Pro',
-    slug: 'trailmaster-pro',
-    description: 'High-performance mountain bike designed for serious trail riders.',
-    price: '2299.00',
-    imageUrl: 'https://images.unsplash.com/photo-1544191696-15693072fb5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+    id: 'askgo-26',
+    name: '26" ASKGO (700W)',
+    slug: 'askgo-26',
+    description: 'High-performance electric bike with 700W motor and 26 inch wheels.',
+    price: '701.58',
+    imageUrl: '/images/e-bikes/askgo-26.png',
     categoryId: 'bikes',
     featured: true,
     inStock: true,
     specifications: {
-      frame: "Aluminum Alloy",
-      gears: "21-speed",
-      brakes: "Hydraulic Disc",
-      weight: "15kg"
+      motor: "700W",
+      wheels: "26 inch",
+      type: "Electric bike",
+      quality: "Premium"
     },
     created_at: new Date().toISOString()
   },
   {
-    id: 'demo-2',
-    name: 'City Cruiser Elite',
-    slug: 'city-cruiser-elite',
-    description: 'Perfect urban companion for daily commuting and weekend adventures.',
-    price: '1599.00',
-    imageUrl: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+    id: 'okonge-fat-20',
+    name: '20" Fat Tire OKONGE',
+    slug: 'okonge-fat-20',
+    description: 'All-terrain fat tire electric bike with rugged build and 20 inch wheels.',
+    price: '1499.58',
+    imageUrl: '/images/e-bikes/okonge-fat-20.png',
     categoryId: 'bikes',
     featured: true,
     inStock: true,
     specifications: {
-      frame: "Steel",
-      gears: "7-speed",
-      brakes: "V-Brake",
-      weight: "18kg"
+      design: "Fat tire",
+      wheels: "20 inch",
+      capability: "All-terrain",
+      build: "Rugged"
     },
     created_at: new Date().toISOString()
   },
   {
-    id: 'demo-3',
-    name: 'E-Power Max',
-    slug: 'e-power-max',
-    description: 'Electric bike with extended range and smart features.',
-    price: '3499.00',
-    imageUrl: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600',
+    id: 'keteles-fat-26',
+    name: '26" Fat Tire KETELES',
+    slug: 'keteles-fat-26',
+    description: 'Premium fat tire electric bike with high-end components and 26 inch wheels.',
+    price: '3171.58',
+    imageUrl: '/images/e-bikes/keteles-fat-26.png',
     categoryId: 'bikes',
     featured: true,
     inStock: true,
     specifications: {
-      frame: "Carbon Fiber",
-      motor: "250W",
-      battery: "500Wh",
-      range: "80km"
+      type: "Premium fat tire",
+      wheels: "26 inch",
+      components: "High-end",
+      grade: "Professional"
+    },
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 'coz-trike-24',
+    name: '24" Trike CO-Z',
+    slug: 'coz-trike-24',
+    description: '3-wheel stability electric trike with 24 inch wheels and comfortable seating.',
+    price: '909.79',
+    imageUrl: '/images/e-bikes/24" Trike CO-Z.png',
+    categoryId: 'bikes',
+    featured: true,
+    inStock: true,
+    specifications: {
+      stability: "3-wheel",
+      wheels: "24 inch",
+      riding: "Easy",
+      seating: "Comfortable"
+    },
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 'okonge-trike-20',
+    name: '20" Trike OKONGE',
+    slug: 'okonge-trike-20',
+    description: '3-wheel trike with stable design and quality construction.',
+    price: '1279.79',
+    imageUrl: '/images/e-bikes/20" Trike OKONGE.png',
+    categoryId: 'bikes',
+    featured: true,
+    inStock: true,
+    specifications: {
+      type: "3-wheel trike",
+      wheels: "20 inch",
+      design: "Stable",
+      construction: "Quality"
     },
     created_at: new Date().toISOString()
   }

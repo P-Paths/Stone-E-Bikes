@@ -17,6 +17,10 @@ import Checkout from "./pages/Checkout";
 import Blog from "./pages/Blog";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import ShippingInfo from "./pages/ShippingInfo";
+import Returns from "./pages/Returns";
+import SizeGuide from "./pages/SizeGuide";
+import Support from "./pages/Support";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -31,6 +35,10 @@ function Router() {
         <Route path="/blog" component={Blog} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
+        <Route path="/shipping-info" component={ShippingInfo} />
+        <Route path="/returns" component={Returns} />
+        <Route path="/size-guide" component={SizeGuide} />
+        <Route path="/support" component={Support} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

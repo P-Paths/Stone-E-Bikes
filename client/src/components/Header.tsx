@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link, useLocation } from 'wouter';
 import { Menu, X, ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '../contexts/CartContext';
@@ -12,7 +11,7 @@ export const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { itemCount, openCart } = useCart();
   const theme = useTheme();
-  const pathname = usePathname();
+  const [location] = useLocation();
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -25,9 +24,9 @@ export const Header: React.FC = () => {
 
   const isActive = (href: string) => {
     if (href === '/') {
-      return pathname === '/';
+      return location === '/';
     }
-    return pathname.startsWith(href);
+    return location.startsWith(href);
   };
 
   return (
@@ -53,6 +52,7 @@ export const Header: React.FC = () => {
                     : 'text-gray-700 hover:text-accent'
                 }`}
                 data-testid={`nav-${item.name.toLowerCase()}`}
+                onClick={() => window.scrollTo(0, 0)}
               >
                 {item.name}
               </Link>
@@ -107,7 +107,10 @@ export const Header: React.FC = () => {
                     ? 'text-secondary font-medium'
                     : 'text-gray-700 hover:text-secondary'
                 }`}
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  window.scrollTo(0, 0);
+                }}
                 data-testid={`mobile-nav-${item.name.toLowerCase()}`}
               >
                 {item.name}

@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import Link from 'next/link';
+import { Link } from 'wouter';
 import { Facebook, Twitter, Instagram, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -18,10 +18,10 @@ export const Footer: React.FC = () => {
   ];
 
   const customerCare = [
-    { name: 'Shipping Info', href: '#' },
-    { name: 'Returns', href: '#' },
-    { name: 'Size Guide', href: '#' },
-    { name: 'Support', href: '#' },
+    { name: 'Shipping Info', href: '/shipping-info' },
+    { name: 'Returns', href: '/returns' },
+    { name: 'Size Guide', href: '/size-guide' },
+    { name: 'Support', href: '/support' },
   ];
 
   return (
