@@ -47,10 +47,76 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 }
 
 
+// Validate ../../app/about/page.tsx
+{
+  const handler = {} as typeof import("../../app/about/page.js")
+  handler satisfies AppPageConfig<"/about">
+}
+
+// Validate ../../app/accessories/page.tsx
+{
+  const handler = {} as typeof import("../../app/accessories/page.js")
+  handler satisfies AppPageConfig<"/accessories">
+}
+
+// Validate ../../app/blog/page.tsx
+{
+  const handler = {} as typeof import("../../app/blog/page.js")
+  handler satisfies AppPageConfig<"/blog">
+}
+
+// Validate ../../app/cart/page.tsx
+{
+  const handler = {} as typeof import("../../app/cart/page.js")
+  handler satisfies AppPageConfig<"/cart">
+}
+
+// Validate ../../app/checkout/page.tsx
+{
+  const handler = {} as typeof import("../../app/checkout/page.js")
+  handler satisfies AppPageConfig<"/checkout">
+}
+
+// Validate ../../app/contact/page.tsx
+{
+  const handler = {} as typeof import("../../app/contact/page.js")
+  handler satisfies AppPageConfig<"/contact">
+}
+
 // Validate ../../app/page.tsx
 {
   const handler = {} as typeof import("../../app/page.js")
   handler satisfies AppPageConfig<"/">
+}
+
+// Validate ../../app/returns/page.tsx
+{
+  const handler = {} as typeof import("../../app/returns/page.js")
+  handler satisfies AppPageConfig<"/returns">
+}
+
+// Validate ../../app/shipping-info/page.tsx
+{
+  const handler = {} as typeof import("../../app/shipping-info/page.js")
+  handler satisfies AppPageConfig<"/shipping-info">
+}
+
+// Validate ../../app/shop/page.tsx
+{
+  const handler = {} as typeof import("../../app/shop/page.js")
+  handler satisfies AppPageConfig<"/shop">
+}
+
+// Validate ../../app/size-guide/page.tsx
+{
+  const handler = {} as typeof import("../../app/size-guide/page.js")
+  handler satisfies AppPageConfig<"/size-guide">
+}
+
+// Validate ../../app/support/page.tsx
+{
+  const handler = {} as typeof import("../../app/support/page.js")
+  handler satisfies AppPageConfig<"/support">
 }
 
 // Validate ../../app/api/blog/route.ts
