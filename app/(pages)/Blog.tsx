@@ -119,7 +119,7 @@ export default function Blog() {
                       <span className="text-sm text-muted" data-testid={`text-blog-date-${postId}`}>
                         {isMarkdown 
                           ? new Date((post as MarkdownBlogPost).date).toLocaleDateString()
-                          : ((post as DBBlogPost).publishedAt ? new Date((post as DBBlogPost).publishedAt).toLocaleDateString() : '')
+                          : ((post as DBBlogPost).publishedAt ? new Date((post as DBBlogPost).publishedAt!).toLocaleDateString() : '')
                         }
                       </span>
                       <Link href={`/blog/${post.slug}`}>
