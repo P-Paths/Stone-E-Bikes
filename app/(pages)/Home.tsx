@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { ProductCard } from '@/components/ProductCard';
-import { PricingSection } from '@/components/PricingSection';
+
 import { useTheme } from '@/contexts/ThemeContext';
 import { Product, BlogPost } from '@shared/schema';
 
@@ -93,10 +93,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-4" data-testid="text-featured-title">
-              Featured Bikes
+              Featured E-Bikes
             </h2>
             <p className="text-xl text-muted max-w-2xl mx-auto" data-testid="text-featured-description">
-              Handpicked selection of our most popular and innovative bicycles
+              Discover our premium collection of electric bicycles for every adventure
             </p>
           </div>
 
@@ -164,9 +164,9 @@ export default function Home() {
                   data-testid={`card-blog-${post.id}`}
                 >
                   <img
-                    src={post.imageUrl || 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250'}
+                    src={post.imageUrl || '/images/e-bikes/keteles-fat-26.png'}
                     alt={post.title}
-                    className="w-full h-48 object-cover"
+                    className="w-full h-48 object-contain bg-gray-50"
                     data-testid={`img-blog-${post.id}`}
                   />
                   <div className="p-6">
@@ -201,8 +201,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <PricingSection />
+
     </div>
   );
 }
