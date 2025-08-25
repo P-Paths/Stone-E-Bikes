@@ -82,7 +82,11 @@ export default function Accessories() {
       description: accessory.description,
       imageUrl: accessory.imageUrl,
       inStock: true,
-      featured: false
+      featured: false,
+      slug: accessory.id,
+      categoryId: null,
+      specifications: null,
+      createdAt: null
     };
     
     addItem(product);
