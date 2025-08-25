@@ -13,13 +13,13 @@
       "static/chunks/255-01c481785f268126.js",
       "static/chunks/main-app-e92d85bf5cdb12a2.js",
       "static/css/931b179cff3131dc.css",
-      "static/css/f2755936b8602d96.css",
+      "static/css/a71e100c7cc25b72.css",
       "static/chunks/909-29a533877ca43697.js",
       "static/chunks/796-2ef5d5bbfabf3cc7.js",
       "static/chunks/619-ba102abea3e3d0e4.js",
       "static/chunks/241-f2a253f34c892bb0.js",
       "static/chunks/672-e42fd1420ecea731.js",
-      "static/chunks/app/layout-37276d4d480be3a0.js"
+      "static/chunks/app/layout-1e1090c82a36e85f.js"
     ],
     "/api/blog/route": [
       "static/chunks/webpack-32412ec6ff45d80d.js",
@@ -86,6 +86,17 @@
       "static/chunks/619-ba102abea3e3d0e4.js",
       "static/chunks/app/cart/page-03a10d5234c45850.js"
     ],
+    "/checkout/page": [
+      "static/chunks/webpack-32412ec6ff45d80d.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-01c481785f268126.js",
+      "static/chunks/main-app-e92d85bf5cdb12a2.js",
+      "static/chunks/909-29a533877ca43697.js",
+      "static/chunks/796-2ef5d5bbfabf3cc7.js",
+      "static/chunks/241-f2a253f34c892bb0.js",
+      "static/chunks/688-b3b129769cfd8441.js",
+      "static/chunks/app/checkout/page-b1259204c6888e79.js"
+    ],
     "/contact/page": [
       "static/chunks/webpack-32412ec6ff45d80d.js",
       "static/chunks/4bd1b696-c023c6e3521b1417.js",
@@ -115,17 +126,6 @@
       "static/chunks/main-app-e92d85bf5cdb12a2.js",
       "static/chunks/909-29a533877ca43697.js",
       "static/chunks/app/returns/page-9bf60acd92ff8fa1.js"
-    ],
-    "/checkout/page": [
-      "static/chunks/webpack-32412ec6ff45d80d.js",
-      "static/chunks/4bd1b696-c023c6e3521b1417.js",
-      "static/chunks/255-01c481785f268126.js",
-      "static/chunks/main-app-e92d85bf5cdb12a2.js",
-      "static/chunks/909-29a533877ca43697.js",
-      "static/chunks/796-2ef5d5bbfabf3cc7.js",
-      "static/chunks/241-f2a253f34c892bb0.js",
-      "static/chunks/688-b3b129769cfd8441.js",
-      "static/chunks/app/checkout/page-b1259204c6888e79.js"
     ],
     "/shipping-info/page": [
       "static/chunks/webpack-32412ec6ff45d80d.js",

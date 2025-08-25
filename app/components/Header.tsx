@@ -72,7 +72,7 @@ export const Header: React.FC = () => {
               <ShoppingCart className="w-6 h-6" />
               {itemCount > 0 && (
                 <span
-                  className="absolute -top-1 -right-1 bg-accent text-black font-semibold text-xs rounded-full w-5 h-5 flex items-center justify-center"
+                  className="absolute -top-1 -right-1 bg-red-500 text-white font-bold text-xs rounded-full min-w-[20px] h-5 flex items-center justify-center px-1 shadow-lg border-2 border-white"
                   data-testid="text-cart-count"
                 >
                   {itemCount}
