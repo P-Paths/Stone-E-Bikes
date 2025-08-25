@@ -118,7 +118,50 @@ export default function Shop() {
                 >
                   {bike.label}
                 </h3>
+                
+                {/* Key Specifications */}
                 <div className="mb-4">
+                  <div className="grid grid-cols-2 gap-3 text-sm">
+                    <div className="bg-gray-50 p-2 rounded">
+                      <span className="font-semibold text-accent">Motor:</span>
+                      <div className="text-muted">{bike.specifications.motor}</div>
+                    </div>
+                    <div className="bg-gray-50 p-2 rounded">
+                      <span className="font-semibold text-accent">Battery:</span>
+                      <div className="text-muted">{bike.specifications.battery}</div>
+                    </div>
+                    <div className="bg-gray-50 p-2 rounded">
+                      <span className="font-semibold text-accent">Range:</span>
+                      <div className="text-muted">{bike.specifications.range}</div>
+                    </div>
+                    <div className="bg-gray-50 p-2 rounded">
+                      <span className="font-semibold text-accent">Max Speed:</span>
+                      <div className="text-muted">{bike.specifications.maxSpeed}</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Frame & Geometry */}
+                <div className="mb-4">
+                  <div className="text-sm space-y-2">
+                    <div>
+                      <span className="font-semibold text-accent">Frame:</span>
+                      <div className="text-muted">{bike.specifications.frame}</div>
+                    </div>
+                    <div>
+                      <span className="font-semibold text-accent">Wheels:</span>
+                      <div className="text-muted">{bike.specifications.wheelSize}</div>
+                    </div>
+                    <div>
+                      <span className="font-semibold text-accent">Brakes:</span>
+                      <div className="text-muted">{bike.specifications.brakes}</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Features */}
+                <div className="mb-4">
+                  <h4 className="font-semibold text-primary mb-2">Key Features:</h4>
                   <ul className="text-sm text-muted space-y-1">
                     {bike.features.map((feature, index) => (
                       <li key={index} className="flex items-center">
@@ -128,6 +171,28 @@ export default function Shop() {
                     ))}
                   </ul>
                 </div>
+                {/* Pricing */}
+                <div className="mb-4 p-3 bg-accent/10 rounded-lg">
+                  <div className="text-sm space-y-1">
+                    <div className="flex justify-between">
+                      <span className="font-semibold">Retail Price:</span>
+                      <span className="text-primary font-bold">${bike.specifications.retailPrice.toLocaleString()}</span>
+                    </div>
+                    {bike.specifications.bulkPrice && (
+                      <div className="flex justify-between text-green-600">
+                        <span className="font-semibold">Bulk Discount:</span>
+                        <span className="font-bold">${bike.specifications.bulkPrice.toLocaleString()}</span>
+                      </div>
+                    )}
+                    {bike.specifications.premiumPrice && (
+                      <div className="flex justify-between text-blue-600">
+                        <span className="font-semibold">Premium Package:</span>
+                        <span className="font-bold">${bike.specifications.premiumPrice.toLocaleString()}</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
                 <div className="flex justify-between items-center">
                   <span 
                     className="text-2xl font-bold text-primary"
