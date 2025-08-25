@@ -121,7 +121,7 @@ export default function Accessories() {
                 <img
                   src={accessory.imageUrl}
                   alt={accessory.name}
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-48 object-contain bg-gray-50 group-hover:scale-105 transition-transform duration-300"
                   data-testid={`img-accessory-${accessory.id}`}
                 />
                 <div className="absolute top-2 left-2 bg-accent text-black font-semibold px-2 py-1 rounded text-xs">

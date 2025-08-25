@@ -54,7 +54,7 @@ export const CartDrawer: React.FC = () => {
                     <img
                       src={item.product.imageUrl || 'https://images.unsplash.com/photo-1544191696-15693072fb5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80'}
                       alt={item.product.name}
-                      className="w-16 h-16 object-cover rounded-lg"
+                      className="w-16 h-16 object-contain bg-gray-50 rounded-lg"
                       data-testid={`img-cart-item-${item.product.id}`}
                     />
                     <div className="flex-1">

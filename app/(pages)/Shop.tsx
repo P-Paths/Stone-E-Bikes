@@ -92,7 +92,7 @@ export default function Shop() {
               <Card 
                 key={bike.id}
                 id={`card-product-${bike.id}`}
-                className="overflow-hidden hover:shadow-xl transition-shadow duration-300 group"
+                className="overflow-hidden hover:shadow-xl transition-all duration-300 group border border-gray-200 hover:border-accent/30"
                 data-testid={`card-product-${bike.id}`}
               >
                 <div className="relative">

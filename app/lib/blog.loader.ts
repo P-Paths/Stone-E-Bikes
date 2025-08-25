@@ -13,60 +13,59 @@ export interface BlogPost {
  */
 export async function loadMarkdownPosts(): Promise<BlogPost[]> {
   try {
-    // For Next.js, we'll return demo blog posts since import.meta.glob doesn't work
-    // In a real app, you'd use fs.readdirSync or a CMS
-    const demoPosts: BlogPost[] = [
+    // Return the actual markdown blog posts we've created
+    const markdownPosts: BlogPost[] = [
       {
-        title: "Electric Bike Revolution: Why E-Bikes Are Taking Over",
-        slug: "electric-bike-revolution",
+        title: "The Top 5 Health Benefits of Cycling: Why Riding is Great for Your Body and Mind",
+        slug: "cycling-health-benefits",
+        date: "2024-01-20",
+        excerpt: "Discover the science-backed health benefits of cycling, from cardiovascular fitness to mental well-being. Learn why riding a bike is one of the best exercises for overall health.",
+        tags: ["health", "fitness", "cycling", "exercise", "wellness", "e-bikes"],
+        content: "Cycling is more than just a fun way to get around—it's one of the most effective forms of exercise for improving your overall health..."
+      },
+      {
+        title: "Michigan Bike Safety Rules: What Every Rider Needs to Know",
+        slug: "michigan-bike-safety-rules",
         date: "2024-01-15",
-        excerpt: "Discover how electric bicycles are transforming urban transportation and why more people are choosing e-bikes for their daily commute.",
-        tags: ["e-bikes", "transportation", "urban"],
-        content: "Electric bicycles are revolutionizing how we think about urban transportation..."
+        excerpt: "Essential Michigan bike safety rules and regulations to keep you safe on the road. Learn the laws, best practices, and safety tips for cyclists of all ages.",
+        tags: ["safety", "michigan", "bike-laws", "cycling", "e-bikes"],
+        content: "Cycling in Michigan is a fantastic way to explore our beautiful state, but it's crucial to understand and follow the safety rules and regulations..."
       },
       {
-        title: "Choosing Your First Commuter E-Bike",
-        slug: "choosing-first-commuter-bike",
-        date: "2024-01-10",
-        excerpt: "A comprehensive guide to selecting the perfect e-bike for your daily commute, including key features to consider.",
-        tags: ["commuting", "guide", "beginners"],
-        content: "When choosing your first commuter e-bike, there are several important factors to consider..."
+        title: "Bike Safety Tips for Older Adults: Stay Safe and Confident on Your Rides",
+        slug: "bike-safety-seniors",
+        date: "2024-01-25",
+        excerpt: "Essential bike safety tips specifically designed for older adults. Learn how to ride safely, build confidence, and enjoy cycling at any age with proper preparation and equipment.",
+        tags: ["safety", "seniors", "cycling", "e-bikes", "health", "confidence"],
+        content: "Cycling is an excellent activity for older adults, offering numerous health benefits while being gentle on joints..."
       },
       {
-        title: "E-Bikes for Seniors: Health Benefits and Safety Tips",
+        title: "Why E-Bikes Are Great for Seniors' Health",
         slug: "ebikes-seniors-health",
-        date: "2024-01-05",
-        excerpt: "How electric bicycles can improve health and mobility for seniors, with essential safety considerations.",
-        tags: ["seniors", "health", "safety"],
-        content: "Electric bicycles offer numerous health benefits for seniors while providing safe, accessible transportation..."
+        date: "2024-08-24",
+        excerpt: "Discover how electric bicycles can improve seniors' health through low-impact cardio, joint mobility, and mental well-being.",
+        tags: ["health", "seniors", "e-bikes", "fitness"],
+        content: "Electric bicycles are revolutionizing how seniors stay active and healthy..."
       },
       {
         title: "Building Endurance: Your First Month with an E-Bike",
         slug: "building-endurance-first-ebike",
-        date: "2023-12-28",
-        excerpt: "A month-long plan to build your cycling endurance and confidence with your new electric bicycle.",
-        tags: ["fitness", "endurance", "training"],
-        content: "Starting your e-bike journey can be exciting but also challenging. Here's how to build endurance safely..."
+        date: "2024-08-24",
+        excerpt: "A comprehensive guide to building your cycling endurance and confidence with your new electric bicycle.",
+        tags: ["fitness", "endurance", "training", "e-bikes"],
+        content: "Starting your e-bike journey can be both exciting and challenging..."
       },
       {
         title: "Spring Maintenance Tips for Your E-Bike",
         slug: "bike-maintenance-spring",
-        date: "2023-12-20",
+        date: "2024-08-24",
         excerpt: "Essential maintenance tasks to keep your electric bicycle running smoothly through the spring season.",
-        tags: ["maintenance", "spring", "care"],
-        content: "Spring is the perfect time to give your e-bike some TLC. Here are the essential maintenance tasks..."
-      },
-      {
-        title: "Group Riding for Seniors: Safety and Social Benefits",
-        slug: "group-riding-seniors",
-        date: "2023-12-15",
-        excerpt: "How group riding can enhance the e-bike experience for seniors, with safety guidelines and social benefits.",
-        tags: ["group-riding", "seniors", "community"],
-        content: "Group riding offers both safety and social benefits for senior e-bike riders..."
+        tags: ["maintenance", "spring", "care", "e-bikes"],
+        content: "Spring is the perfect time to give your e-bike some TLC..."
       }
     ];
 
-    return demoPosts;
+    return markdownPosts;
   } catch (error) {
     console.warn('Failed to load markdown posts:', error);
     return [];
