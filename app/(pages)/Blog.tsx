@@ -138,6 +138,50 @@ export default function Blog() {
             })}
           </div>
         )}
+
+        {/* Bike Safety Resources */}
+        <section className="mt-16">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-primary mb-4">Bike Safety Resources</h2>
+            <p className="text-muted">Essential resources for safe cycling in Michigan</p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardContent className="p-6">
+                <h3 className="text-lg font-semibold text-primary mb-3">Michigan Bike Safety</h3>
+                <p className="text-muted mb-4">
+                  Official Michigan State Police resources for bicyclist safety, including laws, regulations, and safety guidelines.
+                </p>
+                <a 
+                  href="https://www.michigan.gov/msp/divisions/ohsp/safety-programs/bicyclist-safety" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center text-accent hover:text-yellow-600 font-semibold"
+                >
+                  Visit Michigan.gov →
+                </a>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardContent className="p-6">
+                <h3 className="text-lg font-semibold text-primary mb-3">AARP Bike Safety for Seniors</h3>
+                <p className="text-muted mb-4">
+                  Comprehensive bike safety tips and resources specifically designed for older adults and seniors.
+                </p>
+                <a 
+                  href="https://www.aarp.org/health/healthy-living/bike-safety/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center text-accent hover:text-yellow-600 font-semibold"
+                >
+                  Visit AARP.org →
+                </a>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
       </div>
     </div>
   );

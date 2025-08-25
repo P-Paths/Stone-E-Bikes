@@ -6,6 +6,7 @@ export interface BlogPost {
   tags: string[];
   content: string;
   imageUrl?: string;
+  externalUrl?: string;
 }
 
 /**
@@ -41,7 +42,8 @@ export async function loadMarkdownPosts(): Promise<BlogPost[]> {
         excerpt: "Essential bike safety tips specifically designed for older adults. Learn how to ride safely, build confidence, and enjoy cycling at any age with proper preparation and equipment.",
         tags: ["safety", "seniors", "cycling", "e-bikes", "health", "confidence"],
         content: "Cycling is an excellent activity for older adults, offering numerous health benefits while being gentle on joints...",
-        imageUrl: "/images/blog/senior-bike-safety.jpg"
+        imageUrl: "/images/blog/senior-bike-safety.jpg",
+        externalUrl: "https://www.aarp.org/health/healthy-living/bike-safety/"
       },
       {
         title: "Why E-Bikes Are Great for Seniors' Health",
@@ -50,7 +52,8 @@ export async function loadMarkdownPosts(): Promise<BlogPost[]> {
         excerpt: "Discover how electric bicycles can improve seniors' health through low-impact cardio, joint mobility, and mental well-being.",
         tags: ["health", "seniors", "e-bikes", "fitness"],
         content: "Electric bicycles are revolutionizing how seniors stay active and healthy...",
-        imageUrl: "/images/blog/ebikes-seniors-health.jpg"
+        imageUrl: "/images/blog/ebikes-seniors-health.jpg",
+        externalUrl: "https://crazylennysebikes.com/why-an-e-bike-is-perfect-for-seniors/?srsltid=AfmBOooeSd0OZP0lEHj_yGo0S_WEApTlZ35FDfn-97NPqlIuECRK0r6C"
       },
       {
         title: "Building Endurance: Your First Month with an E-Bike",
@@ -59,7 +62,8 @@ export async function loadMarkdownPosts(): Promise<BlogPost[]> {
         excerpt: "A comprehensive guide to building your cycling endurance and confidence with your new electric bicycle.",
         tags: ["fitness", "endurance", "training", "e-bikes"],
         content: "Starting your e-bike journey can be both exciting and challenging...",
-        imageUrl: "/images/blog/building-endurance.jpg"
+        imageUrl: "/images/blog/building-endurance.jpg",
+        externalUrl: "https://www.moveelectric.com/e-bikes/can-you-get-fit-using-electric-bike"
       },
       {
         title: "Spring Maintenance Tips for Your E-Bike",
@@ -68,7 +72,8 @@ export async function loadMarkdownPosts(): Promise<BlogPost[]> {
         excerpt: "Essential maintenance tasks to keep your electric bicycle running smoothly through the spring season.",
         tags: ["maintenance", "spring", "care", "e-bikes"],
         content: "Spring is the perfect time to give your e-bike some TLC...",
-        imageUrl: "/images/blog/spring-maintenance.jpg"
+        imageUrl: "/images/blog/spring-maintenance.jpg",
+        externalUrl: "https://www.radpowerbikes.com/blogs/the-scenic-route/ebike-spring-maintenance-guide?srsltid=AfmBOopEVmG6tW0Ejtig9DeTS8HbWteAWaFgAZpKR78Vu5nwHf0GTXbR"
       }
     ];
 

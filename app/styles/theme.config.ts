@@ -58,9 +58,9 @@ export const defaultTheme: ThemeConfig = {
     borderRadius: "0.5rem", // rounded-lg
   },
   contact: {
-    phone: "(555) 123-BIKE",
+    phone: "313-495-2887",
     email: "info@stonee-bikes.com",
-    address: "123 Bike Street, Cycling City, CC 12345",
+    address: "15151 W 8 Mile\nDetroit, Michigan",
   },
   social: {
     facebook: "https://facebook.com/stonee-bikes",
