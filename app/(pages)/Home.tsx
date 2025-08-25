@@ -171,7 +171,7 @@ export default function Home() {
                   data-testid={`card-blog-${post.slug}`}
                 >
                   <img
-                    src={post.imageUrl || '/images/Blog/Health Benefits.png'}
+                    src={post.imageUrl || '/images/Blog/TOP 5 Health.jpg'}
                     alt={post.title}
                     className="w-full h-48 object-contain bg-gray-50"
                     data-testid={`img-blog-${post.slug}`}

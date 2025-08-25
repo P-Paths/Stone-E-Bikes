@@ -24,7 +24,7 @@ export async function loadMarkdownPosts(): Promise<BlogPost[]> {
         excerpt: "Discover the science-backed health benefits of cycling, from cardiovascular fitness to mental well-being. Learn why riding a bike is one of the best exercises for overall health.",
         tags: ["health", "fitness", "cycling", "exercise", "wellness", "e-bikes"],
         content: "Cycling is more than just a fun way to get around—it's one of the most effective forms of exercise for improving your overall health...",
-        imageUrl: "/images/Blog/Health Benefits.png"
+        imageUrl: "/images/Blog/TOP 5 Health.jpg"
       },
       {
         title: "Michigan Bike Safety Rules: What Every Rider Needs to Know",
@@ -43,8 +43,8 @@ export async function loadMarkdownPosts(): Promise<BlogPost[]> {
         excerpt: "Essential bike safety tips specifically designed for older adults. Learn how to ride safely, build confidence, and enjoy cycling at any age with proper preparation and equipment.",
         tags: ["safety", "seniors", "cycling", "e-bikes", "health", "confidence"],
         content: "Cycling is an excellent activity for older adults, offering numerous health benefits while being gentle on joints...",
-        imageUrl: "/images/Blog/Senior Safety.png",
-        externalUrl: "https://www.aarp.org/health/healthy-living/bike-safety/"
+        imageUrl: "/images/Blog/Are_Electric_Bikes_Safe_for_Senior.png",
+        externalUrl: "https://crazylennysebikes.com/why-an-e-bike-is-perfect-for-seniors/?srsltid=AfmBOooeSd0OZP0lEHj_yGo0S_WEApTlZ35FDfn-97NPqlIuECRK0r6C"
       },
       {
         title: "Why E-Bikes Are Great for Seniors' Health",
@@ -54,7 +54,7 @@ export async function loadMarkdownPosts(): Promise<BlogPost[]> {
         tags: ["health", "seniors", "e-bikes", "fitness"],
         content: "Electric bicycles are revolutionizing how seniors stay active and healthy...",
         imageUrl: "/images/Blog/Senior Health.png",
-        externalUrl: "https://crazylennysebikes.com/why-an-e-bike-is-perfect-for-seniors/?srsltid=AfmBOooeSd0OZP0lEHj_yGo0S_WEApTlZ35FDfn-97NPqlIuECRK0r6C"
+        externalUrl: "https://www.aarp.org/health/healthy-living/bike-safety/"
       },
       {
         title: "Building Endurance: Your First Month with an E-Bike",
@@ -63,7 +63,7 @@ export async function loadMarkdownPosts(): Promise<BlogPost[]> {
         excerpt: "A comprehensive guide to building your cycling endurance and confidence with your new electric bicycle.",
         tags: ["fitness", "endurance", "training", "e-bikes"],
         content: "Starting your e-bike journey can be both exciting and challenging...",
-        imageUrl: "/images/Blog/Building Endurance.png",
+        imageUrl: "/images/Blog/Building Endurance- Your First Month with an E-Bike .jpg",
         externalUrl: "https://www.moveelectric.com/e-bikes/can-you-get-fit-using-electric-bike"
       },
       {
