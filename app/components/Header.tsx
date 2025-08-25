@@ -31,14 +31,14 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-200">
+    <header className="gradient-bg text-white shadow-lg sticky top-0 z-50 border-b border-accent/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href="/" className="text-2xl font-bold text-primary cursor-pointer" data-testid="logo">
-              {theme.logo.text}
-            </Link>
+                      <Link href="/" className="text-2xl font-bold text-white cursor-pointer hover:text-accent transition-colors" data-testid="logo">
+            {theme.logo.text}
+          </Link>
           </div>
 
           {/* Desktop Navigation */}
@@ -50,7 +50,7 @@ export const Header: React.FC = () => {
                 className={`cursor-pointer transition-colors ${
                   isActive(item.href)
                     ? 'text-accent font-medium'
-                    : 'text-gray-700 hover:text-accent'
+                    : 'text-white hover:text-accent'
                 }`}
                 data-testid={`nav-${item.name.toLowerCase()}`}
                 onClick={() => window.scrollTo(0, 0)}
@@ -66,7 +66,7 @@ export const Header: React.FC = () => {
               variant="ghost"
               size="sm"
               onClick={openCart}
-              className="relative p-2 text-gray-700 hover:text-accent"
+              className="relative p-2 text-white hover:text-accent"
               data-testid="button-cart"
             >
               <ShoppingCart className="w-6 h-6" />
@@ -83,7 +83,7 @@ export const Header: React.FC = () => {
             <Button
               variant="ghost"
               size="sm"
-              className="md:hidden p-2 text-gray-700"
+              className="md:hidden p-2 text-white"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               data-testid="button-mobile-menu"
             >
@@ -98,15 +98,15 @@ export const Header: React.FC = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 py-4 space-y-2" data-testid="mobile-menu">
+          <div className="md:hidden border-t border-accent/20 py-4 space-y-2 bg-black/95" data-testid="mobile-menu">
             {navigation.map((item) => (
               <Link 
                 key={item.name} 
                 href={item.href}
                 className={`cursor-pointer block px-3 py-2 transition-colors ${
                   isActive(item.href)
-                    ? 'text-secondary font-medium'
-                    : 'text-gray-700 hover:text-secondary'
+                    ? 'text-accent font-medium'
+                    : 'text-white hover:text-accent'
                 }`}
                 onClick={() => {
                   setIsMobileMenuOpen(false);

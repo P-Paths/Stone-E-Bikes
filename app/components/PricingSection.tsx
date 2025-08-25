@@ -46,10 +46,10 @@ export function PricingSection() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-primary mb-4" data-testid="text-pricing-title">
-            Simple, Transparent Pricing
+            Featured E-Bikes
           </h2>
           <p className="text-muted text-lg max-w-2xl mx-auto">
-            Choose the perfect plan for your business needs
+            Discover our premium collection of electric bicycles
           </p>
           {PRICING.note && (
             <Badge variant="secondary" className="mt-4">

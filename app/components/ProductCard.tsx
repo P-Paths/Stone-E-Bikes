@@ -26,14 +26,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, variant = 'de
 
   return (
     <Card 
-      className="overflow-hidden hover:shadow-xl transition-shadow duration-300 group"
+      className="overflow-hidden hover:shadow-xl transition-all duration-300 group border border-gray-200 hover:border-accent/30"
       data-testid={`card-product-${product.id}`}
     >
       <div className="relative">
         <img
           src={product.imageUrl || 'https://images.unsplash.com/photo-1544191696-15693072fb5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300'}
           alt={product.name}
-          className={`w-full object-cover group-hover:scale-105 transition-transform duration-300 ${
+          className={`w-full object-contain bg-gray-50 group-hover:scale-105 transition-transform duration-300 ${
             variant === 'featured' ? 'h-64' : 'h-48'
           }`}
           data-testid={`img-product-${product.id}`}
@@ -66,7 +66,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, variant = 'de
             ${product.price}
           </span>
           <Button
-            className="bg-secondary hover:bg-blue-600 text-white"
+            className="bg-accent hover:bg-yellow-600 text-black font-semibold transition-all duration-300 transform hover:scale-105"
             onClick={handleAddToCart}
             disabled={!product.inStock}
             data-testid={`button-add-to-cart-${product.id}`}

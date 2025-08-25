@@ -57,3 +57,29 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .gradient-bg {
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  }
+  
+  .gold-accent {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  }
+  
+  .text-gold {
+    color: #FFD700;
+  }
+  
+  .border-gold {
+    border-color: #FFD700;
+  }
+  
+  .hover-gold:hover {
+    color: #FFD700;
+  }
+  
+  .shadow-gold {
+    box-shadow: 0 4px 14px 0 rgba(255, 215, 0, 0.2);
+  }
+}

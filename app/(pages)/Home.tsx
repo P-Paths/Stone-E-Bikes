@@ -37,16 +37,16 @@ export default function Home() {
   return (
     <div className="bg-gray-50">
       {/* Hero Section */}
-      <section className="relative bg-black text-white" data-testid="hero-section">
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+      <section className="relative gradient-bg text-white" data-testid="hero-section">
+        <div className="absolute inset-0 bg-gradient-to-br from-black/80 to-black/60"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl lg:text-6xl font-bold mb-6" data-testid="text-hero-title">
                 Stone E-Bikes
-                <span className="text-accent block">Premium Electric Bikes</span>
+                <span className="text-accent block drop-shadow-lg">Premium Electric Bikes</span>
               </h1>
-              <p className="text-xl mb-4 text-gray-300" data-testid="text-hero-slogan">
+              <p className="text-xl mb-4 text-accent font-semibold" data-testid="text-hero-slogan">
                 Ride it, live it, love it!
               </p>
               <p className="text-lg mb-8 text-gray-300" data-testid="text-hero-description">
@@ -55,7 +55,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/shop">
                   <Button 
-                    className="bg-accent hover:bg-yellow-600 text-black font-semibold px-8 py-3 text-lg"
+                    className="gold-accent text-black font-semibold px-8 py-3 text-lg transition-all duration-300 transform hover:scale-105 shadow-gold hover:shadow-lg"
                     data-testid="button-shop-now"
                   >
                     Shop Now
@@ -64,7 +64,7 @@ export default function Home() {
                 <Link href="/about">
                   <Button 
                     variant="outline" 
-                    className="border-accent text-accent hover:bg-accent hover:text-black font-semibold px-8 py-3 text-lg"
+                    className="border-accent text-accent hover:bg-accent hover:text-black font-semibold px-8 py-3 text-lg transition-all duration-300 transform hover:scale-105 shadow-gold"
                     data-testid="button-learn-more"
                   >
                     Learn More

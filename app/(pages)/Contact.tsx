@@ -91,7 +91,7 @@ export default function Contact() {
               Get in Touch
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto" data-testid="text-contact-description">
-              Have questions about our bikes or need expert advice? We're here to help you find the perfect ride.
+              Have questions about our bikes or need expert advice? We're here to help you find the perfect ride. Get in touch with us today!
             </p>
           </div>
         </div>
@@ -107,9 +107,11 @@ export default function Contact() {
             
             <div className="space-y-6">
               {contactInfo.map((info, index) => (
-                <div key={index} className="flex items-start space-x-4" data-testid={info.testId}>
+                <div key={index} className="flex items-start space-x-4 p-4 bg-white rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow" data-testid={info.testId}>
                   <div className="flex-shrink-0">
-                    <info.icon className="w-6 h-6 text-accent" />
+                    <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center">
+                      <info.icon className="w-6 h-6 text-accent" />
+                    </div>
                   </div>
                   <div>
                     <h4 className="font-semibold text-primary mb-1">{info.title}</h4>
