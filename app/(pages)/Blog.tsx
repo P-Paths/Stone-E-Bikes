@@ -91,7 +91,7 @@ export default function Blog() {
                           : (post as DBBlogPost).imageUrl || '/images/e-bikes/askgo-26.png'
                       }
                       alt={post.title}
-                      className="w-full h-full object-contain bg-gray-50 hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover bg-gray-50 hover:scale-105 transition-transform duration-300"
                       data-testid={`img-blog-${postId}`}
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-20"></div>

@@ -1,19 +1,19 @@
 {
-  "/api/products/featured/route": "/api/products/featured",
   "/_not-found/page": "/_not-found",
+  "/api/products/featured/route": "/api/products/featured",
   "/api/blog/route": "/api/blog",
   "/api/products/route": "/api/products",
   "/about/page": "/about",
-  "/blog/[slug]/page": "/blog/[slug]",
+  "/accessories/page": "/accessories",
   "/blog/page": "/blog",
-  "/contact/page": "/contact",
-  "/page": "/",
+  "/cart/page": "/cart",
+  "/blog/[slug]/page": "/blog/[slug]",
   "/checkout/page": "/checkout",
+  "/page": "/",
+  "/contact/page": "/contact",
   "/returns/page": "/returns",
   "/shipping-info/page": "/shipping-info",
-  "/support/page": "/support",
-  "/size-guide/page": "/size-guide",
   "/shop/page": "/shop",
-  "/cart/page": "/cart",
-  "/accessories/page": "/accessories"
+  "/size-guide/page": "/size-guide",
+  "/support/page": "/support"
 }

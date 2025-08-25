@@ -173,7 +173,7 @@ export default function Home() {
                   <img
                     src={post.imageUrl || '/images/Blog/TOP 5 Health.jpg'}
                     alt={post.title}
-                    className="w-full h-48 object-contain bg-gray-50"
+                    className="w-full h-48 object-cover bg-gray-50"
                     data-testid={`img-blog-${post.slug}`}
                   />
                   <div className="p-6">
