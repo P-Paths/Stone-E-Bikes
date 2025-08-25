@@ -68,8 +68,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                           <img
                 src={
                   usingMarkdown 
-                    ? (post as MarkdownBlogPost).imageUrl || '/images/Blog/TOP 5 Health.jpg'
-                    : (post as DBBlogPost).imageUrl || '/images/Blog/TOP 5 Health.jpg'
+                    ? (post as MarkdownBlogPost).imageUrl || '/images/Blog/Balck top 5 health tips.png'
+                    : (post as DBBlogPost).imageUrl || '/images/Blog/Balck top 5 health tips.png'
                 }
                 alt={post.title}
                 className="w-full h-full object-cover bg-gray-50"

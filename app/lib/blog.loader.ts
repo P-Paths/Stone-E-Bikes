@@ -42,7 +42,7 @@ Choosing to cycle instead of drive reduces your carbon footprint and contributes
 
 ## Social Connection
 Cycling can be a social activity, whether you're joining group rides, cycling with family, or participating in community events.`,
-        imageUrl: "/images/Blog/TOP 5 Health.jpg"
+        imageUrl: "/images/Blog/Balck top 5 health tips.png"
       },
       {
         title: "Michigan Bike Safety Rules: What Every Rider Needs to Know",
@@ -236,7 +236,7 @@ E-bikes enable seniors to join group rides and cycling clubs, providing social i
 Many seniors have discovered new freedom and joy through e-biking. From daily errands to weekend adventures, e-bikes are helping seniors stay active, independent, and connected to their communities.
 
 The key is to start slowly and build confidence. With the right e-bike and proper preparation, cycling can become a lifelong passion that keeps you healthy and happy.`,
-        imageUrl: "/images/Blog/Senior Health.png",
+        imageUrl: "/images/Blog/Black Amrecans on E-bokes health.png",
         externalUrl: "https://www.aarp.org/health/healthy-living/bike-safety/"
       },
       {
