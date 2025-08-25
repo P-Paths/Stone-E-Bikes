@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { getFeaturedProducts } from '../../../../lib/queries/products';
-import { isSupabaseConfigured } from '../../../../lib/supabase/server';
+import { getFeaturedProducts } from '@/lib/queries/products';
+import { isSupabaseConfigured } from '@/lib/supabase/server';
 
 export async function GET() {
   try {
