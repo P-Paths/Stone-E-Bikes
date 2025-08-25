@@ -6,14 +6,14 @@
   "/about/page": "/about",
   "/accessories/page": "/accessories",
   "/blog/page": "/blog",
-  "/blog/[slug]/page": "/blog/[slug]",
-  "/contact/page": "/contact",
-  "/checkout/page": "/checkout",
-  "/page": "/",
   "/cart/page": "/cart",
+  "/contact/page": "/contact",
+  "/page": "/",
   "/returns/page": "/returns",
+  "/checkout/page": "/checkout",
   "/shipping-info/page": "/shipping-info",
-  "/shop/page": "/shop",
   "/size-guide/page": "/size-guide",
-  "/support/page": "/support"
+  "/support/page": "/support",
+  "/shop/page": "/shop",
+  "/blog/[slug]/page": "/blog/[slug]"
 }

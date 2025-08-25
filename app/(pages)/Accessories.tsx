@@ -37,7 +37,7 @@ export default function Accessories() {
       name: 'LED Rear Light Set',
       price: 39.99,
       description: 'High-visibility rear lights with brake detection',
-      imageUrl: '/images/accessories/backlight for e-bike.jpg',
+      imageUrl: '/images/accessories/Updated rear light.png',
       category: 'Safety'
     },
     {
@@ -125,7 +125,7 @@ export default function Accessories() {
                   data-testid={`img-accessory-${accessory.id}`}
                 />
                 <div className="absolute top-2 left-2 bg-accent text-black font-bold px-3 py-1 rounded-full text-xs shadow-lg border border-white">
-                  {accessory.category}
+                  {accessory.category === 'Safety' ? '🛡️ Safety' : accessory.category}
                 </div>
               </div>
               
