@@ -8,6 +8,11 @@ import { BlogPost } from '@shared/schema';
  */
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
+  if (!supabase) {
+    console.warn('Supabase not configured, returning empty array');
+    return [];
+  }
+
   const { data, error } = await supabase
     .from('blog_posts')
     .select('*')
@@ -23,6 +28,11 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
 }
 
 export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
+  if (!supabase) {
+    console.warn('Supabase not configured, returning null');
+    return null;
+  }
+
   const { data, error } = await supabase
     .from('blog_posts')
     .select('*')
@@ -39,6 +49,11 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
 }
 
 export async function getBlogPostsByCategory(category: string): Promise<BlogPost[]> {
+  if (!supabase) {
+    console.warn('Supabase not configured, returning empty array');
+    return [];
+  }
+
   const { data, error } = await supabase
     .from('blog_posts')
     .select('*')

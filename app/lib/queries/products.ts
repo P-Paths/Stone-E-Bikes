@@ -152,6 +152,11 @@ export async function getFeaturedProducts(): Promise<Product[]> {
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
   try {
+    if (!supabase) {
+      console.warn('Supabase not configured, using demo data');
+      return DEMO_PRODUCTS.find(p => p.slug === slug) || null;
+    }
+
     const { data, error } = await supabase
       .from('products')
       .select('*')
@@ -172,6 +177,11 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
 
 export async function getProductsByCategory(categoryId: string): Promise<Product[]> {
   try {
+    if (!supabase) {
+      console.warn('Supabase not configured, using demo data');
+      return DEMO_PRODUCTS.filter(p => p.categoryId === categoryId);
+    }
+
     const { data, error } = await supabase
       .from('products')
       .select('*')
