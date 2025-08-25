@@ -65,15 +65,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         {/* Blog Post */}
         <Card className="overflow-hidden">
           <div className="relative h-96 overflow-hidden">
-            <img
-              src={
-                usingMarkdown 
-                  ? '/images/e-bikes/keteles-fat-26.png'
-                  : (post as DBBlogPost).imageUrl || '/images/e-bikes/askgo-26.png'
-              }
-              alt={post.title}
-              className="w-full h-full object-contain bg-gray-50"
-            />
+                          <img
+                src={
+                  usingMarkdown 
+                    ? (post as MarkdownBlogPost).imageUrl || '/images/Blog/TOP 5 Health.jpg'
+                    : (post as DBBlogPost).imageUrl || '/images/Blog/TOP 5 Health.jpg'
+                }
+                alt={post.title}
+                className="w-full h-full object-cover bg-gray-50"
+              />
             <div className="absolute inset-0 bg-black bg-opacity-30"></div>
           </div>
           
@@ -116,7 +116,28 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               {usingMarkdown ? (
                 <div 
                   className="text-muted leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: (post as MarkdownBlogPost).content }}
+                  dangerouslySetInnerHTML={{
+                    __html: (post as MarkdownBlogPost).content
+                      .split('\n')
+                      .map(line => {
+                        if (line.startsWith('## ')) {
+                          return `<h2 class="text-2xl font-bold text-primary mt-8 mb-4">${line.replace('## ', '')}</h2>`;
+                        } else if (line.startsWith('### ')) {
+                          return `<h3 class="text-xl font-semibold text-primary mt-6 mb-3">${line.replace('### ', '')}</h3>`;
+                        } else if (line.startsWith('- **')) {
+                          return `<li class="mb-2"><strong>${line.replace('- **', '').replace('** -', ':</strong> ')}</li>`;
+                        } else if (line.startsWith('- ')) {
+                          return `<li class="mb-2">${line.replace('- ', '')}</li>`;
+                        } else if (line.startsWith('1. ')) {
+                          return `<li class="mb-2">${line.replace(/^\d+\.\s/, '')}</li>`;
+                        } else if (line.trim() === '') {
+                          return '<br>';
+                        } else {
+                          return `<p class="mb-4">${line}</p>`;
+                        }
+                      })
+                      .join('')
+                  }}
                 />
               ) : (
                 <div className="text-muted leading-relaxed">
