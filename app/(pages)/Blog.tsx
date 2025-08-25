@@ -118,7 +118,7 @@ export default function Blog() {
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-muted" data-testid={`text-blog-date-${postId}`}>
                         {isMarkdown 
-                          ? new Date(post.date).toLocaleDateString()
+                          ? new Date((post as MarkdownBlogPost).date).toLocaleDateString()
                           : ((post as DBBlogPost).publishedAt ? new Date((post as DBBlogPost).publishedAt).toLocaleDateString() : '')
                         }
                       </span>
