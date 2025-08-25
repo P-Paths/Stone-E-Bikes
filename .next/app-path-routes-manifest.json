@@ -3,17 +3,17 @@
   "/api/blog/route": "/api/blog",
   "/api/products/featured/route": "/api/products/featured",
   "/api/products/route": "/api/products",
-  "/blog/[slug]/page": "/blog/[slug]",
   "/about/page": "/about",
   "/cart/page": "/cart",
-  "/blog/page": "/blog",
+  "/accessories/page": "/accessories",
+  "/blog/[slug]/page": "/blog/[slug]",
   "/checkout/page": "/checkout",
+  "/blog/page": "/blog",
   "/contact/page": "/contact",
-  "/page": "/",
   "/returns/page": "/returns",
-  "/shop/page": "/shop",
   "/shipping-info/page": "/shipping-info",
-  "/support/page": "/support",
+  "/page": "/",
+  "/shop/page": "/shop",
   "/size-guide/page": "/size-guide",
-  "/accessories/page": "/accessories"
+  "/support/page": "/support"
 }

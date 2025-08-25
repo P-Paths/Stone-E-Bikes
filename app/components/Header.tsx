@@ -36,9 +36,13 @@ export const Header: React.FC = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
-                      <Link href="/" className="text-2xl font-bold text-black cursor-pointer hover:text-accent transition-colors" data-testid="logo">
-            {theme.logo.text}
-          </Link>
+            <Link href="/" className="cursor-pointer transition-opacity hover:opacity-80" data-testid="logo">
+              <img 
+                src="/images/Logo/STONE E-BIKESLOGO.png" 
+                alt="Stone E-Bikes" 
+                className="h-12 w-auto"
+              />
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
