@@ -6,12 +6,12 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
 import { PRICING } from '@/commerce/pricing.config';
-import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 export default function Shop() {
   const { addItem } = useCart();
   const { toast } = useToast();
-  const [location] = useLocation();
+  const pathname = usePathname();
 
   // Scroll to top when page loads
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function Shop() {
 
   // Handle anchor links to scroll to specific bikes
   useEffect(() => {
-    const hash = location.split('#')[1];
+    const hash = pathname.split('#')[1];
     if (hash) {
       const element = document.getElementById(`card-product-${hash}`);
       if (element) {
@@ -32,7 +32,7 @@ export default function Shop() {
         }, 3000);
       }
     }
-  }, [location]);
+  }, [pathname]);
 
   const handleAddToCart = (bike: any) => {
     // Create a product object for the cart
