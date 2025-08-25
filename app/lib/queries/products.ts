@@ -20,7 +20,7 @@ const DEMO_PRODUCTS: Product[] = [
       type: "Electric bike",
       quality: "Premium"
     },
-    created_at: new Date().toISOString()
+    createdAt: new Date()
   },
   {
     id: 'okonge-fat-20',
@@ -38,7 +38,7 @@ const DEMO_PRODUCTS: Product[] = [
       capability: "All-terrain",
       build: "Rugged"
     },
-    created_at: new Date().toISOString()
+    createdAt: new Date()
   },
   {
     id: 'keteles-fat-26',
@@ -56,7 +56,7 @@ const DEMO_PRODUCTS: Product[] = [
       components: "High-end",
       grade: "Professional"
     },
-    created_at: new Date().toISOString()
+    createdAt: new Date()
   },
   {
     id: 'coz-trike-24',
@@ -74,7 +74,7 @@ const DEMO_PRODUCTS: Product[] = [
       riding: "Easy",
       seating: "Comfortable"
     },
-    created_at: new Date().toISOString()
+    createdAt: new Date()
   },
   {
     id: 'okonge-trike-20',
@@ -92,7 +92,7 @@ const DEMO_PRODUCTS: Product[] = [
       design: "Stable",
       construction: "Quality"
     },
-    created_at: new Date().toISOString()
+    createdAt: new Date()
   }
 ];
 
