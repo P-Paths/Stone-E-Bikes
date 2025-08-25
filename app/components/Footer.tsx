@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Facebook, Twitter, Instagram, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useTheme } from '../contexts/ThemeContext';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export const Footer: React.FC = () => {
   const theme = useTheme();

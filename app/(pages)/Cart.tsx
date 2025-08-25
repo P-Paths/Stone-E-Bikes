@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Trash2, Plus, Minus, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { useCart } from '../contexts/CartContext';
+import { useCart } from '@/contexts/CartContext';
 
 export default function Cart() {
   const { items, total, removeItem, updateQuantity } = useCart();

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext } from 'react';
-import { ThemeConfig, defaultTheme } from '../styles/theme.config';
+import { ThemeConfig, defaultTheme } from '@/styles/theme.config';
 
 const ThemeContext = createContext<ThemeConfig>(defaultTheme);
 

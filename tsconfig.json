@@ -1,6 +1,6 @@
 {
   "include": [
-    "client/src/**/*",
+    "app/**/*",
     "server/**/*",
     "shared/**/*",
     ".next/types/**/*.ts"
@@ -34,7 +34,7 @@
     ],
     "paths": {
       "@/*": [
-        "./client/src/*"
+        "./app/*"
       ],
       "@shared/*": [
         "./shared/*"

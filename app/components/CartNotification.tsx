@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { CheckCircle } from 'lucide-react';
-import { useCart } from '../contexts/CartContext';
+import { useCart } from '@/contexts/CartContext';
 
 export const CartNotification: React.FC = () => {
   const { showNotification, notificationMessage } = useCart();

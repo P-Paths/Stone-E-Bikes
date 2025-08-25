@@ -14,7 +14,7 @@ import { insertContactSubmissionSchema, type InsertContactSubmission } from '@sh
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiRequest } from '@/lib/queryClient';
 import { useToast } from '@/hooks/use-toast';
-import { useTheme } from '../contexts/ThemeContext';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export default function Contact() {
   const theme = useTheme();

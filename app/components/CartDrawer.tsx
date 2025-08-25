@@ -3,7 +3,7 @@
 import React from 'react';
 import { X, Trash2, Plus, Minus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useCart } from '../contexts/CartContext';
+import { useCart } from '@/contexts/CartContext';
 import { useRouter } from 'next/navigation';
 
 export const CartDrawer: React.FC = () => {

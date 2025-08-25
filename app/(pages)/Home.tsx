@@ -3,10 +3,10 @@
 import React from 'react';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
-import { Button } from '../components/ui/button';
-import { ProductCard } from '../components/ProductCard';
-import { PricingSection } from '../components/PricingSection';
-import { useTheme } from '../contexts/ThemeContext';
+import { Button } from '@/components/ui/button';
+import { ProductCard } from '@/components/ProductCard';
+import { PricingSection } from '@/components/PricingSection';
+import { useTheme } from '@/contexts/ThemeContext';
 import { Product, BlogPost } from '@shared/schema';
 
 export default function Home() {

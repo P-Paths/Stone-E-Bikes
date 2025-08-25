@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X, ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useCart } from '../contexts/CartContext';
-import { useTheme } from '../contexts/ThemeContext';
+import { useCart } from '@/contexts/CartContext';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

@@ -4,7 +4,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Product } from '@shared/schema';
-import { useCart } from '../contexts/CartContext';
+import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
 
 interface ProductCardProps {

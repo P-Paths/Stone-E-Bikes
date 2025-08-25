@@ -3,10 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { useCart } from '../contexts/CartContext';
+import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
-import { PRICING } from '../commerce/pricing.config';
-import { useLocation } from 'wouter';
+import { PRICING } from '@/commerce/pricing.config';
+import { useRouter } from 'next/navigation';
 
 export default function Shop() {
   const { addItem } = useCart();
