@@ -8,12 +8,12 @@
   "/blog/[slug]/page": "/blog/[slug]",
   "/blog/page": "/blog",
   "/cart/page": "/cart",
-  "/page": "/",
   "/contact/page": "/contact",
-  "/checkout/page": "/checkout",
-  "/shop/page": "/shop",
-  "/shipping-info/page": "/shipping-info",
+  "/page": "/",
   "/returns/page": "/returns",
+  "/checkout/page": "/checkout",
+  "/shipping-info/page": "/shipping-info",
+  "/shop/page": "/shop",
   "/size-guide/page": "/size-guide",
   "/support/page": "/support"
 }

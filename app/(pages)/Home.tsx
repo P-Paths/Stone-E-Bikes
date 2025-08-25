@@ -64,7 +64,7 @@ export default function Home() {
                 <Link href="/about">
                   <Button 
                     variant="outline" 
-                    className="border-accent text-accent hover:bg-accent hover:text-black font-semibold px-8 py-3 text-lg transition-all duration-300 transform hover:scale-105 shadow-gold"
+                    className="border-accent text-accent hover:bg-accent hover:text-black font-semibold px-8 py-3 text-lg transition-all duration-300 transform hover:scale-105"
                     data-testid="button-learn-more"
                   >
                     Learn More

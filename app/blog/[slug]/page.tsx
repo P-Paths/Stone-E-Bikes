@@ -68,11 +68,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <img
               src={
                 usingMarkdown 
-                  ? 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400'
-                  : (post as DBBlogPost).imageUrl || 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400'
+                  ? '/images/e-bikes/keteles-fat-26.png'
+                  : (post as DBBlogPost).imageUrl || '/images/e-bikes/askgo-26.png'
               }
               alt={post.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain bg-gray-50"
             />
             <div className="absolute inset-0 bg-black bg-opacity-30"></div>
           </div>
