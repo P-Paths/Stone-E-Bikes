@@ -109,8 +109,8 @@ export default function Shop() {
                       e.currentTarget.src = 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300';
                     }}
                   />
-                  <div className="absolute top-2 left-2 bg-accent text-black font-semibold px-2 py-1 rounded text-xs">
-                    Electric
+                  <div className="absolute top-2 left-2 bg-accent text-black font-bold px-3 py-1 rounded-full text-xs shadow-lg border border-white">
+                    ⚡ Electric
                   </div>
                 </div>
               

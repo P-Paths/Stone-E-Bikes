@@ -40,8 +40,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, variant = 'de
           data-testid={`img-product-${product.id}`}
         />
         {product.featured && (
-          <div className="absolute top-2 left-2 bg-accent text-white px-2 py-1 rounded text-xs font-semibold">
-            Featured
+          <div className="absolute top-2 left-2 bg-accent text-black font-bold px-3 py-1 rounded-full text-xs shadow-lg border border-white">
+            ⭐ Featured
           </div>
         )}
       </div>

@@ -111,7 +111,7 @@ export const CartDrawer: React.FC = () => {
                 </span>
               </div>
               <Button
-                className="w-full bg-accent hover:bg-green-600 text-white mb-2"
+                className="w-full bg-accent hover:bg-yellow-600 text-black font-semibold mb-2"
                 onClick={handleCheckout}
                 data-testid="button-checkout"
               >
