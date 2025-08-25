@@ -87,8 +87,8 @@ export default function About() {
             </div>
             <div>
               <img
-                src="/images/Detroit.jpg"
-                alt="Detroit cityscape representing our local community"
+                src="/images/Logo/Detroit-Michigan.png"
+                alt="Detroit skyline representing our local community"
                 className="rounded-lg shadow-lg w-full h-auto"
                 data-testid="img-our-story"
               />

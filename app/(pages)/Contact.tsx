@@ -87,6 +87,14 @@ export default function Contact() {
       <section className="bg-primary text-white py-16" data-testid="contact-hero-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
+            {/* Logo */}
+            <div className="mb-8 flex justify-center">
+              <img 
+                src="/images/Logo/STONE E-BIKESLOGO.png" 
+                alt="Stone E-Bikes" 
+                className="h-24 w-auto"
+              />
+            </div>
             <h1 className="text-4xl lg:text-5xl font-bold mb-6" data-testid="text-contact-title">
               Get in Touch
             </h1>
@@ -101,21 +109,21 @@ export default function Contact() {
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Information */}
           <div>
-            <h2 className="text-2xl font-bold text-primary mb-8" data-testid="text-contact-info-title">
-              Contact Information
+            <h2 className="text-3xl font-bold text-primary mb-8" data-testid="text-contact-info-title">
+              Get in Contact
             </h2>
             
             <div className="space-y-6">
               {contactInfo.map((info, index) => (
-                <div key={index} className="flex items-start space-x-4 p-4 bg-white rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow" data-testid={info.testId}>
+                <div key={index} className="flex items-start space-x-4 p-6 bg-white rounded-lg shadow-lg border-2 border-accent/20 hover:shadow-xl transition-all duration-300" data-testid={info.testId}>
                   <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center">
-                      <info.icon className="w-6 h-6 text-accent" />
+                    <div className="w-14 h-14 bg-accent rounded-full flex items-center justify-center shadow-lg">
+                      <info.icon className="w-7 h-7 text-black" />
                     </div>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-primary mb-1">{info.title}</h4>
-                    <p className="text-muted whitespace-pre-line">{info.content}</p>
+                    <h4 className="font-bold text-primary text-lg mb-2">{info.title}</h4>
+                    <p className="text-gray-700 whitespace-pre-line font-medium">{info.content}</p>
                   </div>
                 </div>
               ))}
