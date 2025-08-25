@@ -43,7 +43,11 @@ export default function Shop() {
       description: bike.features.join(', '),
       imageUrl: `/images/e-bikes/${bike.id}.png`,
       inStock: true,
-      featured: false
+      featured: false,
+      slug: bike.id,
+      categoryId: null,
+      specifications: null,
+      createdAt: null
     };
     
     addItem(product);
