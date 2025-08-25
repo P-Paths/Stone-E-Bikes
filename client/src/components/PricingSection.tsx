@@ -1,14 +1,45 @@
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check } from "lucide-react";
 import { PRICING } from "../commerce/pricing.config";
+import { useRouter } from "next/navigation";
 
 export function PricingSection() {
+  const router = useRouter();
+  
   // Safe fallback: if no tiers configured, render nothing
   if (!PRICING.tiers || PRICING.tiers.length === 0) {
     return null;
   }
+
+  // Map bike IDs to actual image filenames
+  const imageMap: { [key: string]: string } = {
+    'askgo-26': 'askgo-26.png',
+    'okonge-fat-20': 'okonge-fat-20.png', 
+    'keteles-fat-26': 'keteles-fat-26.png',
+    'coz-trike-24': '24" Trike CO-Z.png',
+    'okonge-trike-20': '20" Trike OKONGE.png'
+  };
+  
+  // Encode the filename for URL safety
+  const getImageUrl = (bikeId: string) => {
+    const filename = imageMap[bikeId] || `${bikeId}.png`;
+    return `/images/e-bikes/${encodeURIComponent(filename)}`;
+  };
+
+  const handleGetStarted = (bikeId: string) => {
+    // Navigate to shop page and scroll to specific bike
+    router.push(`/shop#${bikeId}`);
+  };
+
+  const handleQuickView = (bikeId: string) => {
+    // For now, just navigate to shop page
+    // In the future, this could open a modal with bike details
+    router.push(`/shop#${bikeId}`);
+  };
 
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8">
@@ -39,6 +70,19 @@ export function PricingSection() {
                   Most Popular
                 </Badge>
               )}
+              <div className="relative">
+                <img
+                  src={getImageUrl(tier.id)}
+                  alt={tier.label}
+                  className="w-full h-48 object-contain bg-gray-100"
+                  onError={(e) => {
+                    e.currentTarget.src = 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300';
+                  }}
+                />
+                <div className="absolute top-2 left-2 bg-accent text-black font-semibold px-2 py-1 rounded text-xs">
+                  Electric
+                </div>
+              </div>
               <CardHeader className="text-center pb-8">
                 <CardTitle className="text-xl font-bold">{tier.label}</CardTitle>
                 <div className="mt-4">
@@ -57,16 +101,27 @@ export function PricingSection() {
                     </li>
                   ))}
                 </ul>
-                <Button 
-                  className={`w-full ${
-                    index === 1 
-                      ? 'bg-secondary hover:bg-blue-600' 
-                      : 'bg-primary hover:bg-gray-700'
-                  }`}
-                  data-testid={`button-select-${tier.id}`}
-                >
-                  Get Started
-                </Button>
+                <div className="flex gap-2">
+                  <Button 
+                    variant="outline"
+                    className="flex-1 border-accent text-accent hover:bg-accent hover:text-black font-semibold"
+                    data-testid={`button-quick-view-${tier.id}`}
+                    onClick={() => handleQuickView(tier.id)}
+                  >
+                    Quick View
+                  </Button>
+                  <Button 
+                    className={`flex-1 ${
+                      index === 1 
+                        ? 'bg-accent hover:bg-yellow-600 text-black font-semibold' 
+                        : 'bg-accent hover:bg-yellow-600 text-black font-semibold'
+                    }`}
+                    data-testid={`button-select-${tier.id}`}
+                    onClick={() => handleGetStarted(tier.id)}
+                  >
+                    Get Started
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           ))}

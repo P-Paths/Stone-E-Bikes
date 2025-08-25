@@ -121,9 +121,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Stripe payment
   app.post("/api/create-payment-intent", async (req, res) => {
     if (!paymentsEnabled) {
-      return res.status(501).json({ 
-        message: "Payments disabled in demo mode",
-        demo: true 
+      // Return a demo client secret for testing the UI
+      return res.status(200).json({ 
+        message: "Demo mode - using test payment intent",
+        demo: true,
+        clientSecret: "pi_demo_secret_test123"
       });
     }
 

@@ -1,5 +1,8 @@
+"use client";
+
 import React, { useState } from 'react';
-import { Link, useLocation } from 'wouter';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, X, ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '../contexts/CartContext';
@@ -9,7 +12,7 @@ export const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { itemCount, openCart } = useCart();
   const theme = useTheme();
-  const [location] = useLocation();
+  const pathname = usePathname();
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -22,38 +25,36 @@ export const Header: React.FC = () => {
 
   const isActive = (href: string) => {
     if (href === '/') {
-      return location === '/';
+      return pathname === '/';
     }
-    return location.startsWith(href);
+    return pathname.startsWith(href);
   };
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
+    <header className="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href="/">
-              <div className="text-2xl font-bold text-primary cursor-pointer" data-testid="logo">
-                {theme.logo.text}
-              </div>
+            <Link href="/" className="text-2xl font-bold text-primary cursor-pointer" data-testid="logo">
+              {theme.logo.text}
             </Link>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             {navigation.map((item) => (
-              <Link key={item.name} href={item.href}>
-                <span
-                  className={`cursor-pointer transition-colors ${
-                    isActive(item.href)
-                      ? 'text-secondary font-medium'
-                      : 'text-gray-700 hover:text-secondary'
-                  }`}
-                  data-testid={`nav-${item.name.toLowerCase()}`}
-                >
-                  {item.name}
-                </span>
+              <Link 
+                key={item.name} 
+                href={item.href}
+                className={`cursor-pointer transition-colors ${
+                  isActive(item.href)
+                    ? 'text-accent font-medium'
+                    : 'text-gray-700 hover:text-accent'
+                }`}
+                data-testid={`nav-${item.name.toLowerCase()}`}
+              >
+                {item.name}
               </Link>
             ))}
           </nav>
@@ -64,13 +65,13 @@ export const Header: React.FC = () => {
               variant="ghost"
               size="sm"
               onClick={openCart}
-              className="relative p-2 text-gray-700 hover:text-secondary"
+              className="relative p-2 text-gray-700 hover:text-accent"
               data-testid="button-cart"
             >
               <ShoppingCart className="w-6 h-6" />
               {itemCount > 0 && (
                 <span
-                  className="absolute -top-1 -right-1 bg-accent text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
+                  className="absolute -top-1 -right-1 bg-accent text-black font-semibold text-xs rounded-full w-5 h-5 flex items-center justify-center"
                   data-testid="text-cart-count"
                 >
                   {itemCount}
@@ -98,18 +99,18 @@ export const Header: React.FC = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden border-t border-gray-200 py-4 space-y-2" data-testid="mobile-menu">
             {navigation.map((item) => (
-              <Link key={item.name} href={item.href}>
-                <span
-                  className={`cursor-pointer block px-3 py-2 transition-colors ${
-                    isActive(item.href)
-                      ? 'text-secondary font-medium'
-                      : 'text-gray-700 hover:text-secondary'
-                  }`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  data-testid={`mobile-nav-${item.name.toLowerCase()}`}
-                >
-                  {item.name}
-                </span>
+              <Link 
+                key={item.name} 
+                href={item.href}
+                className={`cursor-pointer block px-3 py-2 transition-colors ${
+                  isActive(item.href)
+                    ? 'text-secondary font-medium'
+                    : 'text-gray-700 hover:text-secondary'
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+                data-testid={`mobile-nav-${item.name.toLowerCase()}`}
+              >
+                {item.name}
               </Link>
             ))}
           </div>

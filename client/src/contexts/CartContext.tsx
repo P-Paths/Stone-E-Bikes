@@ -1,3 +1,5 @@
+"use client";
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Product } from '@shared/schema';
 
@@ -17,6 +19,8 @@ interface CartContextType {
   isOpen: boolean;
   openCart: () => void;
   closeCart: () => void;
+  showNotification: boolean;
+  notificationMessage: string;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -32,6 +36,8 @@ export const useCart = () => {
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState('');
 
   // Load cart from localStorage on mount
   useEffect(() => {
@@ -50,6 +56,17 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     localStorage.setItem('cart', JSON.stringify(items));
   }, [items]);
 
+  // Auto-hide notification after 3 seconds
+  useEffect(() => {
+    if (showNotification) {
+      const timer = setTimeout(() => {
+        setShowNotification(false);
+        setNotificationMessage('');
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [showNotification]);
+
   const addItem = (product: Product, quantity = 1) => {
     setItems(currentItems => {
       const existingItem = currentItems.find(item => item.product.id === product.id);
@@ -64,6 +81,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return [...currentItems, { product, quantity }];
       }
     });
+
+    // Show notification
+    setNotificationMessage(`${product.name} added to cart!`);
+    setShowNotification(true);
   };
 
   const removeItem = (productId: string) => {
@@ -108,6 +129,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         isOpen,
         openCart,
         closeCart,
+        showNotification,
+        notificationMessage,
       }}
     >
       {children}

@@ -11,10 +11,9 @@ import { apiRequest } from '@/lib/queryClient';
 
 // Make sure to call `loadStripe` outside of a component's render to avoid
 // recreating the `Stripe` object on every render.
-if (!import.meta.env.VITE_STRIPE_PUBLIC_KEY) {
-  throw new Error('Missing required Stripe key: VITE_STRIPE_PUBLIC_KEY');
-}
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+const stripePromise = import.meta.env.VITE_STRIPE_PUBLIC_KEY 
+  ? loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY)
+  : null;
 
 const CheckoutForm = () => {
   const stripe = useStripe();
@@ -166,9 +165,178 @@ const CheckoutForm = () => {
   );
 };
 
+const DemoCheckoutForm = () => {
+  const { total, items, clearCart } = useCart();
+  const { toast } = useToast();
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const handleDemoSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+
+    // Simulate payment processing
+    setTimeout(() => {
+      toast({
+        title: "Demo Payment Successful!",
+        description: "This is a demo payment. In production, this would process through Stripe.",
+      });
+      clearCart();
+      setIsProcessing(false);
+    }, 2000);
+  };
+
+  return (
+    <div className="grid lg:grid-cols-2 gap-8">
+      {/* Order Summary */}
+      <div>
+        <Card>
+          <CardHeader>
+            <CardTitle data-testid="text-order-summary">Order Summary</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {items.map((item) => (
+                <div key={item.product.id} className="flex justify-between" data-testid={`order-item-${item.product.id}`}>
+                  <div>
+                    <p className="font-medium" data-testid={`text-item-name-${item.product.id}`}>
+                      {item.product.name}
+                    </p>
+                    <p className="text-sm text-muted" data-testid={`text-item-quantity-${item.product.id}`}>
+                      Qty: {item.quantity}
+                    </p>
+                  </div>
+                  <p className="font-medium" data-testid={`text-item-total-${item.product.id}`}>
+                    ${(parseFloat(item.product.price) * item.quantity).toFixed(2)}
+                  </p>
+                </div>
+              ))}
+              <hr />
+              <div className="flex justify-between text-lg font-bold">
+                <span>Total:</span>
+                <span data-testid="text-checkout-total">${total.toFixed(2)}</span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Demo Payment Form */}
+      <div>
+        <Card>
+          <CardHeader>
+            <CardTitle data-testid="text-payment-details">Demo Payment Details</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+              <div className="flex">
+                <div className="ml-3">
+                  <h3 className="text-sm font-medium text-yellow-800">
+                    Demo Mode Active
+                  </h3>
+                  <div className="mt-2 text-sm text-yellow-700">
+                    <p>This is a demo payment form. Use any test card details:</p>
+                    <ul className="list-disc list-inside mt-2">
+                      <li>Card: 4242 4242 4242 4242</li>
+                      <li>Expiry: Any future date</li>
+                      <li>CVC: Any 3 digits</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <form onSubmit={handleDemoSubmit} className="space-y-6">
+              {/* Shipping Information */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Shipping Information</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="firstName">First Name</Label>
+                    <Input id="firstName" data-testid="input-first-name" required />
+                  </div>
+                  <div>
+                    <Label htmlFor="lastName">Last Name</Label>
+                    <Input id="lastName" data-testid="input-last-name" required />
+                  </div>
+                </div>
+                <div>
+                  <Label htmlFor="email">Email</Label>
+                  <Input id="email" type="email" data-testid="input-email" required />
+                </div>
+                <div>
+                  <Label htmlFor="address">Address</Label>
+                  <Input id="address" data-testid="input-address" required />
+                </div>
+                <div className="grid grid-cols-3 gap-4">
+                  <div>
+                    <Label htmlFor="city">City</Label>
+                    <Input id="city" data-testid="input-city" required />
+                  </div>
+                  <div>
+                    <Label htmlFor="state">State</Label>
+                    <Input id="state" data-testid="input-state" required />
+                  </div>
+                  <div>
+                    <Label htmlFor="zip">ZIP Code</Label>
+                    <Input id="zip" data-testid="input-zip" required />
+                  </div>
+                </div>
+              </div>
+
+              {/* Demo Payment Fields */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Payment Information</h3>
+                <div>
+                  <Label htmlFor="cardNumber">Card Number</Label>
+                  <Input 
+                    id="cardNumber" 
+                    placeholder="4242 4242 4242 4242" 
+                    defaultValue="4242 4242 4242 4242"
+                    disabled
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="expiry">Expiry Date</Label>
+                    <Input 
+                      id="expiry" 
+                      placeholder="MM/YY" 
+                      defaultValue="12/25"
+                      disabled
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="cvc">CVC</Label>
+                    <Input 
+                      id="cvc" 
+                      placeholder="123" 
+                      defaultValue="123"
+                      disabled
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <Button
+                type="submit"
+                className="w-full bg-accent hover:bg-green-600"
+                disabled={isProcessing}
+                data-testid="button-complete-payment"
+              >
+                {isProcessing ? 'Processing Demo Payment...' : `Complete Demo Payment - $${total.toFixed(2)}`}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+};
+
 export default function Checkout() {
   const { total, items } = useCart();
   const [clientSecret, setClientSecret] = useState("");
+  const [isDemo, setIsDemo] = useState(false);
 
   useEffect(() => {
     if (total > 0) {
@@ -178,8 +346,10 @@ export default function Checkout() {
         .then((data) => {
           if (data.demo) {
             // Demo mode - payments disabled
+            setIsDemo(true);
             setClientSecret("demo");
           } else {
+            setIsDemo(false);
             setClientSecret(data.clientSecret);
           }
         })
@@ -209,34 +379,6 @@ export default function Checkout() {
     );
   }
 
-  if (clientSecret === "demo") {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <h1 className="text-3xl font-bold text-primary mb-8" data-testid="text-checkout-title">
-            Checkout - Demo Mode
-          </h1>
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-8">
-            <div className="flex">
-              <div className="ml-3">
-                <h3 className="text-sm font-medium text-yellow-800">
-                  Demo Mode: Payments Disabled
-                </h3>
-                <div className="mt-2 text-sm text-yellow-700">
-                  <p>This store is running in demo mode. To enable payments:</p>
-                  <ul className="list-disc list-inside mt-2">
-                    <li>Set PAYMENTS_ENABLED=true in environment variables</li>
-                    <li>Configure Stripe keys (VITE_STRIPE_PUBLIC_KEY, STRIPE_SECRET_KEY)</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   if (clientSecret === "error") {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -252,12 +394,33 @@ export default function Checkout() {
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h1 className="text-3xl font-bold text-primary mb-8" data-testid="text-checkout-title">
-          Checkout
+          Checkout {isDemo && "- Demo Mode"}
         </h1>
         
-        <Elements stripe={stripePromise} options={{ clientSecret }}>
-          <CheckoutForm />
-        </Elements>
+        {isDemo ? (
+          <DemoCheckoutForm />
+        ) : stripePromise ? (
+          <Elements stripe={stripePromise} options={{ clientSecret }}>
+            <CheckoutForm />
+          </Elements>
+        ) : (
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+            <div className="flex">
+              <div className="ml-3">
+                <h3 className="text-sm font-medium text-yellow-800">
+                  Stripe Not Configured
+                </h3>
+                <div className="mt-2 text-sm text-yellow-700">
+                  <p>Stripe payment processing is not configured. To enable payments:</p>
+                  <ul className="list-disc list-inside mt-2">
+                    <li>Set VITE_STRIPE_PUBLIC_KEY in environment variables</li>
+                    <li>Configure Stripe keys for payment processing</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -35,18 +35,18 @@ export interface ThemeConfig {
 }
 
 export const defaultTheme: ThemeConfig = {
-  brandName: "Stonee Bikes",
+  brandName: "Stone E-Bikes",
   logo: {
-    text: "Stonee Bikes",
+    text: "Stone E-Bikes",
     imageUrl: undefined, // Can be replaced with actual logo URL
   },
   colors: {
-    primary: "#1F2937", // gray-800
-    secondary: "#3B82F6", // blue-500
-    accent: "#10B981", // emerald-500
+    primary: "#000000", // Black
+    secondary: "#FFFFFF", // White
+    accent: "#FFD700", // Gold
     muted: "#6B7280", // gray-500
-    background: "#FFFFFF",
-    foreground: "#111827", // gray-900
+    background: "#FFFFFF", // White
+    foreground: "#000000", // Black
   },
   fonts: {
     sans: "Inter, system-ui, sans-serif",
@@ -59,13 +59,13 @@ export const defaultTheme: ThemeConfig = {
   },
   contact: {
     phone: "(555) 123-BIKE",
-    email: "info@stoneebikes.com",
+    email: "info@stonee-bikes.com",
     address: "123 Bike Street, Cycling City, CC 12345",
   },
   social: {
-    facebook: "https://facebook.com/stoneebikes",
-    twitter: "https://twitter.com/stoneebikes",
-    instagram: "https://instagram.com/stoneebikes",
+    facebook: "https://facebook.com/stonee-bikes",
+    twitter: "https://twitter.com/stonee-bikes",
+    instagram: "https://instagram.com/stonee-bikes",
   },
 };
 

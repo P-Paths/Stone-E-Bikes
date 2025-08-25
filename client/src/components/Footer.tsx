@@ -1,5 +1,7 @@
+"use client";
+
 import React from 'react';
-import { Link } from 'wouter';
+import Link from 'next/link';
 import { Facebook, Twitter, Instagram, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -23,7 +25,7 @@ export const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-gray-900 text-white py-12">
+    <footer className="bg-black text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
@@ -71,13 +73,12 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2">
               {quickLinks.map((item) => (
                 <li key={item.name}>
-                  <Link href={item.href}>
-                    <span
-                      className="cursor-pointer text-gray-400 hover:text-white transition-colors"
-                      data-testid={`link-${item.name.toLowerCase()}`}
-                    >
-                      {item.name}
-                    </span>
+                  <Link 
+                    href={item.href}
+                    className="cursor-pointer text-gray-400 hover:text-white transition-colors"
+                    data-testid={`link-${item.name.toLowerCase()}`}
+                  >
+                    {item.name}
                   </Link>
                 </li>
               ))}
