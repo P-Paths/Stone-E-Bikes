@@ -87,9 +87,9 @@ export default function About() {
             </div>
             <div>
               <img
-                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400"
-                alt="Bike shop interior"
-                className="rounded-lg shadow-lg"
+                src="/images/Detroit.jpg"
+                alt="Detroit cityscape representing our local community"
+                className="rounded-lg shadow-lg w-full h-auto"
                 data-testid="img-our-story"
               />
             </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
@@ -8,9 +8,12 @@ import { ProductCard } from '@/components/ProductCard';
 
 import { useTheme } from '@/contexts/ThemeContext';
 import { Product, BlogPost } from '@shared/schema';
+import { loadMarkdownPosts, BlogPost as MarkdownBlogPost } from '@/lib/blog.loader';
 
 export default function Home() {
   const theme = useTheme();
+  const [blogPosts, setBlogPosts] = useState<MarkdownBlogPost[]>([]);
+  const [blogLoading, setBlogLoading] = useState(true);
   
   const { data: featuredProducts, isLoading: productsLoading } = useQuery<Product[]>({
     queryKey: ['/api/products/featured'],
@@ -23,16 +26,20 @@ export default function Home() {
     },
   });
 
-  const { data: blogPosts, isLoading: blogLoading } = useQuery<BlogPost[]>({
-    queryKey: ['/api/blog'],
-    queryFn: async () => {
-      const response = await fetch('/api/blog');
-      if (!response.ok) {
-        throw new Error('Failed to fetch blog posts');
+  useEffect(() => {
+    const loadBlogPosts = async () => {
+      try {
+        const posts = await loadMarkdownPosts();
+        setBlogPosts(posts);
+      } catch (error) {
+        console.error('Error loading blog posts:', error);
+      } finally {
+        setBlogLoading(false);
       }
-      return response.json();
-    },
-  });
+    };
+    
+    loadBlogPosts();
+  }, []);
 
   return (
     <div className="bg-gray-50">
@@ -159,35 +166,35 @@ export default function Home() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {blogPosts?.slice(0, 3).map((post) => (
                 <article 
-                  key={post.id} 
+                  key={post.slug} 
                   className="bg-gray-50 rounded-xl overflow-hidden hover:shadow-lg transition-shadow"
-                  data-testid={`card-blog-${post.id}`}
+                  data-testid={`card-blog-${post.slug}`}
                 >
                   <img
                     src={post.imageUrl || '/images/e-bikes/keteles-fat-26.png'}
                     alt={post.title}
                     className="w-full h-48 object-contain bg-gray-50"
-                    data-testid={`img-blog-${post.id}`}
+                    data-testid={`img-blog-${post.slug}`}
                   />
                   <div className="p-6">
-                    <div className="text-sm text-accent font-semibold mb-2" data-testid={`text-blog-category-${post.id}`}>
-                      {post.category}
+                    <div className="text-sm text-accent font-semibold mb-2" data-testid={`text-blog-tags-${post.slug}`}>
+                      {post.tags?.join(', ')}
                     </div>
-                    <h3 className="text-xl font-semibold text-primary mb-3" data-testid={`text-blog-title-${post.id}`}>
+                    <h3 className="text-xl font-semibold text-primary mb-3" data-testid={`text-blog-title-${post.slug}`}>
                       {post.title}
                     </h3>
-                    <p className="text-muted mb-4" data-testid={`text-blog-excerpt-${post.id}`}>
+                    <p className="text-muted mb-4" data-testid={`text-blog-excerpt-${post.slug}`}>
                       {post.excerpt}
                     </p>
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted" data-testid={`text-blog-date-${post.id}`}>
-                        {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString() : ''}
+                      <span className="text-sm text-muted" data-testid={`text-blog-date-${post.slug}`}>
+                        {new Date(post.date).toLocaleDateString()}
                       </span>
                       <Link href={`/blog/${post.slug}`}>
                         <Button 
                           variant="link" 
                           className="text-secondary hover:text-blue-600 p-0"
-                          data-testid={`button-read-more-${post.id}`}
+                          data-testid={`button-read-more-${post.slug}`}
                         >
                           Read More
                         </Button>

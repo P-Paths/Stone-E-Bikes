@@ -138,12 +138,7 @@ export const BikeDetailsModal: React.FC<BikeDetailsModalProps> = ({ isOpen, onCl
                   <span className="font-semibold">Price:</span>
                   <span className="text-2xl font-bold text-primary">${bike.priceMonthly.toLocaleString()}</span>
                 </div>
-                {bike.specifications.bulkPrice && (
-                  <div className="flex justify-between text-green-600">
-                    <span className="font-semibold">Bulk Discount:</span>
-                    <span className="font-bold">${bike.specifications.bulkPrice.toLocaleString()}</span>
-                  </div>
-                )}
+
                 {bike.specifications.premiumPrice && (
                   <div className="flex justify-between text-blue-600">
                     <span className="font-semibold">Premium Package:</span>
