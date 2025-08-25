@@ -8,7 +8,7 @@ import { CartNotification } from './components/CartNotification';
 import { CartProvider } from './contexts/CartContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { Toaster } from './components/ui/toaster';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from './components/QueryClientProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,19 +22,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        staleTime: 60 * 1000, // 1 minute
-        refetchOnWindowFocus: false,
-      },
-    },
-  });
-
   return (
     <html lang="en">
       <body className={inter.className}>
-        <QueryClientProvider client={queryClient}>
+        <QueryClientProvider>
           <ThemeProvider>
             <CartProvider>
               <div className="min-h-screen flex flex-col">
