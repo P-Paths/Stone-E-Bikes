@@ -4,16 +4,16 @@
   "/api/products/featured/route": "app/api/products/featured/route.js",
   "/api/products/route": "app/api/products/route.js",
   "/about/page": "app/about/page.js",
-  "/blog/page": "app/blog/page.js",
+  "/accessories/page": "app/accessories/page.js",
   "/blog/[slug]/page": "app/blog/[slug]/page.js",
-  "/checkout/page": "app/checkout/page.js",
-  "/cart/page": "app/cart/page.js",
+  "/blog/page": "app/blog/page.js",
   "/contact/page": "app/contact/page.js",
+  "/cart/page": "app/cart/page.js",
+  "/shop/page": "app/shop/page.js",
   "/page": "app/page.js",
   "/returns/page": "app/returns/page.js",
-  "/shipping-info/page": "app/shipping-info/page.js",
-  "/shop/page": "app/shop/page.js",
   "/size-guide/page": "app/size-guide/page.js",
-  "/accessories/page": "app/accessories/page.js",
-  "/support/page": "app/support/page.js"
+  "/support/page": "app/support/page.js",
+  "/shipping-info/page": "app/shipping-info/page.js",
+  "/checkout/page": "app/checkout/page.js"
 }

@@ -4,16 +4,16 @@
   "/api/products/featured/route": "/api/products/featured",
   "/api/products/route": "/api/products",
   "/about/page": "/about",
-  "/blog/page": "/blog",
+  "/accessories/page": "/accessories",
   "/blog/[slug]/page": "/blog/[slug]",
-  "/checkout/page": "/checkout",
-  "/cart/page": "/cart",
+  "/blog/page": "/blog",
   "/contact/page": "/contact",
+  "/cart/page": "/cart",
+  "/shop/page": "/shop",
   "/page": "/",
   "/returns/page": "/returns",
-  "/shipping-info/page": "/shipping-info",
-  "/shop/page": "/shop",
   "/size-guide/page": "/size-guide",
-  "/accessories/page": "/accessories",
-  "/support/page": "/support"
+  "/support/page": "/support",
+  "/shipping-info/page": "/shipping-info",
+  "/checkout/page": "/checkout"
 }

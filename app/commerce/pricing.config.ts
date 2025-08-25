@@ -32,7 +32,7 @@ export const PRICING: PricingConfig = {
     {
       id: "askgo-26",
       label: '26" ASKGO (700W)',
-      priceMonthly: 701.58,
+      priceMonthly: 350.79,
       features: ["700W Motor", "26 inch wheels", "Electric bike", "Premium quality"],
       specifications: {
         wheelSize: "26″ × 4″ all-weather tires (gravel / light trail ready)",
@@ -44,15 +44,15 @@ export const PRICING: PricingConfig = {
         accessories: "LED headlight, LCD display (speed, range), rear reflector",
         range: "35–50 mi",
         maxSpeed: "28 mph",
-        cost: 338.72,
-        retailPrice: 701.58,
-        bulkPrice: 677.44
+        cost: 169.36,
+        retailPrice: 350.79,
+        premiumPrice: 338.72
       }
     },
     {
       id: "okonge-fat-20",
       label: '20" Fat Tire OKONGE',
-      priceMonthly: 1499.58,
+      priceMonthly: 749.79,
       features: ["Fat tire design", "20 inch wheels", "All-terrain capability", "Rugged build"],
       specifications: {
         wheelSize: "20″ × 4″ fat tires (sand, snow, trail-friendly)",
@@ -64,15 +64,15 @@ export const PRICING: PricingConfig = {
         accessories: "Folding mechanism, LCD display, front fender",
         range: "25–45 mi",
         maxSpeed: "25 mph",
-        cost: 1009.66,
-        retailPrice: 1499.58,
-        premiumPrice: 2019.30
+        cost: 504.03,
+        retailPrice: 749.79,
+        premiumPrice: 1009.66
       }
     },
     {
       id: "keteles-fat-26",
       label: '26" Fat Tire KETELES',
-      priceMonthly: 3171.58,
+      priceMonthly: 1585.79,
       features: ["Premium fat tire", "26 inch wheels", "High-end components", "Professional grade"],
       specifications: {
         wheelSize: "26″ × 4.5″ fat tires (off-road capability)",
@@ -84,9 +84,9 @@ export const PRICING: PricingConfig = {
         accessories: "Dual suspension, LCD, puncture-resistant tires",
         range: "40–60 mi",
         maxSpeed: "28+ mph",
-        cost: 1787.28,
-        retailPrice: 3171.58,
-        premiumPrice: 3574.56
+        cost: 893.64,
+        retailPrice: 1585.79,
+        premiumPrice: 1787.28
       }
     },
     {
@@ -104,7 +104,7 @@ export const PRICING: PricingConfig = {
         accessories: "Rear basket, vinyl canopy mount, ergonomic seat",
         range: "20–35 mi",
         maxSpeed: "20 mph",
-        cost: 564.14,
+        cost: 546.14,
         retailPrice: 909.79,
         premiumPrice: 1128.79
       }
