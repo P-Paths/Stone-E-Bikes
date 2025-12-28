@@ -1,19 +1,89 @@
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { ProductCard } from '../components/ProductCard';
-import { Product, Category } from '@shared/schema';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { useCart } from '../contexts/CartContext';
+import { useToast } from '@/hooks/use-toast';
 
 export default function Accessories() {
-  const { data: categories } = useQuery<Category[]>({
-    queryKey: ['/api/categories'],
-  });
+  const { addItem } = useCart();
+  const { toast } = useToast();
 
-  const accessoriesCategory = categories?.find(cat => cat.slug === 'accessories');
+  const accessories = [
+    {
+      id: 'helmet-premium',
+      name: 'Premium Safety Helmet',
+      price: 89.99,
+      description: 'High-quality safety helmet with advanced protection',
+      imageUrl: '/images/accessories/Helmet.jpg',
+      category: 'Safety'
+    },
+    {
+      id: 'lights-front',
+      name: 'LED Front Light Set',
+      price: 49.99,
+      description: 'Bright LED front lights for safe night riding',
+      imageUrl: '/images/accessories/front light for e-bike.jpg',
+      category: 'Safety'
+    },
+    {
+      id: 'lights-rear',
+      name: 'LED Rear Light Set',
+      price: 39.99,
+      description: 'High-visibility rear lights with brake detection',
+      imageUrl: '/images/accessories/backlight for e-bike.jpg',
+      category: 'Safety'
+    },
+    {
+      id: 'gloves',
+      name: 'E-Bike Riding Gloves',
+      price: 29.99,
+      description: 'Comfortable gloves for better grip and protection',
+      imageUrl: '/images/accessories/e-bike Gloves.jpg',
+      category: 'Safety'
+    },
+    {
+      id: 'basket-cargo',
+      name: 'Cargo Basket',
+      price: 79.99,
+      description: 'Sturdy basket for groceries and essentials',
+      imageUrl: '/images/accessories/Basket.jpg',
+      category: 'Storage'
+    },
+    {
+      id: 'lock-premium',
+      name: 'Premium Bike Lock',
+      price: 149.99,
+      description: 'Heavy-duty lock for maximum security',
+      imageUrl: '/images/accessories/e-bike Lock.jpg',
+      category: 'Security'
+    },
+    {
+      id: 'mirror',
+      name: 'Bike Mirror',
+      price: 24.99,
+      description: 'Safety mirror for better rear visibility',
+      imageUrl: '/images/accessories/e-bike Mirror.jpg',
+      category: 'Safety'
+    }
+  ];
 
-  const { data: accessories, isLoading } = useQuery<Product[]>({
-    queryKey: ['/api/categories', accessoriesCategory?.slug, 'products'],
-    enabled: !!accessoriesCategory?.slug,
-  });
+  const handleAddToCart = (accessory: any) => {
+    const product = {
+      id: accessory.id,
+      name: accessory.name,
+      price: accessory.price.toString(),
+      description: accessory.description,
+      imageUrl: accessory.imageUrl,
+      inStock: true,
+      featured: false
+    };
+    
+    addItem(product);
+    toast({
+      title: 'Added to cart',
+      description: `${accessory.name} has been added to your cart.`,
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -21,88 +91,64 @@ export default function Accessories() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl lg:text-4xl font-bold text-primary mb-4" data-testid="text-accessories-title">
-            Essential Accessories
+            E-Bike Accessories & Safety Gear
           </h1>
           <p className="text-xl text-muted" data-testid="text-accessories-description">
-            Complete your ride with our premium bike accessories and gear
+            Complete your e-bike experience with premium accessories designed for safety and convenience
           </p>
         </div>
 
         {/* Accessories Grid */}
-        {isLoading ? (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {[...Array(8)].map((_, i) => (
-              <div key={i} className="animate-pulse">
-                <div className="bg-gray-200 h-48 rounded-lg mb-4"></div>
-                <div className="bg-gray-200 h-4 rounded mb-2"></div>
-                <div className="bg-gray-200 h-4 rounded mb-4 w-2/3"></div>
-                <div className="bg-gray-200 h-10 rounded"></div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" data-testid="accessories-grid">
+          {accessories.map((accessory) => (
+            <Card 
+              key={accessory.id}
+              className="overflow-hidden hover:shadow-xl transition-shadow duration-300 group"
+              data-testid={`card-accessory-${accessory.id}`}
+            >
+              <div className="relative">
+                <img
+                  src={accessory.imageUrl}
+                  alt={accessory.name}
+                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                  data-testid={`img-accessory-${accessory.id}`}
+                />
+                <div className="absolute top-2 left-2 bg-accent text-black font-semibold px-2 py-1 rounded text-xs">
+                  {accessory.category}
+                </div>
               </div>
-            ))}
-          </div>
-        ) : accessories?.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-muted text-lg" data-testid="text-no-accessories">
-              No accessories available at the moment.
-            </p>
-          </div>
-        ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" data-testid="accessories-grid">
-            {accessories?.map((accessory) => (
-              <ProductCard key={accessory.id} product={accessory} />
-            ))}
-          </div>
-        )}
-
-        {/* Categories Preview */}
-        <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-            <img
-              src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200"
-              alt="Safety Equipment"
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-4">
-              <h4 className="font-semibold text-primary mb-2">Safety Equipment</h4>
-              <p className="text-sm text-muted">Helmets, lights, and protective gear</p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-            <img
-              src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200"
-              alt="Bike Maintenance"
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-4">
-              <h4 className="font-semibold text-primary mb-2">Maintenance</h4>
-              <p className="text-sm text-muted">Tools and maintenance supplies</p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-            <img
-              src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200"
-              alt="Storage Solutions"
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-4">
-              <h4 className="font-semibold text-primary mb-2">Storage</h4>
-              <p className="text-sm text-muted">Bags, racks, and storage solutions</p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-            <img
-              src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200"
-              alt="Performance Upgrades"
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-4">
-              <h4 className="font-semibold text-primary mb-2">Performance</h4>
-              <p className="text-sm text-muted">Upgrades and performance parts</p>
-            </div>
-          </div>
+              
+              <CardContent className="p-6">
+                <h3 
+                  className="text-lg font-semibold text-primary mb-2"
+                  data-testid={`text-accessory-name-${accessory.id}`}
+                >
+                  {accessory.name}
+                </h3>
+                <p 
+                  className="text-sm text-muted mb-4"
+                  data-testid={`text-accessory-description-${accessory.id}`}
+                >
+                  {accessory.description}
+                </p>
+                <div className="flex justify-between items-center">
+                  <span 
+                    className="text-xl font-bold text-primary"
+                    data-testid={`text-accessory-price-${accessory.id}`}
+                  >
+                    ${accessory.price}
+                  </span>
+                  <Button
+                    className="bg-accent hover:bg-yellow-600 text-black font-semibold"
+                    onClick={() => handleAddToCart(accessory)}
+                    data-testid={`button-add-to-cart-${accessory.id}`}
+                  >
+                    Add to Cart
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </div>
     </div>

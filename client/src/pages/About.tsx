@@ -60,9 +60,9 @@ export default function About() {
               About {theme.brandName}
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto" data-testid="text-about-intro">
-              We're passionate cyclists on a mission to provide the best bikes and gear to help 
-              everyone discover the joy of cycling. Since our founding, we've been committed to 
-              quality, community, and sustainable transportation.
+              We're passionate about electric mobility and helping everyone discover the freedom of e-bikes. 
+              From seniors seeking comfortable transportation to adventure seekers exploring new terrain, 
+              we provide premium electric bicycles that enhance your lifestyle and independence.
             </p>
           </div>
         </div>
@@ -78,20 +78,19 @@ export default function About() {
               </h2>
               <div className="space-y-4 text-muted">
                 <p data-testid="text-story-paragraph-1">
-                  Founded in 2015 by a group of cycling enthusiasts, {theme.brandName} started as a 
-                  small local bike shop with a big dream: to make high-quality bicycles accessible 
-                  to everyone.
+                  Founded in 2020 by a group of electric mobility enthusiasts, {theme.brandName} started with a 
+                  vision: to make premium electric bicycles accessible to everyone, especially seniors and 
+                  those seeking alternative transportation.
                 </p>
                 <p data-testid="text-story-paragraph-2">
-                  Over the years, we've grown from a single storefront to a trusted online retailer, 
-                  but our core values remain the same. We believe that cycling is more than just 
-                  transportation—it's a lifestyle, a passion, and a way to connect with our community 
-                  and environment.
+                  We recognized that many people, particularly seniors, were looking for comfortable, 
+                  safe, and reliable transportation options. Our e-bikes provide the perfect solution—combining 
+                  the freedom of cycling with the assistance of electric power for a truly enjoyable experience.
                 </p>
                 <p data-testid="text-story-paragraph-3">
-                  Today, we're proud to serve thousands of customers worldwide, offering everything 
-                  from entry-level bikes to professional racing machines. Every bike we sell comes 
-                  with our commitment to quality and our promise of excellent customer service.
+                  Today, we're proud to serve customers of all ages and abilities, from seniors enjoying 
+                  leisurely rides to adventure seekers exploring new terrain. Every e-bike we sell comes 
+                  with our commitment to safety, quality, and exceptional customer support.
                 </p>
               </div>
             </div>
@@ -103,6 +102,112 @@ export default function About() {
                 data-testid="img-our-story"
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Audiences */}
+      <section className="py-16 bg-gray-50" data-testid="our-audiences-section">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-primary mb-4" data-testid="text-audiences-title">
+              Designed for Everyone
+            </h2>
+            <p className="text-xl text-muted" data-testid="text-audiences-description">
+              Our e-bikes are designed to serve diverse needs and lifestyles
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Card className="text-center hover:shadow-lg transition-shadow" data-testid="card-audience-seniors">
+              <CardContent className="p-6">
+                <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">👴</span>
+                </div>
+                <h3 className="text-lg font-semibold text-primary mb-3" data-testid="text-audience-seniors-title">
+                  Seniors & Comfort Seekers
+                </h3>
+                <p className="text-muted text-sm" data-testid="text-audience-seniors-description">
+                  Our trikes and comfort-focused e-bikes provide stability, ease of use, and gentle assistance 
+                  for those who want to maintain independence and enjoy outdoor activities safely.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center hover:shadow-lg transition-shadow" data-testid="card-audience-commuters">
+              <CardContent className="p-6">
+                <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">🚴</span>
+                </div>
+                <h3 className="text-lg font-semibold text-primary mb-3" data-testid="text-audience-commuters-title">
+                  Urban Commuters
+                </h3>
+                <p className="text-muted text-sm" data-testid="text-audience-commuters-description">
+                  Perfect for daily commuting with cargo capacity for groceries, work essentials, and 
+                  reliable performance for consistent transportation needs.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center hover:shadow-lg transition-shadow" data-testid="card-audience-adventurers">
+              <CardContent className="p-6">
+                <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">🏔️</span>
+                </div>
+                <h3 className="text-lg font-semibold text-primary mb-3" data-testid="text-audience-adventurers-title">
+                  Adventure Seekers
+                </h3>
+                <p className="text-muted text-sm" data-testid="text-audience-adventurers-description">
+                  Fat tire e-bikes designed for off-road exploration, beach rides, and challenging terrain 
+                  with powerful motors and durable construction.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center hover:shadow-lg transition-shadow" data-testid="card-audience-families">
+              <CardContent className="p-6">
+                <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">👨‍👩‍👧‍👦</span>
+                </div>
+                <h3 className="text-lg font-semibold text-primary mb-3" data-testid="text-audience-families-title">
+                  Families & Recreation
+                </h3>
+                <p className="text-muted text-sm" data-testid="text-audience-families-description">
+                  Safe, comfortable e-bikes perfect for family outings, leisurely rides, and creating 
+                  lasting memories together in the great outdoors.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center hover:shadow-lg transition-shadow" data-testid="card-audience-business">
+              <CardContent className="p-6">
+                <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">💼</span>
+                </div>
+                <h3 className="text-lg font-semibold text-primary mb-3" data-testid="text-audience-business-title">
+                  Business & Delivery
+                </h3>
+                <p className="text-muted text-sm" data-testid="text-audience-business-description">
+                  Cargo e-bikes and trikes ideal for small business deliveries, food service, and 
+                  professional use with reliable performance and ample storage.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center hover:shadow-lg transition-shadow" data-testid="card-audience-health">
+              <CardContent className="p-6">
+                <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">❤️</span>
+                </div>
+                <h3 className="text-lg font-semibold text-primary mb-3" data-testid="text-audience-health-title">
+                  Health & Wellness
+                </h3>
+                <p className="text-muted text-sm" data-testid="text-audience-health-description">
+                  Low-impact exercise option that promotes cardiovascular health, joint mobility, and 
+                  mental well-being for riders of all fitness levels.
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>

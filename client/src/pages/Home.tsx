@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'wouter';
 import { useQuery } from '@tanstack/react-query';
-import { Button } from '@/components/ui/button';
+import { Button } from '../components/ui/button';
 import { ProductCard } from '../components/ProductCard';
 import { PricingSection } from '../components/PricingSection';
 import { useTheme } from '../contexts/ThemeContext';
@@ -12,31 +12,48 @@ export default function Home() {
   
   const { data: featuredProducts, isLoading: productsLoading } = useQuery<Product[]>({
     queryKey: ['/api/products/featured'],
+    queryFn: async () => {
+      const response = await fetch('/api/products/featured');
+      if (!response.ok) {
+        throw new Error('Failed to fetch featured products');
+      }
+      return response.json();
+    },
   });
 
   const { data: blogPosts, isLoading: blogLoading } = useQuery<BlogPost[]>({
     queryKey: ['/api/blog'],
+    queryFn: async () => {
+      const response = await fetch('/api/blog');
+      if (!response.ok) {
+        throw new Error('Failed to fetch blog posts');
+      }
+      return response.json();
+    },
   });
 
   return (
     <div className="bg-gray-50">
       {/* Hero Section */}
-      <section className="relative bg-primary text-white" data-testid="hero-section">
+      <section className="relative bg-black text-white" data-testid="hero-section">
         <div className="absolute inset-0 bg-black bg-opacity-40"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl lg:text-6xl font-bold mb-6" data-testid="text-hero-title">
-                Ride the Future
-                <span className="text-accent block">Premium Bikes</span>
+                Stone E-Bikes
+                <span className="text-accent block">Premium Electric Bikes</span>
               </h1>
-              <p className="text-xl mb-8 text-gray-300" data-testid="text-hero-description">
-                Discover our collection of cutting-edge bicycles designed for every adventure. From city commuting to mountain trails.
+              <p className="text-xl mb-4 text-gray-300" data-testid="text-hero-slogan">
+                Love it, live it, ride it too.
+              </p>
+              <p className="text-lg mb-8 text-gray-300" data-testid="text-hero-description">
+                Discover our collection of cutting-edge electric bicycles designed for every adventure. From city commuting to mountain trails.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/shop">
                   <Button 
-                    className="bg-accent hover:bg-green-600 text-white px-8 py-3 text-lg"
+                    className="bg-accent hover:bg-yellow-600 text-black font-semibold px-8 py-3 text-lg"
                     data-testid="button-shop-now"
                   >
                     Shop Now
@@ -45,7 +62,7 @@ export default function Home() {
                 <Link href="/about">
                   <Button 
                     variant="outline" 
-                    className="border-white text-white hover:bg-white hover:text-primary px-8 py-3 text-lg"
+                    className="border-accent text-accent hover:bg-accent hover:text-black font-semibold px-8 py-3 text-lg"
                     data-testid="button-learn-more"
                   >
                     Learn More
@@ -55,10 +72,14 @@ export default function Home() {
             </div>
             <div className="hidden lg:block">
               <img
-                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-                alt="Professional cyclist on modern road bike"
+                src="/images/e-bikes/keteles-fat-26.png"
+                alt="26&quot; Fat Tire KETELES - Premium electric bicycle - Stone E-Bikes"
                 className="rounded-xl shadow-2xl"
                 data-testid="img-hero"
+                onError={(e) => {
+                  // Fallback to a placeholder if image fails to load
+                  e.currentTarget.src = 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600';
+                }}
               />
             </div>
           </div>
@@ -99,7 +120,7 @@ export default function Home() {
           <div className="text-center mt-12">
             <Link href="/shop">
               <Button 
-                className="bg-primary hover:bg-gray-800 text-white px-8 py-3"
+                className="bg-accent hover:bg-yellow-600 text-black font-semibold px-8 py-3"
                 data-testid="button-view-all-bikes"
               >
                 View All Bikes
@@ -160,7 +181,7 @@ export default function Home() {
                       <span className="text-sm text-muted" data-testid={`text-blog-date-${post.id}`}>
                         {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString() : ''}
                       </span>
-                      <Link href={`/blog/${post.slug}`}>
+                      <Link href="/blog">
                         <Button 
                           variant="link" 
                           className="text-secondary hover:text-blue-600 p-0"

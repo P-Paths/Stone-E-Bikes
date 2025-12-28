@@ -1,83 +1,79 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'wouter';
-import { Menu, X, ShoppingCart } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useCart } from '../contexts/CartContext';
 import { useTheme } from '../contexts/ThemeContext';
 
 export const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { itemCount, openCart } = useCart();
   const theme = useTheme();
-  const [location] = useLocation();
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const handleNavigation = (href: string) => {
+    router.push(href);
+    setIsMobileMenuOpen(false);
+    // Scroll to top after navigation
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  };
 
   const navigation = [
     { name: 'Home', href: '/' },
-    { name: 'Shop', href: '/shop' },
-    { name: 'Accessories', href: '/accessories' },
-    { name: 'Blog', href: '/blog' },
     { name: 'About', href: '/about' },
+    { name: 'Platform', href: '/platform' },
+    { name: 'Partnerships', href: '/partnerships' },
     { name: 'Contact', href: '/contact' },
   ];
 
   const isActive = (href: string) => {
     if (href === '/') {
-      return location === '/';
+      return pathname === '/';
     }
-    return location.startsWith(href);
+    return pathname.startsWith(href);
   };
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
+    <header className="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href="/">
-              <div className="text-2xl font-bold text-primary cursor-pointer" data-testid="logo">
-                {theme.logo.text}
-              </div>
+            <Link href="/" className="flex items-center space-x-2 cursor-pointer" data-testid="logo">
+              {theme.logo.imageUrl ? (
+                <img 
+                  src={theme.logo.imageUrl} 
+                  alt={theme.logo.text}
+                  className="h-8 w-auto"
+                />
+              ) : (
+                <span className="text-2xl font-bold text-primary">{theme.logo.text}</span>
+              )}
             </Link>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             {navigation.map((item) => (
-              <Link key={item.name} href={item.href}>
-                <span
-                  className={`cursor-pointer transition-colors ${
-                    isActive(item.href)
-                      ? 'text-secondary font-medium'
-                      : 'text-gray-700 hover:text-secondary'
-                  }`}
-                  data-testid={`nav-${item.name.toLowerCase()}`}
-                >
-                  {item.name}
-                </span>
-              </Link>
+              <button
+                key={item.name}
+                onClick={() => handleNavigation(item.href)}
+                className={`cursor-pointer transition-colors ${
+                  isActive(item.href)
+                    ? 'text-accent font-medium'
+                    : 'text-gray-700 hover:text-accent'
+                }`}
+                data-testid={`nav-${item.name.toLowerCase()}`}
+              >
+                {item.name}
+              </button>
             ))}
           </nav>
 
-          {/* Cart and Mobile Menu */}
-          <div className="flex items-center space-x-4">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={openCart}
-              className="relative p-2 text-gray-700 hover:text-secondary"
-              data-testid="button-cart"
-            >
-              <ShoppingCart className="w-6 h-6" />
-              {itemCount > 0 && (
-                <span
-                  className="absolute -top-1 -right-1 bg-accent text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
-                  data-testid="text-cart-count"
-                >
-                  {itemCount}
-                </span>
-              )}
-            </Button>
-            
+          {/* Mobile Menu */}
+          <div className="flex items-center">
             <Button
               variant="ghost"
               size="sm"
@@ -98,19 +94,18 @@ export const Header: React.FC = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden border-t border-gray-200 py-4 space-y-2" data-testid="mobile-menu">
             {navigation.map((item) => (
-              <Link key={item.name} href={item.href}>
-                <span
-                  className={`cursor-pointer block px-3 py-2 transition-colors ${
-                    isActive(item.href)
-                      ? 'text-secondary font-medium'
-                      : 'text-gray-700 hover:text-secondary'
-                  }`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  data-testid={`mobile-nav-${item.name.toLowerCase()}`}
-                >
-                  {item.name}
-                </span>
-              </Link>
+              <button
+                key={item.name}
+                onClick={() => handleNavigation(item.href)}
+                className={`cursor-pointer block px-3 py-2 transition-colors text-left w-full ${
+                  isActive(item.href)
+                    ? 'text-secondary font-medium'
+                    : 'text-gray-700 hover:text-secondary'
+                }`}
+                data-testid={`mobile-nav-${item.name.toLowerCase()}`}
+              >
+                {item.name}
+              </button>
             ))}
           </div>
         )}

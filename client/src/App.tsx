@@ -17,6 +17,8 @@ import Checkout from "./pages/Checkout";
 import Blog from "./pages/Blog";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Shipping from "./pages/Shipping";
+import Returns from "./pages/Returns";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -31,6 +33,8 @@ function Router() {
         <Route path="/blog" component={Blog} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
+        <Route path="/shipping" component={Shipping} />
+        <Route path="/returns" component={Returns} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

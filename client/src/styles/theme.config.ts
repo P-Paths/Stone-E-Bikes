@@ -35,18 +35,18 @@ export interface ThemeConfig {
 }
 
 export const defaultTheme: ThemeConfig = {
-  brandName: "Stonee Bikes",
+  brandName: "Stone E-Bikes",
   logo: {
-    text: "Stonee Bikes",
-    imageUrl: undefined, // Can be replaced with actual logo URL
+    text: "Stone E-Bikes",
+    imageUrl: "/images/stone-e-bikes-logo.png",
   },
   colors: {
-    primary: "#1F2937", // gray-800
-    secondary: "#3B82F6", // blue-500
-    accent: "#10B981", // emerald-500
+    primary: "#004225", // Deep Green
+    secondary: "#004225", // Deep Green
+    accent: "#C6A600", // Gold
     muted: "#6B7280", // gray-500
-    background: "#FFFFFF",
-    foreground: "#111827", // gray-900
+    background: "#FFFFFF", // White
+    foreground: "#004225", // Deep Green
   },
   fonts: {
     sans: "Inter, system-ui, sans-serif",
@@ -58,14 +58,14 @@ export const defaultTheme: ThemeConfig = {
     borderRadius: "0.5rem", // rounded-lg
   },
   contact: {
-    phone: "(555) 123-BIKE",
-    email: "info@stoneebikes.com",
-    address: "123 Bike Street, Cycling City, CC 12345",
+    phone: "313-495-2887",
+    email: "info@stonee-bikes.com",
+    address: "15151 W 8 Mile, Detroit, Michigan",
   },
   social: {
-    facebook: "https://facebook.com/stoneebikes",
-    twitter: "https://twitter.com/stoneebikes",
-    instagram: "https://instagram.com/stoneebikes",
+    facebook: "https://facebook.com/stonee-bikes",
+    twitter: "https://twitter.com/stonee-bikes",
+    instagram: "https://instagram.com/stonee-bikes",
   },
 };
 

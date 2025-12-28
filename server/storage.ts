@@ -7,6 +7,7 @@ import {
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc } from "drizzle-orm";
+import { MockStorage } from "./mock-storage";
 
 export interface IStorage {
   // Users
@@ -174,4 +175,8 @@ export class DatabaseStorage implements IStorage {
   }
 }
 
-export const storage = new DatabaseStorage();
+// Use mock storage when database is not available
+const isDatabaseAvailable = !!process.env.DATABASE_URL;
+
+// For now, always use mock storage since we're in UI-only mode
+export const storage = new MockStorage();
