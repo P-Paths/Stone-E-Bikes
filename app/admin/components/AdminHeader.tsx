@@ -3,9 +3,9 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { LogOut, Menu } from 'lucide-react';
-import { Button } from '../../../client/src/components/ui/button';
-import { createClient } from '../../../lib/supabase/client';
-import { useToast } from '../../../client/src/hooks/use-toast';
+import { Button } from '@/components/ui/button';
+import { createClient } from '@/lib/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 import { useSidebar } from './SidebarContext';
 
 interface AdminUser {

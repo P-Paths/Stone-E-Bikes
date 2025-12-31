@@ -2,11 +2,11 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button } from '../../../client/src/components/ui/button';
-import { Input } from '../../../client/src/components/ui/input';
-import { Card, CardContent, CardHeader, CardTitle } from '../../../client/src/components/ui/card';
-import { createClient } from '../../../lib/supabase/client';
-import { useToast } from '../../../client/src/hooks/use-toast';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { createClient } from '@/lib/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');

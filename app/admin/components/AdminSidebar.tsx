@@ -12,7 +12,7 @@ import {
   QrCode,
   X 
 } from 'lucide-react';
-import { Button } from '../../../client/src/components/ui/button';
+import { Button } from '@/components/ui/button';
 import { useSidebar } from './SidebarContext';
 
 interface AdminSidebarProps {

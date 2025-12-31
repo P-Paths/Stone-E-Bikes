@@ -1,9 +1,9 @@
 import React from 'react';
-import { createClient } from '../../lib/supabase/server';
-import { Card, CardContent, CardHeader, CardTitle } from '../../client/src/components/ui/card';
+import { createClient } from '@/lib/supabase/server';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Users, TrendingUp, Clock, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
-import { Button } from '../../client/src/components/ui/button';
+import { Button } from '@/components/ui/button';
 
 async function getKPIs() {
   const supabase = await createClient();

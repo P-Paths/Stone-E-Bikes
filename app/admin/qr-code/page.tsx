@@ -2,10 +2,10 @@
 
 import React, { useState } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
-import { Card, CardContent, CardHeader, CardTitle } from '../../../client/src/components/ui/card';
-import { Input } from '../../../client/src/components/ui/input';
-import { Button } from '../../../client/src/components/ui/button';
-import { Label } from '../../../client/src/components/ui/label';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
 import { Download, QrCode } from 'lucide-react';
 
 export default function QRCodeGenerator() {
