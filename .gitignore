@@ -4,3 +4,57 @@ dist
 server/public
 vite.config.ts.*
 *.tar.gz
+
+# Environment variables - NEVER commit these!
+.env
+.env.local
+.env*.local
+.env.development
+.env.production
+.env.test
+
+# Markdown files that might contain secrets - ignore all except blog posts
+*.md
+!README.md
+!app/content/posts/*.md
+
+# Files that might leak secrets
+*SECRET*
+*SECURITY*
+*PASSWORD*
+*API_KEY*
+*TOKEN*
+*CREDENTIAL*
+*KEY*
+VERCEL_ENV_VARIABLES.md
+ENVIRONMENT_SETUP.md
+SECURITY_INCIDENT_RESPONSE.md
+FIXES_APPLIED.md
+*.backup
+*.bak
+*.old
+*.tmp
+*.log
+
+# Config files that might have secrets
+config.json
+secrets.json
+credentials.json
+*.secret
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Database dumps
+*.sql
+*.db
+*.sqlite
+*.sqlite3
+
+# Backup and temp files
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db

@@ -53,6 +53,12 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   handler satisfies AppPageConfig<"/about">
 }
 
+// Validate ../../app/accessories/page.tsx
+{
+  const handler = {} as typeof import("../../app/accessories/page.js")
+  handler satisfies AppPageConfig<"/accessories">
+}
+
 // Validate ../../app/admin/analytics/page.tsx
 {
   const handler = {} as typeof import("../../app/admin/analytics/page.js")
@@ -89,10 +95,40 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   handler satisfies AppPageConfig<"/admin">
 }
 
+// Validate ../../app/admin/qr-code/page.tsx
+{
+  const handler = {} as typeof import("../../app/admin/qr-code/page.js")
+  handler satisfies AppPageConfig<"/admin/qr-code">
+}
+
 // Validate ../../app/admin/settings/page.tsx
 {
   const handler = {} as typeof import("../../app/admin/settings/page.js")
   handler satisfies AppPageConfig<"/admin/settings">
+}
+
+// Validate ../../app/blog/[slug]/page.tsx
+{
+  const handler = {} as typeof import("../../app/blog/[slug]/page.js")
+  handler satisfies AppPageConfig<"/blog/[slug]">
+}
+
+// Validate ../../app/blog/page.tsx
+{
+  const handler = {} as typeof import("../../app/blog/page.js")
+  handler satisfies AppPageConfig<"/blog">
+}
+
+// Validate ../../app/cart/page.tsx
+{
+  const handler = {} as typeof import("../../app/cart/page.js")
+  handler satisfies AppPageConfig<"/cart">
+}
+
+// Validate ../../app/checkout/page.tsx
+{
+  const handler = {} as typeof import("../../app/checkout/page.js")
+  handler satisfies AppPageConfig<"/checkout">
 }
 
 // Validate ../../app/contact/page.tsx
@@ -119,6 +155,36 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   handler satisfies AppPageConfig<"/platform">
 }
 
+// Validate ../../app/returns/page.tsx
+{
+  const handler = {} as typeof import("../../app/returns/page.js")
+  handler satisfies AppPageConfig<"/returns">
+}
+
+// Validate ../../app/shipping-info/page.tsx
+{
+  const handler = {} as typeof import("../../app/shipping-info/page.js")
+  handler satisfies AppPageConfig<"/shipping-info">
+}
+
+// Validate ../../app/shop/page.tsx
+{
+  const handler = {} as typeof import("../../app/shop/page.js")
+  handler satisfies AppPageConfig<"/shop">
+}
+
+// Validate ../../app/size-guide/page.tsx
+{
+  const handler = {} as typeof import("../../app/size-guide/page.js")
+  handler satisfies AppPageConfig<"/size-guide">
+}
+
+// Validate ../../app/support/page.tsx
+{
+  const handler = {} as typeof import("../../app/support/page.js")
+  handler satisfies AppPageConfig<"/support">
+}
+
 // Validate ../../app/api/admin/analytics/route.ts
 {
   const handler = {} as typeof import("../../app/api/admin/analytics/route.js")
@@ -143,10 +209,28 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   handler satisfies RouteHandlerConfig<"/api/admin/users">
 }
 
+// Validate ../../app/api/blog/route.ts
+{
+  const handler = {} as typeof import("../../app/api/blog/route.js")
+  handler satisfies RouteHandlerConfig<"/api/blog">
+}
+
 // Validate ../../app/api/contact/route.ts
 {
   const handler = {} as typeof import("../../app/api/contact/route.js")
   handler satisfies RouteHandlerConfig<"/api/contact">
+}
+
+// Validate ../../app/api/products/featured/route.ts
+{
+  const handler = {} as typeof import("../../app/api/products/featured/route.js")
+  handler satisfies RouteHandlerConfig<"/api/products/featured">
+}
+
+// Validate ../../app/api/products/route.ts
+{
+  const handler = {} as typeof import("../../app/api/products/route.js")
+  handler satisfies RouteHandlerConfig<"/api/products">
 }
 
 

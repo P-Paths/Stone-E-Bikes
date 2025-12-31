@@ -26,31 +26,37 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className="bg-white text-black shadow-lg sticky top-0 z-50 border-b border-gray-200">
+    <header className="bg-white shadow-lg sticky top-0 z-50 border-b" style={{ borderColor: '#E5E7EB', position: 'sticky' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-24">
+        <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex items-center">
             <Link href="/" className="cursor-pointer transition-opacity hover:opacity-80" data-testid="logo">
               <img 
                 src="/images/Logo/STONE E-BIKESLOGO.png" 
                 alt="Stone E-Bikes" 
-                className="h-20 w-auto"
+                className="h-16 w-auto"
+                style={{ maxHeight: '64px' }}
               />
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-8 items-center" style={{ position: 'relative', zIndex: 100 }}>
             {navigation.map((item) => (
               <Link 
                 key={item.name} 
                 href={item.href}
-                className={`cursor-pointer transition-colors ${
-                  isActive(item.href)
-                    ? 'text-accent font-medium'
-                    : 'text-black hover:text-accent'
-                }`}
+                className="cursor-pointer transition-colors font-medium text-lg hover:opacity-80 no-underline"
+                style={{
+                  color: isActive(item.href) ? '#C6A600' : '#004225',
+                  textDecoration: 'none',
+                  display: 'inline-block',
+                  position: 'relative',
+                  zIndex: 100,
+                  minWidth: '60px',
+                  textAlign: 'center'
+                }}
                 data-testid={`nav-${item.name.toLowerCase()}`}
                 onClick={() => window.scrollTo(0, 0)}
               >
@@ -79,16 +85,17 @@ export const Header: React.FC = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 py-4 space-y-2 bg-white" data-testid="mobile-menu">
+          <div className="md:hidden border-t border-gray-200 py-4 space-y-2 bg-white" data-testid="mobile-menu" style={{ position: 'relative', zIndex: 100 }}>
             {navigation.map((item) => (
               <Link 
                 key={item.name} 
                 href={item.href}
-                className={`cursor-pointer block px-3 py-2 transition-colors ${
-                  isActive(item.href)
-                    ? 'text-accent font-medium'
-                    : 'text-black hover:text-accent'
-                }`}
+                className="cursor-pointer block px-3 py-2 transition-colors font-medium text-lg hover:opacity-80"
+                style={{
+                  color: isActive(item.href) ? '#C6A600' : '#004225',
+                  textDecoration: 'none',
+                  display: 'block'
+                }}
                 onClick={() => {
                   setIsMobileMenuOpen(false);
                   window.scrollTo(0, 0);

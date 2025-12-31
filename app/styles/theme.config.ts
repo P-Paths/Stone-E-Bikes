@@ -41,12 +41,12 @@ export const defaultTheme: ThemeConfig = {
     imageUrl: undefined, // Can be replaced with actual logo URL
   },
   colors: {
-    primary: "#000000", // Black
+    primary: "#004225", // Deep Green
     secondary: "#FFFFFF", // White
-    accent: "#FFD700", // Gold
+    accent: "#C6A600", // Gold
     muted: "#6B7280", // gray-500
     background: "#FFFFFF", // White
-    foreground: "#000000", // Black
+    foreground: "#004225", // Deep Green
   },
   fonts: {
     sans: "Inter, system-ui, sans-serif",
