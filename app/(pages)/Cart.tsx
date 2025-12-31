@@ -71,7 +71,7 @@ export default function Cart() {
           <div className="lg:col-span-2">
             <div className="space-y-4" data-testid="cart-items-list">
               {items.map((item) => (
-                <Card key={item.id} className="overflow-hidden" data-testid={`cart-item-${item.id}`}>
+                <Card key={item.product.id} className="overflow-hidden" data-testid={`cart-item-${item.product.id}`}>
                   <CardContent className="p-6">
                     <div className="flex items-center space-x-4">
                       {/* Product Image */}
