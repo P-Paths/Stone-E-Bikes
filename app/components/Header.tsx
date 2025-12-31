@@ -49,7 +49,7 @@ export const Header: React.FC = () => {
                 href={item.href}
                 className="cursor-pointer transition-colors font-medium text-lg hover:opacity-80 no-underline"
                 style={{
-                  color: isActive(item.href) ? '#C6A600' : '#004225',
+                  color: isActive(item.href) ? '#C6A600' : '#000000',
                   textDecoration: 'none',
                   display: 'inline-block',
                   position: 'relative',
@@ -92,7 +92,7 @@ export const Header: React.FC = () => {
                 href={item.href}
                 className="cursor-pointer block px-3 py-2 transition-colors font-medium text-lg hover:opacity-80"
                 style={{
-                  color: isActive(item.href) ? '#C6A600' : '#004225',
+                  color: isActive(item.href) ? '#C6A600' : '#000000',
                   textDecoration: 'none',
                   display: 'block'
                 }}

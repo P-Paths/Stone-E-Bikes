@@ -70,12 +70,12 @@ export default function Contact() {
     <div className="bg-white min-h-screen">
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h1 className="text-4xl lg:text-5xl font-bold mb-8" style={{ color: '#004225' }}>Contact Us</h1>
+        <h1 className="text-4xl lg:text-5xl font-bold mb-8" style={{ color: '#000000' }}>Contact Us</h1>
       </section>
 
       {/* Divider */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <hr style={{ borderTop: '2px solid #004225' }} />
+        <hr style={{ borderTop: '2px solid #000000' }} />
       </div>
 
       {/* Contact Form */}
@@ -83,12 +83,12 @@ export default function Contact() {
         <div className="max-w-2xl mx-auto">
           <Card>
             <CardHeader>
-              <CardTitle className="text-2xl" style={{ color: '#004225' }}>Get in Touch</CardTitle>
+              <CardTitle className="text-2xl" style={{ color: '#000000' }}>Get in Touch</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2" style={{ color: '#004225' }}>
+                  <label htmlFor="name" className="block text-sm font-medium mb-2" style={{ color: '#000000' }}>
                     Name *
                   </label>
                   <Input
@@ -104,7 +104,7 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: '#004225' }}>
+                  <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: '#000000' }}>
                     Email *
                   </label>
                   <Input
@@ -120,7 +120,7 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label htmlFor="organization" className="block text-sm font-medium mb-2" style={{ color: '#004225' }}>
+                  <label htmlFor="organization" className="block text-sm font-medium mb-2" style={{ color: '#000000' }}>
                     Organization
                   </label>
                   <Input
@@ -135,7 +135,7 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ color: '#004225' }}>
+                  <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ color: '#000000' }}>
                     Message *
                   </label>
                   <Textarea
@@ -155,8 +155,8 @@ export default function Contact() {
                   className="rounded-xl border-2 px-8 py-3 text-lg font-semibold w-full"
                   style={{ 
                     backgroundColor: 'white',
-                    borderColor: '#004225',
-                    color: '#004225'
+                    borderColor: '#000000',
+                    color: '#000000'
                   }}
                 >
                   {isSubmitting ? 'Sending...' : 'Send Message'}
@@ -170,7 +170,7 @@ export default function Contact() {
       {/* Contact Information */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl font-bold mb-4" style={{ color: '#004225' }}>Other Ways to Reach Us</h2>
+          <h2 className="text-2xl font-bold mb-4" style={{ color: '#000000' }}>Other Ways to Reach Us</h2>
           <div className="space-y-2" style={{ color: '#6B7280' }}>
             <p>Email: info@stonee-bikes.com</p>
             <p>Phone: 313-495-2887</p>

@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { LineChart, Line, PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { TrendingUp, Users, Clock, CheckCircle } from 'lucide-react';
 
-const COLORS = ['#004225', '#C6A600', '#6B7280', '#3B82F6', '#10B981'];
+const COLORS = ['#000000', '#C6A600', '#6B7280', '#3B82F6', '#10B981'];
 
 async function fetchAnalytics(period: string) {
   const response = await fetch(`/api/admin/analytics?period=${period}`);
@@ -139,7 +139,7 @@ export default function AnalyticsPage() {
                   <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Line type="monotone" dataKey="count" stroke="#004225" name="New Leads" />
+                  <Line type="monotone" dataKey="count" stroke="#000000" name="New Leads" />
                   <Line type="monotone" dataKey="contacted" stroke="#C6A600" name="Contacted" />
                 </LineChart>
               </ResponsiveContainer>
@@ -198,7 +198,7 @@ export default function AnalyticsPage() {
                   <XAxis dataKey="name" />
                   <YAxis />
                   <Tooltip />
-                  <Bar dataKey="value" fill="#004225" />
+                  <Bar dataKey="value" fill="#000000" />
                 </BarChart>
               </ResponsiveContainer>
             ) : (

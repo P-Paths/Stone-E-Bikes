@@ -20,7 +20,7 @@ export const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="py-12" style={{ backgroundColor: '#004225', color: 'white' }}>
+    <footer className="py-12" style={{ backgroundColor: '#000000', color: 'white' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Brand */}

@@ -9,18 +9,18 @@ export default function About() {
     <div className="bg-white min-h-screen">
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h1 className="text-4xl lg:text-5xl font-bold mb-8" style={{ color: '#004225' }}>About Stone E-Bikes</h1>
+        <h1 className="text-4xl lg:text-5xl font-bold mb-8" style={{ color: '#000000' }}>About Stone E-Bikes</h1>
       </section>
 
       {/* Divider */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <hr style={{ borderTop: '2px solid #004225' }} />
+        <hr style={{ borderTop: '2px solid #000000' }} />
       </div>
 
       {/* Founder Story */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="max-w-3xl">
-          <h2 className="text-3xl font-bold mb-6" style={{ color: '#004225' }}>Our Story</h2>
+          <h2 className="text-3xl font-bold mb-6" style={{ color: '#000000' }}>Our Story</h2>
           <div className="space-y-4 text-lg" style={{ color: '#6B7280' }}>
             <p>
               Stone E-Bikes was founded in 2023 with a clear vision: to revolutionize electric mobility by creating transportation solutions that are accessible, safe, and sustainable. As a Black minority-owned business based in Detroit, we're deeply committed to building the future of mobility in the Motor City and beyond.
@@ -34,13 +34,13 @@ export default function About() {
 
       {/* Divider */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <hr style={{ borderTop: '2px solid #004225' }} />
+        <hr style={{ borderTop: '2px solid #000000' }} />
       </div>
 
       {/* Detroit Roots */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="max-w-3xl">
-          <h2 className="text-3xl font-bold mb-6" style={{ color: '#004225' }}>Detroit Roots</h2>
+          <h2 className="text-3xl font-bold mb-6" style={{ color: '#000000' }}>Detroit Roots</h2>
           <div className="space-y-4 text-lg" style={{ color: '#6B7280' }}>
             <p>
               Being based in Detroit is central to our identity. The Motor City has a rich history of automotive innovation, and we're proud to be part of the next chapter in that story. Detroit's legacy of manufacturing excellence, combined with its spirit of resilience and innovation, informs everything we do.
@@ -54,13 +54,13 @@ export default function About() {
 
       {/* Divider */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <hr style={{ borderTop: '2px solid #004225' }} />
+        <hr style={{ borderTop: '2px solid #000000' }} />
       </div>
 
       {/* Mission & Values */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="max-w-3xl">
-          <h2 className="text-3xl font-bold mb-6" style={{ color: '#004225' }}>Our Mission</h2>
+          <h2 className="text-3xl font-bold mb-6" style={{ color: '#000000' }}>Our Mission</h2>
           <div className="space-y-4 text-lg" style={{ color: '#6B7280' }}>
             <p>
               Our mission is to create accessible, safe, and environmentally responsible transportation solutions that serve communities across America. We believe that mobility is a fundamental right, and our quad-cycle platform is designed to make electric transportation available to everyone, regardless of age, ability, or experience level.
@@ -74,13 +74,13 @@ export default function About() {
 
       {/* Divider */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <hr style={{ borderTop: '2px solid #004225' }} />
+        <hr style={{ borderTop: '2px solid #000000' }} />
       </div>
 
       {/* CTA Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4" style={{ color: '#004225' }}>Join Us on This Journey</h2>
+          <h2 className="text-2xl font-bold mb-4" style={{ color: '#000000' }}>Join Us on This Journey</h2>
           <p className="mb-8 max-w-2xl mx-auto" style={{ color: '#6B7280' }}>
             We're always looking for partners, investors, and community members who share our vision for the future of mobility.
           </p>
@@ -89,8 +89,8 @@ export default function About() {
               className="rounded-xl border-2 px-8 py-3 text-lg font-semibold"
               style={{ 
                 backgroundColor: 'white',
-                borderColor: '#004225',
-                color: '#004225'
+                borderColor: '#000000',
+                color: '#000000'
               }}
             >
               Get in Touch
