@@ -77,10 +77,10 @@ export default function Cart() {
                       {/* Product Image */}
                       <div className="flex-shrink-0">
                         <img
-                          src={item.imageUrl}
-                          alt={item.name}
+                          src={item.product.imageUrl || item.product.images?.[0] || 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100'}
+                          alt={item.product.name}
                           className="w-20 h-20 object-cover rounded-lg"
-                          data-testid={`img-cart-item-${item.id}`}
+                          data-testid={`img-cart-item-${item.product.id}`}
                           onError={(e) => {
                             e.currentTarget.src = 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100';
                           }}
@@ -89,14 +89,14 @@ export default function Cart() {
 
                       {/* Product Details */}
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-lg font-semibold text-primary mb-1" data-testid={`text-cart-item-name-${item.id}`}>
-                          {item.name}
+                        <h3 className="text-lg font-semibold text-primary mb-1" data-testid={`text-cart-item-name-${item.product.id}`}>
+                          {item.product.name}
                         </h3>
-                        <p className="text-sm text-muted mb-2" data-testid={`text-cart-item-description-${item.id}`}>
-                          {item.description}
+                        <p className="text-sm text-muted mb-2" data-testid={`text-cart-item-description-${item.product.id}`}>
+                          {item.product.description || ''}
                         </p>
-                        <p className="text-lg font-bold text-primary" data-testid={`text-cart-item-price-${item.id}`}>
-                          ${item.price}
+                        <p className="text-lg font-bold text-primary" data-testid={`text-cart-item-price-${item.product.id}`}>
+                          ${item.product.price}
                         </p>
                       </div>
 
@@ -105,19 +105,19 @@ export default function Cart() {
                         <Button
                           variant="outline"
                           size="sm"
-                          onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
-                          data-testid={`button-decrease-${item.id}`}
+                          onClick={() => handleQuantityChange(item.product.id, item.quantity - 1)}
+                          data-testid={`button-decrease-${item.product.id}`}
                         >
                           <Minus className="w-4 h-4" />
                         </Button>
-                        <span className="w-8 text-center font-semibold" data-testid={`text-quantity-${item.id}`}>
+                        <span className="w-8 text-center font-semibold" data-testid={`text-quantity-${item.product.id}`}>
                           {item.quantity}
                         </span>
                         <Button
                           variant="outline"
                           size="sm"
-                          onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
-                          data-testid={`button-increase-${item.id}`}
+                          onClick={() => handleQuantityChange(item.product.id, item.quantity + 1)}
+                          data-testid={`button-increase-${item.product.id}`}
                         >
                           <Plus className="w-4 h-4" />
                         </Button>
@@ -127,9 +127,9 @@ export default function Cart() {
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => removeItem(item.id)}
+                        onClick={() => removeItem(item.product.id)}
                         className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                        data-testid={`button-remove-${item.id}`}
+                        data-testid={`button-remove-${item.product.id}`}
                       >
                         <Trash2 className="w-4 h-4" />
                       </Button>
