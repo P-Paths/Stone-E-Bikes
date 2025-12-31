@@ -1,10 +1,10 @@
 'use client';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ThemeProvider } from '../client/src/contexts/ThemeContext';
-import { Toaster } from '../client/src/components/ui/toaster';
-import { TooltipProvider } from '../client/src/components/ui/tooltip';
-import { Header } from '../client/src/components/Header';
+import { ThemeProvider } from '@/contexts/ThemeContext';
+import { Toaster } from '@/components/ui/toaster';
+import { TooltipProvider } from '@/components/ui/tooltip';
+import { Header } from '@/components/Header';
 import { Footer } from '../client/src/components/Footer';
 import { Chatbot } from '../client/src/components/Chatbot';
 import { useState } from 'react';
