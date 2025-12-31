@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useCart } from '@/contexts/CartContext';
 
 export default function Cart() {
-  const { items, removeItem, updateQuantity, clearCart, getTotalPrice, getTotalItems } = useCart();
+  const { items, removeItem, updateQuantity, clearCart, total, itemCount } = useCart();
   const router = useRouter();
 
   const handleQuantityChange = (itemId: string, newQuantity: number) => {
@@ -62,7 +62,7 @@ export default function Cart() {
             Shopping Cart
           </h1>
           <p className="text-xl text-muted" data-testid="text-cart-subtitle">
-            {getTotalItems()} {getTotalItems() === 1 ? 'item' : 'items'} in your cart
+            {itemCount} {itemCount === 1 ? 'item' : 'items'} in your cart
           </p>
         </div>
 
@@ -160,8 +160,8 @@ export default function Cart() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex justify-between" data-testid="cart-subtotal">
-                  <span className="text-muted">Subtotal ({getTotalItems()} items)</span>
-                  <span className="font-semibold">${getTotalPrice().toFixed(2)}</span>
+                  <span className="text-muted">Subtotal ({itemCount} items)</span>
+                  <span className="font-semibold">${total.toFixed(2)}</span>
                 </div>
                 
                 <div className="flex justify-between" data-testid="cart-shipping">
@@ -177,7 +177,7 @@ export default function Cart() {
                 <div className="border-t pt-4">
                   <div className="flex justify-between text-lg font-bold" data-testid="cart-total">
                     <span>Total</span>
-                    <span>${getTotalPrice().toFixed(2)}</span>
+                    <span>${total.toFixed(2)}</span>
                   </div>
                 </div>
 
