@@ -1,4 +1,5 @@
 import { createServerClient } from '@supabase/ssr';
+import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 import { cookies } from 'next/headers';
 
 export async function createClient() {
@@ -26,5 +27,33 @@ export async function createClient() {
       },
     }
   );
+}
+
+/**
+ * Get Supabase admin client with service role key (server-only)
+ * Use this for admin operations that bypass RLS
+ */
+export function getSupabaseAdmin() {
+  const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl || !supabaseServiceRoleKey) {
+    throw new Error('Missing Supabase server environment variables');
+  }
+
+  return createSupabaseClient(supabaseUrl, supabaseServiceRoleKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false
+    }
+  });
+}
+
+/**
+ * Check if Supabase is configured on the server
+ */
+export function isSupabaseConfigured(): boolean {
+  return !!(process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL) && 
+         !!process.env.SUPABASE_SERVICE_ROLE_KEY;
 }
 
