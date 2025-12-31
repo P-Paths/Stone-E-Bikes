@@ -77,7 +77,7 @@ export default function Cart() {
                       {/* Product Image */}
                       <div className="flex-shrink-0">
                         <img
-                          src={item.product.imageUrl || item.product.images?.[0] || 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100'}
+                          src={item.product.imageUrl || 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100'}
                           alt={item.product.name}
                           className="w-20 h-20 object-cover rounded-lg"
                           data-testid={`img-cart-item-${item.product.id}`}
