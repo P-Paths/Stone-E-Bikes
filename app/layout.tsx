@@ -4,6 +4,7 @@ import './globals.css';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { ThemeProvider } from './contexts/ThemeContext';
+import { CartProvider } from './contexts/CartContext';
 import { Toaster } from './components/ui/toaster';
 import { QueryClientProvider } from './components/QueryClientProvider';
 
@@ -24,14 +25,16 @@ export default function RootLayout({
       <body className={inter.className}>
         <QueryClientProvider>
           <ThemeProvider>
-            <div className="min-h-screen flex flex-col bg-white">
-              <Header />
-              <main className="flex-1 w-full">
-                {children}
-              </main>
-              <Footer />
-            </div>
-            <Toaster />
+            <CartProvider>
+              <div className="min-h-screen flex flex-col bg-white">
+                <Header />
+                <main className="flex-1 w-full">
+                  {children}
+                </main>
+                <Footer />
+              </div>
+              <Toaster />
+            </CartProvider>
           </ThemeProvider>
         </QueryClientProvider>
       </body>
