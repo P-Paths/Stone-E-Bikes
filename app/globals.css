@@ -2,57 +2,84 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  /* Brand Colors - Stone E-Bikes Platform */
-  --primary: hsl(150, 100%, 13%); /* Deep Green #004225 */
-  --primary-foreground: hsl(0, 0%, 100%);
-  --secondary: hsl(150, 100%, 13%); /* Deep Green */
-  --secondary-foreground: hsl(0, 0%, 100%);
-  --accent: hsl(48, 100%, 39%); /* Gold #C6A600 */
-  --accent-foreground: hsl(150, 100%, 13%); /* Deep Green text on gold */
-  --muted: hsl(220, 9%, 46%);
-  --muted-foreground: hsl(215, 16%, 47%);
-  --destructive: hsl(0, 84.2%, 60.2%);
-  --destructive-foreground: hsl(0, 0%, 98%);
-  --border: hsl(220, 13%, 91%);
-  --input: hsl(220, 13%, 91%);
-  --ring: hsl(48, 100%, 39%); /* Gold */
-  --background: hsl(0, 0%, 100%);
-  --foreground: hsl(210, 25%, 7.8431%);
-  --card: hsl(0, 0%, 100%);
-  --card-foreground: hsl(210, 25%, 7.8431%);
-  --popover: hsl(0, 0%, 100%);
-  --popover-foreground: hsl(210, 25%, 7.8431%);
-  --radius: 0.5rem;
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 100%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 45 100% 51%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 45 100% 51%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 0%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 0%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 0%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 45 100% 51%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 45 100% 51%;
+  }
 }
 
-.dark {
-  --background: hsl(210, 25%, 7.8431%);
-  --foreground: hsl(0, 0%, 98%);
-  --card: hsl(210, 25%, 7.8431%);
-  --card-foreground: hsl(0, 0%, 98%);
-  --popover: hsl(210, 25%, 7.8431%);
-  --popover-foreground: hsl(0, 0%, 98%);
-  --primary: hsl(0, 0%, 98%);
-  --primary-foreground: hsl(210, 25%, 7.8431%);
-  --secondary: hsl(217, 32.6%, 17.5%);
-  --secondary-foreground: hsl(0, 0%, 98%);
-  --muted: hsl(217, 32.6%, 17.5%);
-  --muted-foreground: hsl(215, 20.2%, 65.1%);
-  --accent: hsl(217, 32.6%, 17.5%);
-  --accent-foreground: hsl(0, 0%, 98%);
-  --destructive: hsl(0, 62.8%, 30.6%);
-  --destructive-foreground: hsl(0, 0%, 98%);
-  --border: hsl(217, 32.6%, 17.5%);
-  --input: hsl(217, 32.6%, 17.5%);
-  --ring: hsl(212.7, 26.8%, 83.9%);
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 
-* {
-  border-color: hsl(var(--border));
-}
-
-body {
-  color: hsl(var(--foreground));
-  background: hsl(var(--background));
+@layer components {
+  .gradient-bg {
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  }
+  
+  .gold-accent {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  }
+  
+  .text-gold {
+    color: #FFD700;
+  }
+  
+  .border-gold {
+    border-color: #FFD700;
+  }
+  
+  .hover-gold:hover {
+    color: #FFD700;
+  }
+  
+  .shadow-gold {
+    box-shadow: 0 4px 14px 0 rgba(255, 215, 0, 0.2);
+  }
 }
