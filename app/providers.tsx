@@ -5,8 +5,8 @@ import { ThemeProvider } from '@/contexts/ThemeContext';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { Header } from '@/components/Header';
-import { Footer } from '../client/src/components/Footer';
-import { Chatbot } from '../client/src/components/Chatbot';
+import { Footer } from '@/components/Footer';
+import { Chatbot } from '@/components/Chatbot';
 import { useState } from 'react';
 
 export function Providers({ children }: { children: React.ReactNode }) {
