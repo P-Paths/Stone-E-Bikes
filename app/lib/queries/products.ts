@@ -1,5 +1,5 @@
-import { supabase } from '../supabase/client';
-import { supabaseAdmin } from '../supabase/server';
+import { createClient } from '../supabase/client';
+import { getSupabaseAdmin } from '../supabase/server';
 import { Product } from '@shared/schema';
 
 // Demo data for when Supabase is not configured
@@ -103,11 +103,7 @@ const DEMO_PRODUCTS: Product[] = [
 
 export async function getProducts(): Promise<Product[]> {
   try {
-    if (!supabase) {
-      console.warn('Supabase not configured, using demo data');
-      return DEMO_PRODUCTS;
-    }
-
+    const supabase = createClient();
     const { data, error } = await supabase
       .from('products')
       .select('*')
@@ -127,11 +123,7 @@ export async function getProducts(): Promise<Product[]> {
 
 export async function getFeaturedProducts(): Promise<Product[]> {
   try {
-    if (!supabase) {
-      console.warn('Supabase not configured, using demo data');
-      return DEMO_PRODUCTS.filter(p => p.featured);
-    }
-
+    const supabase = createClient();
     const { data, error } = await supabase
       .from('products')
       .select('*')
@@ -152,11 +144,7 @@ export async function getFeaturedProducts(): Promise<Product[]> {
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
   try {
-    if (!supabase) {
-      console.warn('Supabase not configured, using demo data');
-      return DEMO_PRODUCTS.find(p => p.slug === slug) || null;
-    }
-
+    const supabase = createClient();
     const { data, error } = await supabase
       .from('products')
       .select('*')
@@ -177,11 +165,7 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
 
 export async function getProductsByCategory(categoryId: string): Promise<Product[]> {
   try {
-    if (!supabase) {
-      console.warn('Supabase not configured, using demo data');
-      return DEMO_PRODUCTS.filter(p => p.categoryId === categoryId);
-    }
-
+    const supabase = createClient();
     const { data, error } = await supabase
       .from('products')
       .select('*')
@@ -206,6 +190,7 @@ export async function getProductsByCategory(categoryId: string): Promise<Product
  */
 
 export async function createProduct(productData: Omit<Product, 'id' | 'created_at'>): Promise<Product> {
+  const supabaseAdmin = getSupabaseAdmin();
   const { data, error } = await supabaseAdmin
     .from('products')
     .insert(productData)
@@ -221,6 +206,7 @@ export async function createProduct(productData: Omit<Product, 'id' | 'created_a
 }
 
 export async function updateProduct(id: string, updates: Partial<Product>): Promise<Product> {
+  const supabaseAdmin = getSupabaseAdmin();
   const { data, error } = await supabaseAdmin
     .from('products')
     .update(updates)
@@ -237,6 +223,7 @@ export async function updateProduct(id: string, updates: Partial<Product>): Prom
 }
 
 export async function deleteProduct(id: string): Promise<void> {
+  const supabaseAdmin = getSupabaseAdmin();
   const { error } = await supabaseAdmin
     .from('products')
     .delete()

@@ -1,5 +1,5 @@
-import { supabase } from '../supabase/client';
-import { supabaseAdmin } from '../supabase/server';
+import { createClient } from '../supabase/client';
+import { getSupabaseAdmin } from '../supabase/server';
 import { BlogPost } from '@shared/schema';
 
 /**
@@ -8,65 +8,68 @@ import { BlogPost } from '@shared/schema';
  */
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
-  if (!supabase) {
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from('blog_posts')
+      .select('*')
+      .eq('published', true)
+      .order('published_at', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching blog posts:', error);
+      throw new Error('Failed to fetch blog posts');
+    }
+
+    return data || [];
+  } catch (error) {
     console.warn('Supabase not configured, returning empty array');
     return [];
   }
-
-  const { data, error } = await supabase
-    .from('blog_posts')
-    .select('*')
-    .eq('published', true)
-    .order('published_at', { ascending: false });
-
-  if (error) {
-    console.error('Error fetching blog posts:', error);
-    throw new Error('Failed to fetch blog posts');
-  }
-
-  return data || [];
 }
 
 export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
-  if (!supabase) {
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from('blog_posts')
+      .select('*')
+      .eq('slug', slug)
+      .eq('published', true)
+      .single();
+
+    if (error) {
+      console.error('Error fetching blog post by slug:', error);
+      return null;
+    }
+
+    return data;
+  } catch (error) {
     console.warn('Supabase not configured, returning null');
     return null;
   }
-
-  const { data, error } = await supabase
-    .from('blog_posts')
-    .select('*')
-    .eq('slug', slug)
-    .eq('published', true)
-    .single();
-
-  if (error) {
-    console.error('Error fetching blog post by slug:', error);
-    return null;
-  }
-
-  return data;
 }
 
 export async function getBlogPostsByCategory(category: string): Promise<BlogPost[]> {
-  if (!supabase) {
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from('blog_posts')
+      .select('*')
+      .eq('category', category)
+      .eq('published', true)
+      .order('published_at', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching blog posts by category:', error);
+      throw new Error('Failed to fetch blog posts by category');
+    }
+
+    return data || [];
+  } catch (error) {
     console.warn('Supabase not configured, returning empty array');
     return [];
   }
-
-  const { data, error } = await supabase
-    .from('blog_posts')
-    .select('*')
-    .eq('category', category)
-    .eq('published', true)
-    .order('published_at', { ascending: false });
-
-  if (error) {
-    console.error('Error fetching blog posts by category:', error);
-    throw new Error('Failed to fetch blog posts by category');
-  }
-
-  return data || [];
 }
 
 /**
@@ -75,6 +78,7 @@ export async function getBlogPostsByCategory(category: string): Promise<BlogPost
  */
 
 export async function createBlogPost(postData: Omit<BlogPost, 'id' | 'created_at'>): Promise<BlogPost> {
+  const supabaseAdmin = getSupabaseAdmin();
   const { data, error } = await supabaseAdmin
     .from('blog_posts')
     .insert(postData)
@@ -90,6 +94,7 @@ export async function createBlogPost(postData: Omit<BlogPost, 'id' | 'created_at
 }
 
 export async function updateBlogPost(id: string, updates: Partial<BlogPost>): Promise<BlogPost> {
+  const supabaseAdmin = getSupabaseAdmin();
   const { data, error } = await supabaseAdmin
     .from('blog_posts')
     .update(updates)
@@ -106,6 +111,7 @@ export async function updateBlogPost(id: string, updates: Partial<BlogPost>): Pr
 }
 
 export async function deleteBlogPost(id: string): Promise<void> {
+  const supabaseAdmin = getSupabaseAdmin();
   const { error } = await supabaseAdmin
     .from('blog_posts')
     .delete()
@@ -118,6 +124,7 @@ export async function deleteBlogPost(id: string): Promise<void> {
 }
 
 export async function publishBlogPost(id: string): Promise<BlogPost> {
+  const supabaseAdmin = getSupabaseAdmin();
   const { data, error } = await supabaseAdmin
     .from('blog_posts')
     .update({ 
